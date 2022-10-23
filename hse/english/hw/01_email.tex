@@ -1,0 +1,75 @@
+% ДЗ по Английскому на 10.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[a4paper,12pt]{article}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+\Large
+Dear Mr X,
+
+I watched your interview on the television newscast last week
+and was very impressed. I am involved in organizing the opening ceremony of our
+company's new building and I would like to
+invite you to give a speach at our event in City N, Country Y
+on 10 Nov.
+The talk need to last for 15 minutes (I know you worked
+at the old building for fifty years, please just tell something about our company)
+
+Please find attached a document giving full details of the programme.
+
+Should you have any further questions, please do not hesitate to contanct me.
+
+I look forward to hearing from you.
+
+Yours sincerely,
+Mikhedov Konstantin
+
+Opening Organiser
+
+\end{document}
