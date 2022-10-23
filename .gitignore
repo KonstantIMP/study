@@ -1,0 +1,11 @@
+# LATEX temp and output files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.sta
+*.synctex*
+*.pdf
+
+
