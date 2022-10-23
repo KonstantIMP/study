@@ -1,0 +1,156 @@
+% ДЗ по Математическому Анализу 04.10.2022
+% Михедов Константин Константинович, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+    % Отключить прямоугольную рамку
+    pdfborder={0 0 0},
+    % Включить цветные ссылки
+    colorlinks=true,
+    % Цвет для ссылок на веб-ресурсы
+    urlcolor=blue,
+    % Цвет внутренних ссылок
+    linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Корректная нумерация вложенных списков
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+
+\begin{document}
+  \textbf{Выполнил:} Михедов Константин Константинович БИБ224
+
+  \subsection{Задача №1}
+
+  \textbf{Условие:} доказать, что $\forall x_0 > 0$ и $\alpha > 1$ последовательность $x_n$ сходится
+  \[x_{n} = \frac{x_{n - 1}}{\alpha + x_{n - 1}}\] 
+
+  \begin{enumerate}
+    \item {
+        Докажем, что $x_n > 0$ $\forall n \in \mathbb{N}$
+
+        \begin{enumerate}
+            \item {
+                Рассмотрим случай для $n = 1$
+
+                \begin{equation}
+                    x_1 = \frac{x_{1 - 0}}{x_{1 - 0} + \alpha} =
+                    \frac{x_0}{x_0 + \alpha}
+                \end{equation}
+
+                Т.к. $x_0 > 0$ и $\alpha > 1$ (по условию),
+                то $x_0 + \alpha > 1 $
+
+                \begin{equation}
+                    \begin{cases}
+                        x_0 > 0 \\
+                        x_0 + \alpha > 1
+                    \end{cases}
+                    \Rightarrow \frac{x_0}{x_0 + \alpha} > 0
+                    \Rightarrow x_1 > 0
+                \end{equation}
+            }
+            \item {
+                Предположим, $x_n > 0$ для $n = k$
+                
+                \begin{equation}
+                    x_k = \frac{x_{k - 1}}{x_{k - 1} + \alpha} > 0
+                \end{equation}
+            }
+            \item {
+                Рассмотрим случай для $n = k + 1$
+
+                \begin{equation}
+                    x_{k + 1} = \frac{x_{(k + 1) - 1}}{x_{(k + 1) - 1} + \alpha}
+                    = \frac{x_k}{x_k + \alpha}
+                \end{equation}
+
+                Т.к. $x_k > 0$ (см 1.2) и $\alpha > 1$ (по условию), то
+                $x_k + \alpha > 1$
+
+                \begin{equation}
+                    \begin{cases}
+                        x_k > 0 \\
+                        x_k + \alpha > 1
+                    \end{cases}
+                    \Rightarrow \frac{x_k}{x_k + \alpha} > 0
+                    \Rightarrow x_{k + 1} > 0
+                \end{equation}
+            }
+        \end{enumerate}
+
+        \textbf{Вывод:} $x_n > 0$ $\forall x \in \mathbb{N}$
+    }
+    \item {
+        Изучим монотонность функции
+
+        \begin{multline}
+            x_n \lor x_{n + 1} \Rightarrow x_n \lor \frac{x_n}{x_n + \alpha}
+            \Rightarrow x_n - \frac{x_n}{x_n + \alpha} \lor 0 \Rightarrow \\
+            \Rightarrow \frac{x_n(x_n + \alpha) - x_n}{x_n + \alpha} \lor 0
+            \Rightarrow \frac{x_n((x_n + \alpha) - 1)}{x_n + \alpha} \lor 0 \Rightarrow \\
+            \Rightarrow \frac{x_n(x_n + \alpha - 1)}{x_n + \alpha} \lor 0
+        \end{multline}
+
+        Т.к. $a > 1$ по условию, то $a - 1 > 0$. Исходя из пункта 1:
+        $x_n > 0$ $\forall n \in \mathbb{N}$, тогда $x_n + \alpha > 1$
+        и $x_n + \alpha - 1 > 0$
+
+        \begin{multline}
+            \begin{cases}
+                x_n > 0 \\
+                x_n + \alpha - 1 > 0 \\
+                x_n + \alpha > 0
+            \end{cases}
+            \Rightarrow \frac{x_n(x_n + \alpha - 1)}{x_n + \alpha} > 0
+            \Rightarrow \\ \Rightarrow x_n - x_{n + 1} > 0 \Rightarrow
+            x_n > x_{n + 1} \: \forall n \in \mathbb{N}
+        \end{multline}
+    }
+    \item {
+        Так как $x_n > 0$ $\forall n \in \mathbb{N}$, то последовательность
+        $x_n$ ограничена снизу.
+        
+        Последовательность $x_n$ монотонно убывает (см. 2) и
+        ограничена снизу $\Rightarrow$ $x_n$ сходится по
+        теореме Вейрштрасса, то есть \[\exists \lim\limits_{x \to + \infty}{x_n} = \inf (x_n)\]
+    }
+  \end{enumerate}
+
+  \textbf{Вывод:} последовательность $x_n$ монотонно убывает ($\blacksquare$)
+
+\end{document}
