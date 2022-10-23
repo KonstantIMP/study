@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Михедов  Константин Константинович </title><style>
+    /* cspell:disable-file */
+    /* webkit printing magic: print all background colors */
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen {
+        body {
+            margin: 2em auto;
+            max-width: 900px;
+            color: rgb(55, 53, 47);
+        }
+    }
+    
+    body {
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+    
+    a,
+    a.visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    
+    .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    
+    .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+    }
+    
+    .callout {
+        border-radius: 3px;
+        padding: 1rem;
+    }
+    
+    figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+    }
+    
+    figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+    }
+    
+    mark {
+        background-color: transparent;
+    }
+    
+    .indented {
+        padding-left: 1.5em;
+    }
+    
+    hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    @media only print {
+        img {
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    }
+    
+    @page {
+        margin: 1in;
+    }
+    
+    .collection-content {
+        font-size: 0.875rem;
+    }
+    
+    .column-list {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .column {
+        padding: 0 1em;
+    }
+    
+    .column:first-child {
+        padding-left: 0;
+    }
+    
+    .column:last-child {
+        padding-right: 0;
+    }
+    
+    .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+    }
+    
+    .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+    }
+    
+    .table_of_contents-indent-2 {
+        margin-left: 3rem;
+    }
+    
+    .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+    }
+    
+    .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+    }
+    
+    table {
+        border-left: none;
+        border-right: none;
+    }
+    
+    th,
+    td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+    }
+    
+    th {
+        color: rgba(55, 53, 47, 0.6);
+    }
+    
+    ol,
+    ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+    }
+    
+    li > ol:first-child,
+    li > ul:first-child {
+        margin-block-start: 0.6em;
+    }
+    
+    ul > li {
+        list-style: disc;
+    }
+    
+    ul.to-do-list {
+        text-indent: -1.7em;
+    }
+    
+    ul.to-do-list > li {
+        list-style: none;
+    }
+    
+    .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+    }
+    
+    ul.toggle > li {
+        list-style: none;
+    }
+    
+    ul {
+        padding-inline-start: 1.7em;
+    }
+    
+    ul > li {
+        padding-left: 0.1em;
+    }
+    
+    ol {
+        padding-inline-start: 1.6em;
+    }
+    
+    ol > li {
+        padding-left: 0.2em;
+    }
+    
+    .mono ol {
+        padding-inline-start: 2em;
+    }
+    
+    .mono ol > li {
+        text-indent: -0.4em;
+    }
+    
+    .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+    }
+    
+    /* Indent toggle children */
+    .toggle > li > details {
+        padding-left: 1.7em;
+    }
+    
+    .toggle > li > details > summary {
+        margin-left: -1.1em;
+    }
+    
+    .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+    }
+    
+    .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+    }
+    .simple-table td {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table th {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+    }
+    .simple-table-header {
+        font-weight: 500;
+    }
+    
+    time {
+        opacity: 0.5;
+    }
+    
+    .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+    }
+    
+    img.icon {
+        border-radius: 3px;
+    }
+    
+    .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+    }
+    
+    .user-icon-inner {
+        font-size: 0.8em;
+    }
+    
+    .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+    }
+    
+    .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+    }
+    
+    .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+    }
+    
+    .page-header-icon img {
+        border-radius: 3px;
+    }
+    
+    .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+    }
+    
+    p > .user {
+        opacity: 0.5;
+    }
+    
+    td > .user,
+    td > time {
+        white-space: nowrap;
+    }
+    
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+    }
+    
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    
+    .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+    
+    .code,
+    code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+    }
+    
+    code {
+        color: #eb5757;
+    }
+    
+    .code {
+        padding: 1.5em 1em;
+    }
+    
+    .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    
+    .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+    }
+    
+    blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+    }
+    
+    .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+    }
+    
+    .bookmark-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+    }
+    
+    .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+    }
+    
+    .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+    }
+    
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+    .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+    .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+    .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+    .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+    .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+    .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+    .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+    .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+    .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+    .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+    .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .highlight-default {
+        color: rgba(55, 53, 47, 1);
+    }
+    .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .block-color-default {
+        color: inherit;
+        fill: inherit;
+    }
+    .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+    .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+    .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+    .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+    .select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+    .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+    .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+    .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+    .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+    .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+    
+    .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+    }
+    
+    .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+    
+    .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+        
+    </style></head><body><article id="38f78754-88e0-43ec-bcdc-9563342b5f9e" class="page sans"><header><h1 class="page-title">Михедов  Константин Константинович </h1></header><div class="page-body"><div id="108b2eb4-79a1-4f47-af3c-8bdbd1071d3b" class="column-list"><div id="02fee83a-63f0-42ec-ae24-1b4313ca7dd2" style="width:50%" class="column"><h2 id="6bb79768-7f14-48bf-9d8e-b2697478c24a" class="">Образование</h2><hr id="695511e8-be54-4834-a932-dd72122fcbd2"/><h3 id="97d7e7d9-3b26-48d4-b0f9-447addcc57cb" class=""><details open=""><summary>НИУ ВШЭ 2022 - 2026</summary></details></h3><div class="indented"><p id="cb8d0d89-2cf0-43fd-a1f6-00ac40bbe32b" class=""><strong>Факультет:</strong> МИЭМ им. А.Н. Тихонова</p><p id="df63519e-451a-46df-8058-5c3330e153f8" class=""><strong>Направление:</strong> Информационная безопасноть (Бакалавриат)</p></div><h3 id="49938321-cc7d-41cf-a1f3-6ba3968ca9ef" class=""><details open=""><summary>Среднее общее 2011 - 2022</summary></details></h3><div class="indented"><p id="3c1e99d1-9417-413e-bf50-d642bcfd1e09" class="">
+    </p></div></div><div id="3877dc13-579c-477d-a6b9-e950eee97066" style="width:50%" class="column"><h2 id="8bbcd603-e96d-4845-8a6e-8a09260f2662" class="">Контакты</h2><hr id="0695f1df-016e-4d74-b5c5-53349ae9b2ec"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5bb949a5-ed38-4db9-bdae-9d1f37ac2878"><div style="font-size:1.5em"><span class="icon">✉️</span></div><div style="width:100%">konstantimp@yandex.ru</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c9e9c7ac-44b5-4ce4-88c9-7890852591dc"><div style="font-size:1.5em"><span class="icon">📞</span></div><div style="width:100%">+7 (968)-065-31-24</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f7546c9a-7401-431e-9ded-49d66a659da7"><div style="font-size:1.5em"><img class="icon" src="figures/telegram.png"/></div><div style="width:100%"><a href="https://t.me/KonstantIMP">@KonstantIMP</a></div></figure></div></div><div id="685a5173-668e-4944-aa22-ff0f8f2d2de8" class="column-list"><div id="3086b5ed-11f8-42ec-a046-8dd806db533d" style="width:50%" class="column"><h2 id="ac0a9461-0a5b-4118-942f-e4138e3a0795" class="">Дополнительное образование</h2><hr id="5cb8031a-f3ae-4f78-bad7-3f02a68d77ff"/><h3 id="d57d0855-2190-4055-9562-b585172e995b" class=""><details open=""><summary>IT-школа Samsung 2021 - 2022</summary></details></h3><div class="indented"><p id="1959e077-dc86-412f-a78f-aa3e3406959f" class="">Samsung Innovation Campus</p></div><h3 id="10da0e0c-bbec-4450-86b7-5fe14cea6dbe" class=""><details open=""><summary>Радиоэлектронная автоматика 2016 - 2020</summary></details></h3><div class="indented"><p id="a51fd88c-7560-4706-b5ba-3091fefa37d9" class="">ГБУ ДО &quot;ПДДТ&quot; Невского района Санкт-Петербурга</p></div><h2 id="6e6ce3b6-1c4f-414c-93fa-21f90a0fe829" class="">Навыки</h2><hr id="087ed0fd-308b-43a0-a935-02b6aa1d7b97"/><h3 id="5b6a8ecf-a578-447f-8da9-c1bee758ef38" class=""><details open=""><summary>C++</summary></details></h3><div class="indented"><p id="64802477-3106-4490-9f8a-bf0672e4d10d" class=""><strong>Основные:</strong> OOP, Standart Temlate Library, smart pointers, multithreading, raw memory management, sockets, lambdas</p><p id="e2989d45-df9e-4b22-adc3-d3c5d4bfe5ee" class=""><strong>Дополнительные:</strong> Qt, Gtk+/gtkmm, spdlog, fftw, yamlcpp</p></div><h3 id="5c398a1c-834e-4312-973f-b0e616901f7d" class=""><details open=""><summary>Java</summary></details></h3><div class="indented"><p id="709a42f2-cfef-4fe0-8fc2-e1f19ce5d145" class=""><strong>Основные:</strong> OOP, streams, generics, concurrency, reflection</p><p id="f9735577-d2fb-4361-83ad-61560174cbbb" class=""><strong>Дополнительные:</strong> jar decompilation, Android, GSON, OkHttp, retrofit</p></div><h3 id="bcf81808-de2f-45ed-aa8e-636001e19c44" class=""><details open=""><summary>Kotlin</summary></details></h3><div class="indented"><p id="c604afe0-640d-48e4-8f9e-d21ddc3fcbb0" class=""><strong>Основные:</strong> OOP, coroutines, Null-safety</p><p id="414cd19d-60fd-4b6c-b933-d8939fb9bc0d" class=""><strong>Дополнительные: </strong>Java-compatibility</p></div><h3 id="9deaf3ba-ca03-45ec-8fc6-8fea9512d2f0" class=""><details open=""><summary>Python</summary></details></h3><div class="indented"><p id="83eae258-70f2-4615-848b-16c7437b53ff" class=""><strong>Основные: </strong>classes, functions, notebooks, data types</p><p id="b2441de0-73cc-44fe-9435-de63df4a3730" class=""><strong>Дополнительные:</strong> pip, numpy, pygtk, pygame</p></div><h3 id="e80a30ae-9555-4d82-bc4b-2e97ae5ce1c4" class=""><details open=""><summary>Android</summary></details></h3><div class="indented"><p id="aad7829b-6059-432c-b648-e42ee34d6ee5" class=""><strong>Основные: </strong>Activities, Fragments, Broadcast Receivers, Application’s manifest, UI Markup</p><p id="4573fee7-4825-468f-90ec-b2210394c702" class=""><strong>Дополнительные: </strong>View Models (MVVM architect), Recycler View, Firebase, Material Design 3, charts</p></div><h3 id="cb0bd91c-b3c1-4235-9aa5-2947a49ae2a6" class=""><details open=""><summary>Базы данных</summary></details></h3><div class="indented"><p id="93c1d12b-e9a0-4943-a4d2-86e4743e1594" class="">MongoDB, SQLite3, MySQL, PostegreSQL</p></div><h3 id="f858cb6f-cd1d-43af-8133-449e0dbf8248" class=""><details open=""><summary>Системы сборки</summary></details></h3><div class="indented"><p id="d983ef01-391b-4cbf-9955-e78effc27cc7" class="">GNU Make, CMake, Meson/Ninja, Gradle, Maven</p></div><p id="0e9de84f-6904-4630-aea3-ee801eb9017f" class="">
+    </p><p id="4a261a40-7f3a-494c-8bbc-19150dce8590" class="">
+    </p><p id="39b99cf3-13ad-46e8-9e8f-c240f51654d1" class="">
+    </p></div><div id="2fd98370-ceaa-4aa6-8140-3b3c5ede1cfb" style="width:49.99999999999999%" class="column"><h2 id="cd93909c-764c-475b-90b6-da4adb1a7e7c" class="">Достижения</h2><hr id="0e86b2d3-34f2-4b82-8cbc-1f1b6bdbe601"/><h3 id="18d563c9-457f-4edd-b72d-69093ebfad75" class=""><details open=""><summary>IT-школа выбирает сильнейших 2022</summary></details></h3><div class="indented"><p id="f10f97e3-12f2-4374-831a-4eb6477f76c5" class=""><strong>Номинация:</strong> Социальное приложение</p><p id="e31174c8-3fd9-4bac-9d63-1fd223f2f59c" class=""><strong>Статус:</strong> Финалист / 3 место на региональном этапе</p></div><h3 id="baa42693-09eb-43f7-8619-74d78c6deddb" class=""><details open=""><summary>Конференция «<strong>Инженеры будущего</strong>» 2022</summary></details></h3><div class="indented"><p id="e468be97-f86b-4880-94a4-4df8c826e3e1" class=""><strong>Профиль:</strong> Информационные технологии</p><p id="e3b7ca8f-88d1-4fc8-b7db-9b46eefaa6b0" class=""><strong>Статус:</strong> Финалист</p></div><h3 id="ecbf5b40-f647-4f84-9fb5-a345e24c52e0" class=""><details open=""><summary>Национальная Технологическая Олимпиада 2022</summary></details></h3><div class="indented"><p id="cb885f74-0b25-4769-be51-dfe02abe25e3" class=""><strong>Профиль:</strong> Автоматизация бизнес-процессов</p><p id="6eeb0716-cee2-457f-8794-db90397e3a78" class=""><strong>Статус: </strong>Финалист</p></div><h3 id="093ab34e-820b-4383-927f-a0de8bcc1b54" class=""><details open=""><summary>Московская Предпрофессиональная Олимпиала Школьников 2022</summary></details></h3><div class="indented"><p id="594fe06b-79e5-4f70-8f95-73cc128597e7" class=""><strong>Проифль:</strong> Информационные технологии</p><p id="8694e52f-f7df-485f-beba-ceea9e2cc793" class=""><strong>Статус: </strong>Победитель</p></div><h3 id="5dca4e02-2c20-4630-b271-77f3b3760def" class=""><details open=""><summary>Московская Предпрофессиональная Олимпиала Школьников 2021</summary></details></h3><div class="indented"><p id="adb26593-38f2-4652-a2a9-048864e5029a" class=""><strong>Проифль:</strong> Информационные технологии</p><p id="ecf47d4b-24d8-403a-aae3-e0186a8b2911" class=""><strong>Статус: </strong>Призер 3 степени</p></div><h3 id="a87ac1d7-d84f-4d60-97f1-2bb3386fd8dc" class=""><details open=""><summary>Хакатон “Информационные технологии, BIGDATA и кибербезопасность” 2021</summary></details></h3><div class="indented"><p id="2b7fd8cb-b62d-4dbb-814f-c04b17fa63bd" class=""><strong>Статус: </strong>3 место</p></div><p id="46d661cb-e535-4b6f-bf19-0c04b1f7239a" class="">
+    </p><h2 id="fbd424cd-b66d-44d5-9046-c56214e7f4c7" class="">Дополнительно</h2><hr id="945bcb3e-b365-4594-ad0a-ffd2d06c168c"/><figure class="block-color-purple callout" style="white-space:pre-wrap;display:flex" id="52d5c8a5-4f53-4ddb-be77-c37b792cc449"><div style="font-size:1.5em"><img class="icon" src="figures/github.png"/></div><div style="width:100%"><a href="https://github.com/KonstantIMP/">@KonstantIMP</a></div></figure><p id="2ab1b7f7-a51f-40ed-8f0f-824bf5566591" class="">
+    </p></div></div><p id="07b7322d-691d-45b5-8e15-328797a2115c" class="">
+    </p></div></article></body></html>
+    
