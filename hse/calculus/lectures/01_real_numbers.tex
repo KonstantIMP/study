@@ -1,0 +1,287 @@
+% Лекция по Математическому Анализу 07.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+  \subsection{Как определить вещественные числа?}
+
+  \begin{itemize}
+    \item {
+      Теории первого порядка -
+      полное определение с нуля, без ничего (например: ZF, GB, MK)
+    }
+    \item {
+      Сконструировать вещественные числа внутри теории множеств
+    }
+    \item {
+      Расширить существующую теорию множеств
+      (построить в ней новую теорию, как дифференциальное расширение)
+    }
+  \end{itemize}
+
+  \subsection{Модель вещественных чисел}
+
+  Моделью вещественных чисел называют шестерку объектов: \[
+    \left\{ \mathbb{R}, \; 0, \;  1, \;  +, \;  \times, \;  \leq \right\} 
+  \] где $\mathbb{R}$ - некоторое множество, 0 и 1 - элементы множества
+  $\mathbb{R}$, $+$ и $\times$ - некоторые бинарные операции, а $\leq$ - 
+  бинарное отношение.
+
+  \subsubsection{Бинарные операции и отношения}
+
+  Бинарные операции $+$ и $\times$ замкнуты на множестве $\mathbb{R}$,
+  то есть $\mathbb{R} + \mathbb{R} \rightarrow \mathbb{R}$ и
+  $\mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}$
+
+  \begin{equation}
+    \begin{aligned}
+      \underbrace{\left(x, \; y \right)}_{\mathbb{R} \times \mathbb{R}} &
+      \rightarrow \underbrace{x + y}_{\mathbb{R}} \\
+      \underbrace{\left(x, \; y \right)}_{\mathbb{R} \times \mathbb{R}} &
+      \rightarrow \underbrace{x \times y}_{\mathbb{R}}
+    \end{aligned}
+  \end{equation}
+
+  $\forall x,y\in\mathbb{R}$ бинарное отношение $x \leq y$ верно или неверно.
+
+  \subsection{Аксиомы вещественных чисел}
+
+  \begin{enumerate}
+    \item[A1.] {
+      Коммутативность сложения:
+      \[x + y = y + x\]
+    }
+    \item[A2.] {
+      Коммутативность умножения:
+      \[x \times y = y \times x\]
+    }
+    \item[A3.] {
+      Ассоциативность сложения:
+      \[\left(x + y \right) + z = x + \left(y + z\right)\]
+    }
+    \item[A4.] {
+      Ассоциативность умножения:
+      \[\left(x \times y \right) \times z = x \times \left(y \times z\right)\]
+    }
+    \item[A5.] {
+      Закон дистрибутивности:
+      \[\left(x + y\right) \times z = x \times z + y \times z\]
+    }
+    \item[A6.] {
+      Свойство нуля:
+      \[x + 0 = x\]
+    }
+    \item[A7.] {
+      Существование противоположного элемента:
+      \[\forall x \in \mathbb{R}, \exists {-x} \in \mathbb{R}: x + \left(-x\right) = 0\]
+    }
+    \item[A8.] {
+      Свойство единицы:
+      \[x \times 1 = x\]
+    }
+    \item[A9.] {
+      Существование обратного элемента:
+      \[\forall x \in \mathbb{R} \land x \neq 0, \exists x^{-1}: x\times{x^{-1}} = 1 \]
+    }
+    \item[A10.] {
+      Рефлексивность:
+      \[\forall x \in \mathbb{R}, x \leq x \text{ - верно}\]
+    }
+    \item[A11.] {
+      Транзитивность:
+      \[x \leq y \land y \leq z \Rightarrow x \leq z\]
+    }
+    \item[A12.] {
+      Антисимметричность:
+      \[x \leq y \land y \leq x \Rightarrow x = y\]
+    }
+    \item[A13.] {
+      Линейность:
+      \[\forall x,y \in \mathbb{R}, x\leq y \lor y \leq x\]
+    }
+    \item[A14.] {
+      Монотонность сложения:
+      \[x \leq y \Rightarrow x + z \leq y + z\]
+    }
+    \item[A15.] {
+      Сохранение знака при умножении:
+      \[x \geq 0 \land y \geq 0 \Rightarrow x \times y \geq 0\]
+    }
+    \item[A16.] {
+      Непрерывность:
+      
+      \begin{equation}
+        \mathbb{X},\mathbb{Y}\subseteq \mathbb{R}:
+        \forall x \in \mathbb{X} \text{ и } \forall y \in \mathbb{Y}
+        \text{ если } x \leq y, \text{ то } \exists{c} \in \mathbb{R}:
+        x \leq c \leq y
+      \end{equation}
+
+      \begin{picture}(380,50)
+        \put(15,35){\line(1,0){35}}
+        \qbezier(50,35)(60,35)(60,25)
+
+        \qbezier(100,25)(100,35)(110,35)
+        \put(110,35){\line(1,0){35}}
+
+        \put(15,25){\vector(1,0){130}}
+
+        \put(37.5,25){\circle*{3}}
+        \put(35, 15){x}
+
+        \put(80,25){\circle*{3}}
+        \put(77.5, 15){c}
+
+        \put(122.5,25){\circle*{3}}
+        \put(120, 15){y}
+
+        \put(140, 10){$\mathbb{R}$}
+        \put(32.5, 40){$\mathbb{X}$}
+        \put(117.5, 40){$\mathbb{Y}$}
+
+        \put(17.5,35){\line(1,-1){10}}
+        \put(27.5,35){\line(1,-1){10}}
+        \put(37.5,35){\line(1,-1){10}}
+        \put(47.5,35){\line(1,-1){10}}
+
+        \put(102.5,25){\line(1,1){10}}
+        \put(112.5,25){\line(1,1){10}}
+        \put(122.5,25){\line(1,1){10}}
+        \put(132.5,25){\line(1,1){10}}
+
+        \put(180, 25){или}
+
+        \put(235,35){\line(1,0){55}}
+        \qbezier(290,35)(300,35)(300,25)
+
+        \qbezier(300,25)(300,15)(310,15)
+        \put(310,15){\line(1,0){55}}
+
+        \put(235,25){\vector(1,0){130}}
+
+        \put(300,25){\circle*{5}}
+        \put(290, 15){c}
+
+        \put(267.5,25){\circle*{3}}
+        \put(265, 15){x}
+
+        \put(332.5,25){\circle*{3}}
+        \put(330, 30){y}
+
+        \put(360, 30){$\mathbb{R}$}
+        \put(262.5, 40){$\mathbb{X}$}
+        \put(330, 2.5){$\mathbb{Y}$}
+
+        \put(240,35){\line(1,-1){10}}
+        \put(250,35){\line(1,-1){10}}
+        \put(260,35){\line(1,-1){10}}
+        \put(270,35){\line(1,-1){10}}
+        \put(280,35){\line(1,-1){10}}
+        \put(290,35){\line(1,-1){10}}
+
+        \put(300,25){\line(1,-1){10}}
+        \put(310,25){\line(1,-1){10}}
+        \put(320,25){\line(1,-1){10}}
+        \put(330,25){\line(1,-1){10}}
+        \put(340,25){\line(1,-1){10}}
+        \put(350,25){\line(1,-1){10}}
+      \end{picture}
+    }
+  \end{enumerate}
+
+  \subsection{Дополнительные бинарные операции}
+
+  \begin{equation}
+    \begin{aligned}
+      x \geq y & \Leftrightarrow y \leq x \\
+      x < y & \Leftrightarrow x \leq y \land x \neq y \\
+      x > y & \Leftrightarrow y < x
+    \end{aligned}
+  \end{equation}
+
+  \subsection{Примеры}
+
+  \subsubsection{Однозначность определения нуля}
+
+  \textbf{Утверждение:} число $0$ однозначно определеяется с помощью
+  аксиом вещественных чисел (может быть только один $0$).
+
+  Пусть $0$ и $\widetilde{0}$ два различных числа таких, что $0$ и $\widetilde{0}$ $\in \mathbb{R}$, тогда
+  по свойству нуля (A6.) $\forall{x}\in \mathbb{R}: x + 0 = x \text{ и } x + \widetilde{0} = x$
+
+  Пусть $\star : x + 0 = x$, а $\star \star : x + \widetilde{0} = x$,
+  тогда $\widetilde{0} \overset{\star}{=} \widetilde{0} + 0$ и 
+  $0 \overset{\star \star}{=} 0 + \widetilde{0}$, но исходя из
+  коммутативности сложения (A1.) $0 + \widetilde{0} = \widetilde{0} + 0$,
+  поэтому $0 = \widetilde{0}$ $\Rightarrow$ существует только один ноль.
+
+  \subsubsection{Однозначность противоположного числа}
+
+  \textbf{Утверждение:} для данного $x \in \mathbb{R}$ противоположное
+  число $-x \in \mathbb{R}$ единственно.
+
+  Допустим, для указанного $x \in \mathbb{R}$ $\exists a, b \in \mathbb{R},
+  a \neq b: x + b = 0 \text{ и } x + a = 0$, то есть числа a и b 
+  противоположны числу x.
+
+  Пусть $\star : x + b = 0$, а $\star \star : x + a = 0$
+  
+  Тогда $a \overset{A6.}{=} a + 0 \overset{A1.}{=} 0 + a \overset{\star}{=}
+  (x + b) + a \overset{A3.}{=} (a + x) + b \overset{\star \star}{=}
+  0 + b \overset{A6.}{=} b$
+
+  Отсюда $a = b$, значит $\forall x \in \mathbb{R}, x \neq 0$ обратное
+  число $-x$ единственно.
+
+  %
+  % Здесь должно быть еще 4 практических задания
+  % На них есть решение, но нет желания его писать
+  %
+
+\end{document}

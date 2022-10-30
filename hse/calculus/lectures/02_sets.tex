@@ -1,0 +1,278 @@
+% Лекция по Математическому Анализу 07.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+Любое числовое числовое множество является подмножеством в $\mathbb{R}$
+
+Например, $\left\{1; \frac{3}{2}; -3\right\}$ - конечное (обычное) множество
+
+\subsection{Виды множеств}
+
+\begin{itemize}
+  \item {
+    Отрезок \begin{equation}
+      \forall a,b \in \mathbb{R}: a \leq b
+      \left\{x \in \mathbb{R}: a \leq x \leq b \right\} =
+      \left[a; b\right]
+    \end{equation}
+  } \item {
+    Интервал \begin{equation}
+      \forall a,b \in \mathbb{R}: a < b
+      \left\{x \in \mathbb{R}: a < x < b \right\} =
+      \left(a; b\right)
+    \end{equation}
+  } \item {
+    Полуинтервалы \begin{equation}
+      \forall a,b \in \mathbb{R}: a < b
+      \left\{x \in \mathbb{R}: a \leq x < b \right\} =
+      \left[a; b\right)
+    \end{equation}
+    \begin{equation}
+      \forall a,b \in \mathbb{R}: a < b
+      \left\{x \in \mathbb{R}: a < x \leq b \right\} =
+      \left(a; b\right]
+    \end{equation}
+  } \item {
+    Бесконечные полуинтервалы \[ \begin{aligned}
+      \forall a \in \mathbb{R}: \left\{x \in \mathbb{R}: a < x\right\} &= \left(a; +\infty\right) \\
+      \forall a \in \mathbb{R}: \left\{x \in \mathbb{R}: a \leq x\right\} &= \left[a; +\infty\right) \\
+      \forall a \in \mathbb{R}: \left\{x \in \mathbb{R}: x < a\right\} &= \left(-\infty; a\right) \\
+      \forall a \in \mathbb{R}: \left\{x \in \mathbb{R}: x \leq a\right\} &= \left(-\infty; a\right] 
+    \end{aligned} \]
+  }
+\end{itemize}
+
+\subsection{Операции над множествами}
+
+Пусть $\mathbb{X}$ и $\mathbb{Y}$ такие, что
+$\mathbb{X} \subseteq \mathbb{R}$ и $\mathbb{Y} \subseteq \mathbb{R}$
+    
+\begin{itemize}
+  \item {
+    $
+    -\mathbb{X} = \left\{-x: x \in \mathbb{X} \right\} =
+    \left\{z \in \mathbb{R}: \forall x \in \mathbb{X}: z = -x\right\}
+    $
+  }
+  \item {
+    $
+    \mathbb{X} + \mathbb{Y} = \left\{ z \in \mathbb{R}: \exists
+    x \in \mathbb{X} \text{ и } \exists y \in \mathbb{Y}: z = x + y\right\}
+    $
+  }
+  \item {
+    Операции $\times, \div, -$ описываются аналогично сложению
+  }
+  \item {
+    $
+    \mathbb{X} \leq \mathbb{Y} \Leftrightarrow \forall x \in \mathbb{X}
+    \text{ и } \forall y \in \mathbb{Y}: x \leq y
+    $
+  } \item {
+    Операции $\geq, <, >$ описываются аналогично $\leq$
+  }
+\end{itemize}
+
+\subsubsection{Примеры}
+
+%\begin{equation}
+  \begin{align*}
+    [0; 1] + [-1; 1] & = [-1; 2] & [0; 1] + (-1; 1) & = (-1; 2) \\
+    [0; 1] & \nleq [-1; 1] & [-1; 1] & \nleq (0; 1) \\
+    [0; 1] & \leq [1; 2] & (0; 1) & < [1; 2]
+  \end{align*}
+%\end{equation}
+
+\subsection{Максимум и минимум множества}
+
+\begin{equation}
+  \text{Пусть } \mathbb{X} \subseteq \mathbb{R} \text{ тогда } \min{\mathbb{X}}
+  = a, \text{ если } \forall x \in \mathbb{X}: a \leq x
+\end{equation}
+\begin{equation}
+  \text{Пусть } \mathbb{Y} \subseteq \mathbb{R} \text{ тогда } \max{\mathbb{Y}}
+  = b, \text{ если } \forall y \in \mathbb{Y}: b \geq y
+\end{equation}
+
+\subsection{Точная верхняя и нижняя грани}
+
+\textbf{Определение:} множество $\mathbb{X}$ называется
+ограниченным снизу, в том случае, если $\exists s \in \mathbb{R}: s \leq \mathbb{X}$,
+то есть $s \leq \forall x \in \mathbb{X}$
+
+\begin{picture}(360,60)
+  \put(120,25){\vector(1,0){160}}
+
+  \put(150,25){\circle*{4}}
+  \put(147.5,15){\text{s}}
+
+  \qbezier(180,25)(180,35)(190,35)
+  \put(190,35){\line(1,0){85}}
+
+  \put(182,25){\line(1,1){10}}
+  \put(200,25){\line(1,1){10}}
+  \put(220,25){\line(1,1){10}}
+  \put(240,25){\line(1,1){10}}
+  \put(260,25){\line(1,1){10}}
+
+  \put(270,12.5){$\mathbb{R}$}
+  \put(225, 40){$\mathbb{X}$}
+\end{picture}
+
+\textbf{Определение:} множество $\mathbb{Y}$ называется
+ограниченным сверху, в том случае, если $\exists p \in \mathbb{R}: p \geq \mathbb{Y}$,
+то есть $p \geq \forall y \in \mathbb{Y}$
+
+\begin{picture}(360, 60)
+  \put(120,25){\vector(1,0){160}}
+
+  \put(250,25){\circle*{4}}
+  \put(247.5,15){\text{p}}
+
+  \qbezier(220,25)(220,35)(210,35)
+  \put(210,35){\line(-1,0){90}}
+
+  \put(218,25){\line(-1,1){10}}
+  \put(200,25){\line(-1,1){10}}
+  \put(180,25){\line(-1,1){10}}
+  \put(160,25){\line(-1,1){10}}
+  \put(140,25){\line(-1,1){10}}
+
+  \put(270,12.5){$\mathbb{R}$}
+  \put(160, 40){$\mathbb{Y}$}
+\end{picture}
+
+\textbf{Определение:} точная нижняя грань множества $\mathbb{X} \subseteq \mathbb{R}$:
+\begin{equation}
+  \inf{\mathbb{X}} = 
+  \begin{cases}
+    -\infty: \text{ если множество } \mathbb{X} \text{ не ограничено снизу} \\
+    \min{\mathbb{X}: \text{ в другом случае}}
+  \end{cases}
+\end{equation}
+
+\textbf{Определение:} точная верхняя грань множества $\mathbb{Y} \subseteq \mathbb{Y}$
+\begin{equation}
+  \sup{\mathbb{Y}} =
+  \begin{cases}
+    \infty: \text{ если множество } \mathbb{Y} \text{ не ограничено сверху} \\
+    \max{\mathbb{Y}}: \text{ в другом случае}
+  \end{cases}
+\end{equation}
+
+\textbf{Примечание:} $\sup$ - supremum, $\inf$ - infinum
+
+\subsubsection{Теоремы о точных гранях}
+
+\begin{itemize}
+  \item {
+    Если $\exists \min{\mathbb{X}}$, то $\inf{\mathbb{X}} = \min{\mathbb{X}}$
+  }
+  \item {
+    Если $\exists \max{\mathbb{Y}}$, то $\sup{\mathbb{Y}} = \max{\mathbb{Y}}$
+  }
+  \item {
+    Если $\mathbb{Y}$ ограничено сверху, то $\sup{\mathbb{Y}} \in \mathbb{R}$ (является числом)
+  }
+  \item {
+    Если $\mathbb{X}$ ограничено снизу, то $\inf{\mathbb{X}} \in \mathbb{R}$ (является числом)
+  
+    \textbf{Доказательство:} пусть $\mathbb{X} \subseteq \mathbb{R}$ ограничено снизу
+    
+    Рассмотрим множество $\mathbb{S}$ всех таких $s \in \mathbb{R}$,
+    которые ограничивают $\mathbb{X}$ слева:
+    $\mathbb{S} = \left\{s \in \mathbb{R}: s \leq \mathbb{X}\right\}$.
+    Из определения $\mathbb{S}$ видно, что $\mathbb{S} \leq \mathbb{X}$,
+    то есть $\forall x \in \mathbb{X} \land \forall s \in \mathbb{S}: s \leq x$
+    $\Rightarrow \exists c \in \mathbb{R}: \mathbb{S} \leq c \leq \mathbb{R}$
+  
+    Тогда $c$ является одной из тех $s$ для которых $s \leq \mathbb{X}$
+    $\Rightarrow c \in \mathbb{S}$
+
+    Т.к. $\mathbb{S} \leq c$ и $c \in \mathbb{S}$
+    $\Rightarrow c = \max{\mathbb{S}} = \inf{\mathbb{X}} = c \in \mathbb{R}$
+    $\; (\blacksquare)$
+  }
+\end{itemize}
+
+\subsubsection{Свойства граней}
+
+\begin{enumerate}
+  \item {
+    Монотонность
+    \begin{equation}
+      \begin{aligned}
+        \mathbb{X} \subseteq \mathbb{Y} & \Rightarrow \inf{\mathbb{X}} \geq \inf{\mathbb{Y}} \\
+        \mathbb{X} \subseteq \mathbb{Y} & \Rightarrow \sup{\mathbb{X}} \leq \sup{\mathbb{Y}}
+      \end{aligned}
+    \end{equation}
+  }
+  \item {
+    Инвариативность относительно сдвига
+    \begin{equation}
+      \begin{aligned}
+        \forall \mathbb{X} \subseteq \mathbb{R} \text{ и } \forall a \in \mathbb{R}: \inf{(\mathbb{X} + a)} & = \inf{\mathbb{X}} + a\\
+         \sup{(\mathbb{X} + b)} & = \sup{\mathbb{X}} + b
+      \end{aligned}
+    \end{equation}
+  }
+  \item {
+    Двойственность
+    \begin{equation}
+      \begin{aligned}
+        \inf{(-\mathbb{X})} & = -\sup{\mathbb{X}} \\
+        \sup{(-\mathbb{Y})} & = -\inf{\mathbb{Y}}
+      \end{aligned}
+    \end{equation}
+  }
+\end{enumerate}
+
+\end{document}

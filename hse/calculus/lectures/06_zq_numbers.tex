@@ -1,0 +1,73 @@
+% Лекция по Математическому Анализу 12.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+\subsection{Целые числа}
+
+\begin{equation}
+  \mathbb{Z} = \{0; n \: \forall n \in \mathbb{N}^*; -n \: \forall n \in \mathbb{N}\}
+\end{equation}
+\begin{equation}
+  \mathbb{Z} = \mathbb{N}^* \cup -\mathbb{N} \cup \{0\}
+\end{equation}
+
+\subsubsection{Теорема Ферма}
+
+Уравнение $l^k + m^k = n^k$ не имеет целочисленных решений при $k > 2$
+
+\subsection{Рациональные числа}
+
+\begin{equation}
+  \mathbb{Q} = \frac{\mathbb{Z}}{\mathbb{N}^*} =
+  \left\{\frac{p}{q}; \: p \in \mathbb{Z}; \: q \in \mathbb{N}^* \right\}
+\end{equation}
+
+\end{document}

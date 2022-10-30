@@ -1,0 +1,103 @@
+% Семинар по Математическому Анализу 07.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+- это сопособ доказательства какого-либо высказывания 
+для числовой последовательности вида $p_1, p_2 \dots p_n$
+
+\subsection{Алгоритм доказательство} 
+
+\begin{enumerate}
+  \item {
+    Доказать правдивость для фиксированного $n$ (например для $n = 1$)
+  } \item {
+    \textbf{Предположить,} что высказывание верно для какого-то $n = k$
+  } \item {
+    Подтвердить правдивость для $n = k + 1$
+  }
+\end{enumerate}
+
+\subsection{Пример}
+
+\textbf{Доказать:} формулу суммы $n$ членов арифметической прогрессии
+\begin{align*}
+  \exists a_1, d & & a_n = a_1 + d(n - 1) & & \sum\limits_{i = 1}^n{a_i} = a_1 + a_2 + \dots + a_n
+\end{align*}
+\begin{equation}
+  \text{Необходимо доказать, что }\sum\limits_{i = 1}^n{a_i} = \frac{n (a_1 + a_n)}{2}
+\end{equation}
+
+\begin{enumerate}
+  \item {
+    Рассмотрим случай, когда $n = 2$
+    \begin{equation}
+      \begin{aligned}
+        \sum\limits_{i = 0}^2{a_i} & = a_1 + a_2 \\
+        \sum\limits_{i = 0}^2{a_i} & = \frac{2(a_1 + a_2)}{2} = a_1 + a_2
+      \end{aligned}
+    \end{equation}
+  }
+  \item {
+    Допустим, что данное выражение верно для $n = k$
+  }
+  \item {
+    Рассмотрим случай, когда $n = k + 1$
+    \begin{multline}
+      \sum\limits_{i = 0}^{k + 1}{a_i} = a_1 + a_2 + \dots + a_k +
+      a_{k + 1} = \sum\limits_{i = 0}^k{a_i} + a_{k + 1} = \\
+      = \frac{k(a_1 + a_k)}{2} + a_{k + 1} 
+      = \text{*какие-то вычисления*} = \\
+      = \frac{(k + 1)(a_1 + a_{k + 1})}{2} \:\:\: (\blacksquare)
+    \end{multline}
+  }
+\end{enumerate}
+
+\end{document}

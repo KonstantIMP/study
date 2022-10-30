@@ -1,0 +1,229 @@
+% Лекция по Математическому Анализу 26.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.18}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+\textbf{Числовая функция} (определенная на множестве $\mathbb{X}$) -
+правило, которое каждому элементу $\mathbb{X}$ ставит в соответствие
+какое-то число $y \in \mathbb{R}$, однозначно зависящее от x, например:
+\begin{eqnarray}
+  %\begin{aligned}
+    x\in \mathbb{R} \rightarrow x^2 \in \mathbb{R} \text{  или  }
+    x \in \mathbb{X} \mapsto y \in \mathbb{R} 
+  %\end{aligned}
+\end{eqnarray}
+
+Запись вида $f: \mathbb{R} \hookrightarrow \mathbb{R}$ означает,
+что буквой $f$ обозначается какая-то функция, определенная в $\mathbb{R}$
+и возвращающая $\mathbb{R}$.
+
+\paragraph{Еще пример} $\forall x \in \mathbb{R} \mapsto x^n$ ($n \in \mathbb{Z}$)
+- парабола, гипербола или прямая
+
+\subsection{Целая и дробная часть числа}
+
+$f(x) = [x]$ эквивалентно записи $\forall x \in \mathbb{R} \mapsto
+[x] = \max \left\{n\in \mathbb{Z}; n \leq x \right\}$, а также
+$f(x) = \{x\}$ эквивалентно записы $\forall x \in \mathbb{R} \mapsto
+\{x\} = x - [x]$
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}
+    \begin{groupplot}[
+      group style = {
+        group size = 2 by 1,
+        horizontal sep = 15mm
+      },
+      width = 0.45\textwidth,
+      xlabel = $x$,
+      xmin = -4,
+      xmax = 4,
+      ymin = -4,
+      ymax = 4,
+      minor y tick num = 1,
+      minor x tick num = 1,
+      samples = 2,
+      /tikz/smooth,
+      /tikz/mark size = 0.8,
+      grid = both
+    ]
+
+    \nextgroupplot[
+      title ={$f(x) = [x]$}
+    ]
+    \draw[latex-latex, thin, draw=gray] (-4,0)--(4,0) node [right] {$x$};
+    \draw[latex-latex, thin, draw=gray] (0,-4)--(0,4) node [above] {$y$};
+    
+    \node at (-4, -4) {\textbullet};
+    \node at (-3, -3) {\textbullet};
+    \node at (-2, -2) {\textbullet};
+    \node at (-1, -1) {\textbullet};
+    \node at (0, 0) {\textbullet};
+    \node at (1, 1) {\textbullet};
+    \node at (2, 2) {\textbullet};
+    \node at (3, 3) {\textbullet};
+    \node at (4, 4) {\textbullet};
+
+    \node at (-3, -4) {$\circ$};
+    \node at (-2, -3) {$\circ$};
+    \node at (-1, -2) {$\circ$};
+    \node at (0, -1) {$\circ$};
+    \node at (1, 0) {$\circ$};
+    \node at (2, 1) {$\circ$};
+    \node at (3, 2) {$\circ$};
+    \node at (4, 3) {$\circ$};
+
+    \draw[ultra thick, draw=black] (0,0)--(1,0);
+    \draw[ultra thick, draw=black] (1,1)--(2,1);
+    \draw[ultra thick, draw=black] (2,2)--(3,2);
+    \draw[ultra thick, draw=black] (3,3)--(4,3);
+
+    \draw[ultra thick, draw=black] (-1,-1)--(0,-1);
+    \draw[ultra thick, draw=black] (-2,-2)--(-1,-2);
+    \draw[ultra thick, draw=black] (-3,-3)--(-2,-3);
+    \draw[ultra thick, draw=black] (-4,-4)--(-3,-4);
+
+    \nextgroupplot[
+      title={$f(x)=\{x\}$}
+    ]
+
+    \draw[latex-latex, thin, draw=gray] (-4,0)--(4,0) node [right] {$x$};
+    \draw[latex-latex, thin, draw=gray] (0,-4)--(0,4) node [above] {$y$};
+
+    \node at (-4, 0) {\textbullet};
+    \node at (-3, 0) {\textbullet};
+    \node at (-2, 0) {\textbullet};
+    \node at (-1, 0) {\textbullet};
+    \node at (0, 0) {\textbullet};
+    \node at (1, 0) {\textbullet};
+    \node at (2, 0) {\textbullet};
+    \node at (3, 0) {\textbullet};
+    \node at (4, 0) {\textbullet};
+
+    \node at (-4, 1) {$\circ$};
+    \node at (-3, 1) {$\circ$};
+    \node at (-2, 1) {$\circ$};
+    \node at (-1, 1) {$\circ$};
+    \node at (0, 1) {$\circ$};
+    \node at (1, 1) {$\circ$};
+    \node at (2, 1) {$\circ$};
+    \node at (3, 1) {$\circ$};
+    \node at (4, 1) {$\circ$};
+
+    \draw[ultra thick, draw=black] (-4,0)--(-3,1);
+    \draw[ultra thick, draw=black] (-3,0)--(-2,1);
+    \draw[ultra thick, draw=black] (-2,0)--(-1,1);
+    \draw[ultra thick, draw=black] (-1,0)--(0,1);
+    \draw[ultra thick, draw=black] (0,0)--(1,1);
+    \draw[ultra thick, draw=black] (1,0)--(2,1);
+    \draw[ultra thick, draw=black] (2,0)--(3,1);
+    \draw[ultra thick, draw=black] (3,0)--(4,1);
+
+    \end{groupplot}
+  \end{tikzpicture}
+\end{figure}
+
+\subsection{Модуль числа}
+
+\begin{equation}
+  \begin{aligned}
+    \forall x \in \mathbb{R} & \mapsto
+    \begin{cases}
+      x \text{ при } x \geq 0\\
+      -x \text{ при } x < 0
+    \end{cases} & = |x| \\
+    & \text{или} & \\
+    \forall x \in \mathbb{R} & \mapsto
+    \max\{x; -x\} & = |x|
+  \end{aligned}
+\end{equation}
+
+\subsubsection{Свойства модуля}
+
+\begin{enumerate}
+  \begin{multicols}{2}
+  \item {
+    $|x| \geq 0$ $\forall x$
+  }
+  \item {
+    $|x_1 + x_2| \leq |x_1| + |x_2|$
+  }
+  \item {
+    $|x_1 + x_2| \geq |x_1| - |x_2|$
+  }
+  \item {
+    $|x_1| - |x_2| \leq |x_1 - x_2|$
+  }
+  \item {
+    $|x_1| - |x_2| \geq -|x_1 - x_2|$
+  }
+  \item {
+    $|x_1||x_2| = |x_1x_2|$
+  }
+  \item {
+    $|x| = |-x|$
+  }
+\end{multicols}
+\end{enumerate}
+
+\end{document}

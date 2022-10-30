@@ -1,0 +1,109 @@
+% Лекция по Математическому Анализу 12.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+\subsection{Неформальные определения}
+
+Французское определение: $\mathbb{N} = \left\{0; 1; 2; \dots\right\}$
+
+Немецкое определение: $\mathbb{N}^* = \left\{1; 2; 3; \dots\right\}$
+
+\subsection{Индуктивные множества}
+
+Множество $\mathbb{X}$ называется индуктивным, если
+$0 \in \mathbb{X}$ и $\forall x \in \mathbb{X}: x + 1 \in \mathbb{X}$,
+например: $[0; +\infty), \mathbb{N}, [-1; +\infty), (-\infty; +\infty)$
+
+\subsubsection{Наименьшее индуктивное множество}
+
+Множество $\mathbb{N}$ является наименьшим индуктивным множеством, то
+есть для любого другого индуктивного множества $\mathbb{X}$ верно 
+$\mathbb{N} \subseteq \mathbb{X}$
+
+\subsubsection{Теорема о единственности множества натуральных чисел}
+
+\textbf{Формулировка:} множество $\mathbb{N}$ существует и единственно.
+
+Пусть $\mathbf{X}$ - множество всех индуктивных подмножеств в $\mathbb{R}$
+($\mathbf{X} \neq \emptyset$, потому что $\mathbb{R}$ является индуктивным множеством)
+
+Положим, что $\mathbb{N} = \underset{\mathbb{X} \in \mathbf{X}}{\cap{\mathbb{X}}} =
+\left\{x: \forall \mathbb{X} \in \mathbf{X}, x \in \mathbb{X}\right\}$
+
+Т.к. $0 \in \mathbb{N}$, потому что $\forall \mathbb{X} \in \mathbf{X}: 0 \in \mathbb{X}$
+$\Rightarrow 0 \in \underset{\mathbb{X} \in \mathbf{X}}{\cap{\mathbb{X}}} = \mathbb{N}$
+
+Если $x \in \mathbb{N}$, то $x \in \underset{\mathbb{X}\in \mathbf{X}}{\cap{\mathbb{X}}}$,
+то $\forall \mathbb{X} \in \mathbf{X}: x \in \mathbb{X}$. Т.к.
+множества $\mathbb{X} \in \mathbf{X}$ индуктивны, то и
+$\forall \mathbb{X} \in \mathbf{X}: x + 1 \in \mathbb{X}$
+$\Rightarrow$ $x \in \mathbb{N}$ и $x + 1 \in \mathbb{N}$
+$\Rightarrow$ множество $\mathbb{N}$ индуктивное.
+
+$\forall$ индуктивного множества $\mathbb{X}_i$ верно что
+$\mathbb{X}_i \in \mathbf{X}$. Т.к.
+$\mathbb{N} = \underset{\mathbb{X}\in \mathbf{X}}{\cap{\mathbb{X}}}$, a
+$\mathbb{X}_i \in \mathbf{X}$, то $\mathbb{N} \subseteq \mathbb{X}_i$
+
+\textbf{Вывод:} множество $\mathbb{N}$ содержится в любом индуктивном
+множестве $\mathbb{X}_i$ и является наименьшим индуктивным.
+
+Допустим, что $\tilde{\mathbb{N}}$ обладает теми же свойствами,
+что и $\mathbb{N}$, тогда $\mathbb{N} \subseteq \tilde{\mathbb{X}}$
+(т.к. $\mathbb{N}$ минимальное по мощности) и
+$\tilde{\mathbb{N}} \subseteq \mathbb{N}$
+(т.к $\tilde{\mathbb{N}}$ тоже минимальное по мощности).
+Отсюда следует, что $\mathbb{N}$ и $\tilde{\mathbb{N}}$
+минимальные по мощности индуктивные множества
+$\Rightarrow \mathbb{N} = \tilde{\mathbb{N}} \Rightarrow$
+множество натуральных чисел единственно.
+
+\end{document}

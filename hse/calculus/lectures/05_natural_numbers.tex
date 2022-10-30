@@ -1,0 +1,101 @@
+% Лекция по Математическому Анализу 12.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+\subsection{Лемма о неограниченности}
+
+\textbf{Лемма:} множество $\mathbb{N}$ не ограниченно сверху
+
+Предположим противное: пусть $\mathbb{N}$ ограниченно сверху $\Rightarrow$
+$\exists$ такое действительное число $B$, которое лежит правее $\mathbb{N}$ ($\forall x \in \mathbb{N}: x < B$):
+
+\begin{picture}(300, 50)
+  
+  \put(75, 20){\vector(1, 0){200}}
+
+  \put(75, 30){\line(1, 0){100}}
+  \qbezier(175, 30)(185, 30)(185, 20)
+
+  \put(75, 30){\line(1, -1){10}}
+  \put(90, 30){\line(1, -1){10}}
+  \put(105, 30){\line(1, -1){10}}
+  \put(120, 30){\line(1, -1){10}}
+  \put(135, 30){\line(1, -1){10}}
+  \put(150, 30){\line(1, -1){10}}
+  \put(165, 30){\line(1, -1){10}}
+  
+  \put(125, 5){$\mathbb{N}$}
+
+  \put(225, 20){\circle*{5}}
+  \put(222.5, 5){B}
+
+\end{picture}
+
+Тогда по теореме о точной верхней грани множество $\mathbb{N}$
+обладает точной верхней гранью: $\exists \sup{\mathbb{N}} = C \in \mathbb{R}$ ($C \leq B$),
+тогда $C - 1$ является неточной верхней гранью (не ограничивает $\mathbb{N}$ справа)
+$\Rightarrow \exists n \in \mathbb{N}: n > C - 1$ $\Rightarrow$
+т.к. $\mathbb{N}$ - индуктивное $n + 1 \in \mathbb{N}$. $n > C - 1$
+$\Rightarrow n + 1 > (C - 1) + 1 \Rightarrow n + 1 > C \Rightarrow$
+$C \neq \sup{\mathbb{N}} \Rightarrow$ множество $\mathbb{N}$ не ограниченно сверху
+$(\blacksquare)$
+
+\subsection{Принцип Архимеда}
+
+\textbf{Формулировка:} $\forall C \in \mathbb{R}$ $\exists n \in \mathbb{N}: C < n$
+
+Зафиксируем какое-то $C \in \mathbb{R}$ и предположим, что
+$\nexists n \in \mathbb{N}$ для которого $C < n$ $\Rightarrow$
+$\forall n \in \mathbb{N}: n \leq C$ $\Rightarrow$ множество
+$\mathbb{N}$ ограниченно сверху числом $C$, но по лемме о неограниченности
+такого быть не может $\Rightarrow$ принцип Архимеда верен $(\blacksquare)$
+
+\end{document}

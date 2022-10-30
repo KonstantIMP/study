@@ -1,0 +1,238 @@
+% Лекция по Математическому Анализу 19.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+
+\subsection{Более сложные примеры индукции}
+
+\subsubsection{Отдаленный пример}
+
+\textbf{Теорема:} если $\mathbb{E} \subseteq \mathbb{N}$, и
+$0 \in \mathbb{E}$, и $\forall x \in \mathbb{E}: x + 1 \in \mathbb{E}$
+то $\mathbb{E} = \mathbb{N}$
+
+\begin{enumerate}
+  \item {
+    $0 \in \mathbb{E}$ и $\forall x \in \mathbb{E}: x + 1 \in \mathbb{E}$
+    $\Rightarrow \mathbb{E}$ - индуктивное множество 
+  }
+  \item {
+    $\mathbb{E} \subseteq \mathbb{N}$, однако $\mathbb{N}$ - наименьшее
+    индуктивное множество
+  }
+  \item {
+    Исходя из пуктов 1 и 2 $\Rightarrow \mathbb{E} = \mathbb{N}$, т.к.
+    $\mathbb{N} \subseteq \forall \mathbb{X}$, если $\mathbb{X}$ - 
+    индуктивное множество, а $\mathbb{E}$ как раз таковым является
+  }
+\end{enumerate}
+
+\subsubsection{Строгий пример}
+
+Пусть дана последовательность
+высказываний $\left\{ \Phi_n; n\in \mathbb{N}  \right\}$, тогда
+
+\begin{enumerate}
+  \item {
+    Вручную проверяем, что $\Phi_0$ верно
+  }
+  \item {
+    Проверяем, что $\Phi_{n+1}$ верно при верном $\Phi_n$
+  }
+  \item {
+    Тогда $\Phi_n$ верно $\forall n$
+  }
+\end{enumerate}
+
+\subsubsection{Ещё пример}
+
+Рассмотрим $\mathbb{E} = \left\{ n \in \mathbb{N}: \Phi_n \text{ - верно} \right\}$
+
+\begin{enumerate}
+  \item {
+    $0 \in \mathbb{E}$, т.к. $\Phi_0$ верно
+  }
+  \item {
+    Если $n \in \mathbb{E} \Rightarrow \Phi_n$ верно
+    $\Rightarrow \Phi_{n + 1}$ верно $\Rightarrow$
+    $n + 1 \in \mathbb{E}$
+  }
+  \item {
+    Исходя из пуктов 1 и 2 $\mathbb{E}$ индуктивно и равно $\mathbb{N}$
+  }
+\end{enumerate}
+
+\subsection{Определение по индукции}
+
+Пусть $\mathbb{X}$ - какое-либо множество, а $\mathbb{G}$ - такое
+правило, которое каждой конечной последовательность элементов из
+$\mathbb{X} - \left\{ x_0, x_1, \dots, x_n \in \mathbb{X}\right\}$
+ставит в соответствие эелемент $\mathbb{G}\left(x_0, x_1, \dots, x_n\right) \in \mathbb{N}$
+
+Тогда $\forall x \in \mathbb{X}$ правило $\mathbb{G}$ однозначно
+определяет бесконечную последовательность $x_0, x_1, \dots, x_n$
+с таким свойством: $\forall n: x_{n + 1} = \mathbb{G}\left(x_0, x_1, \dots, x_n\right)$
+
+\subsubsection{Определение степени числа}
+
+\textbf{Определение:} 
+$a^n = \underbrace{a \times a \times a \times \dots \times a}_{n \text{ множителей}}
+= a^{n - 1}\times a$ ($a \in \mathbb{R}, n \in \mathbb{N}$)
+
+Рассмотрим правило $\mathbb{G}(x_0, x_1, \dots, x_n)=ax_n$ при $x_0 = 1$
+
+Тогда для любой последовательности $\{x_n\}$ со свойствами:
+
+\begin{equation}
+  \begin{cases}
+    x_{n + 1} & = \mathbb{G}(x_0, x_1, \dots, x_n) = ax_n \\
+    x_0 & = 1
+  \end{cases}
+\end{equation}
+
+верно, что $x_n = a^n$, а $\{x_n\}$ - последовательность степеней числа $a$
+
+\subsubsection{Определение факториала}
+
+\textbf{Определение:} $n! = 1 \times 2 \times \dots \times n$
+
+Рассмотрим правило $G(x_0, x_1, \dots, x_n) = (n + 1)\times x_n$ ($x_0 = 1$)
+
+Тогда для любой последовательности $\{x_n\}$ со свойствами:
+
+\begin{equation}
+  \begin{cases}
+    x_{n + 1} & = \mathbb{G}(x_0, x_1, \dots, x_n) = x_n\times(n + 1) \\
+    x_0 & = 1
+  \end{cases}
+\end{equation}
+
+верно, что $x_n = n!$, а $\{x_n\}$ - последовательность факториалов натуральных чисел
+
+\subsubsection{Определение индуктивной суммы}
+
+Пусть дана бесконечная последовательность $\{a_n\}$ (
+$\forall n \in \mathbb{N} \rightarrow  a_n \in \mathbb{R}$)
+
+Рассмотрим правило $\mathbb{G}(x_0, x_1, \dots, x_n) = x_n + a_{n + 1}$
+($x_0 = a_0$). Тогда существует единственная последовательность $\{x_n\}$,
+такая что $x_0 = 0$, $x_n = \sum\limits_{k=0}^n{a_k}$ и $x_{n + 1} = x_n + a_{n + 1}$
+
+\subsubsection{Определение индуктивного произведения}
+
+Пусть дана бесконечная последовательность $\{b_n\}$
+($\forall n \in \mathbb{N} \rightarrow b_n \in \mathbb{R}$)
+
+Рассмотрим правило $G(x_0, x_1, \dots, x_n) = x_n\times b_{n+1}$
+($x_0 = b_0$). Тогда существует единственная последовательности $\{x_n\}$,
+такая что $x_0 = b_0$, $x_n = \prod\limits_{k=0}^n{b_k}$ и $x_{n + 1} = x_n \times b_{n + 1}$
+
+\subsection{Доказательство формул по индукции}
+
+\subsubsection{Неравенство Бернулли}
+
+\textbf{Само неравенство:} $(1 + \alpha)^n \geq 1 + n\alpha$ ($a > -1, n \in \mathbb{N}$)
+
+\begin{enumerate}
+  \item {
+    Для $\alpha = 0$ или $n = 0$: $1 \geq 1$ - верно
+  }
+  \item {
+    Допустим выражение верно для какого-то числа $n$
+  }
+  \item {
+    Докажем, что выражение верно для $n + 1$:
+    \begin{equation}
+      %\begin{multline}
+        (1 + \alpha)^{(n + 1)} \geq 1 + (n + 1)\alpha% \; \Rightarrow \\
+        \Rightarrow \;
+        \underbrace{(1 + \alpha)^n}_{\geq 1 + n\alpha}\underbrace{(1 + \alpha)}_{> 0} \geq 1 + n\alpha + \alpha %\; \Rightarrow %\\
+        %\Rightarrow \;
+      %\end{multline}
+    \end{equation}
+
+    Тогда $(1 + \alpha)^{n + 1} \geq (1 + n\alpha)(1 + \alpha) =
+    1 + n\alpha + \alpha + \underbrace{n\alpha^2}_{\geq 0}$.
+
+    Т.к. $1 + n\alpha + \alpha + n\alpha^2 \geq 1 + n\alpha + \alpha$, то
+    и $(1 + \alpha)^{n + 1} \geq 1 + n\alpha + \alpha$ ($\blacksquare$)
+  }
+\end{enumerate}
+
+\subsubsection{Ещё какая-то формула}
+
+\textbf{Доказать:} $\sum\limits_{i = 0}^n{q^i} = \frac{1 - q^{n + 1}}{1 - q}$ при $q \neq 1$
+
+\begin{enumerate}
+  \item {
+    Рассмотрим случай $n = 0$, тогда:
+    \begin{equation}
+      \sum\limits_{i = 0}^0{q^i} = q^0 = 1 = \frac{1 - q^{0 + 1}}{1 - q} = 1 \text{ (верно)}
+    \end{equation}
+  }
+  \item {
+    Допустим, выражение верно для какого-то $k$:
+    \begin{equation}
+      \sum\limits_{i = 0}^k{q^i} = \frac{1 - q^{k + 1}}{1 - q}
+    \end{equation}
+  }
+  \item {
+    Проверим выражение при $n = k + 1$:
+    \begin{multline}
+      \sum\limits_{i = 0}^{k + 1}{q^i} = \sum\limits_{i = 0}^{k}{q^i} + q^{k + 1} = \\ =
+      \frac{1 - q^{k + 1}}{1 - q} + q^{k + 1} 
+      = \frac{1 - q^{k + 1} + q^{k + 1}(1 - q)}{1 - q} = \\ =
+      \frac{1 - q^{k + 1} +q^{k + 1} - q^{k + 1  + 1}}{1 - q} 
+      = \frac{1 - q^{(k + 1) + 1}}{1 - q} \:\: (\blacksquare)
+    \end{multline}
+  }
+\end{enumerate}
+
+\end{document}

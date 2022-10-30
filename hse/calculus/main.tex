@@ -1,0 +1,97 @@
+% Вся собранная информация по математическому анализу
+% Михедов Константин Константиновчи БИБ224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+\documentclass[a4paper,12pt]{article}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+  % Титульная страница
+  \begin{titlepage}
+    \begin{center}
+      \vspace*{1.5cm}
+
+      \Huge
+      \textbf{Математический анализ}
+
+      \vspace{0.5cm} \large
+      \textbf{Сборник лекций и семинаров}
+
+      \vspace{1.5cm} \normalsize
+      \textbf{Михедов Константин Константинович}
+
+      \vfill
+
+      \includegraphics[width=0.2\textwidth]{hse_logo}
+
+      \vspace{1cm} \footnotesize
+      Национальный Исследовательский Университет "Высшая Школа Экономики" \\
+      Московский Институт Электроники и Математики им. А. Н. Тихонова \\
+      Информационная Безопасность, БИБ224 \\
+      Москва, 2022
+    \end{center}
+  \end{titlepage}
+
+  \section{Вещественные числа}
+  \import{lectures/}{01_real_numbers}
+
+  \section{Вещественные числа}
+  \import{lectures/}{02_sets}
+
+  \section{Математическая индукция}
+  \import{seminars/}{01_induction}
+  \import{lectures/}{04_induction}
+
+  \section{Натуральные числа}
+  \import{lectures/}{03_natural_numbers}
+  \import{lectures/}{05_natural_numbers}
+
+  \section{Целые и рациональные числа}
+  \import{lectures/}{06_zq_numbers}
+
+  \section{Числовые функции}
+  \import{lectures/}{07_functions}
+
+\end{document}
