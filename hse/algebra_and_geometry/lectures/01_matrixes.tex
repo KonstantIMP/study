@@ -1,0 +1,133 @@
+% Лекция по Алгебре и геометрии 12.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+  \subsection{Определители}
+  
+  \subsubsection{Определители 3 на 3}
+
+  %\begin{equation}
+    \begin{multline}
+      \det{
+        \begin{pmatrix}
+          a_{11} & a_{12} & a_{13} \\
+          a_{21} & a_{22} & a_{23} \\
+          a_{31} & a_{32} & a_{33}
+        \end{pmatrix}
+      }
+      = a_{11}a_{22}a_{33}
+      + a_{12}a_{23}a_{31}
+      + a_{21}a_{32}a_{13} - \\
+      - a_{31}a_{22}a_{13}
+      - a_{21}a_{12}a_{33}
+      - a_{32}a_{23}a_{11}
+    \end{multline}
+  %\end{equation}
+
+  \subsubsection{Определители 2 на 2}
+
+  \begin{equation}
+    \det{
+      \begin{pmatrix}
+        a_{11} &a_{12} \\
+        a_{21} & a_{22}
+      \end{pmatrix}
+    } = a_{11}a_{22} - a_{12}a_{21}
+  \end{equation}
+
+  \subsubsection{Определитель 1 на 1}
+
+  \begin{equation}
+    \det{
+      \begin{pmatrix}
+        b
+      \end{pmatrix}
+    } = b
+  \end{equation}
+
+  \subsubsection{Общее графическое правило}
+
+  Понимай это как хочешь, удачи тебе
+
+  \begin{picture}(350,50)
+    \put(125,10){
+      $\begin{pmatrix}
+          \circ & \circ & \circ \\
+          \circ & \circ & \circ \\
+          \circ & \circ & \circ
+        \end{pmatrix}$
+    }
+
+    \thicklines
+
+    \put(164,37.5){\color{blue}\line(1,-1){16}}
+    \put(149,37.5){\color{green}\line(1,-1){32.5}}
+    \put(134,37.5){\color{red}\line(1,-1){47.5}}
+    \put(134,22.5){\color{blue}\line(1,-1){32.5}}
+    \put(134,7.5){\color{green}\line(1,-1){16}}
+
+    \put(205,10){\text{-}}
+
+    \put(225,10){
+      $\begin{pmatrix}
+          \circ & \circ & \circ \\
+          \circ & \circ & \circ \\
+          \circ & \circ & \circ
+        \end{pmatrix}$
+    }
+
+    \put(264,-11){\color{magenta}\line(1,1){16}}
+    \put(249,-11){\color{cyan}\line(1,1){32.5}}
+    \put(234,-11){\color{yellow}\line(1,1){47.5}}
+    \put(234,4){\color{magenta}\line(1,1){32.5}}
+    \put(234,18){\color{cyan}\line(1,1){16}}
+  \end{picture}
+
+\end{document}

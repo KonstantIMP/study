@@ -1,0 +1,76 @@
+% Лекция по Алгебре и геометрии 21.09.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+\begin{document}
+  
+\subsubsection{Определитель n-ого порядка}
+
+\begin{equation}
+  \det{
+    \begin{pmatrix}
+      a_{11} & a_{12} & \dots & a_{1n} \\
+      a_{21} & a_{22} & \dots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{n1} & a_{n2} & \dots & a_{nn}
+    \end{pmatrix}
+  } = \sum\limits_{(\alpha_1, \alpha_2, \dots, \alpha_n)}{
+    \left(a_{1\alpha_1} a_{2\alpha_2} \dots a_{n\alpha_n}
+    (-1)^{f(\alpha_1, \alpha_2, \dots, \alpha_n)}\right)
+  }
+\end{equation}
+
+\begin{equation}
+  f(\alpha_1, \alpha_2, \dots, \alpha_n) = \begin{cases}
+    1 & \text{ если } (\alpha_1, \alpha_2, \dots, \alpha_n) \text{ чётная} \\
+    0 & \text{ в других случаях}
+  \end{cases}
+\end{equation}
+
+\end{document}
