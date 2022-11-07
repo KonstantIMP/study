@@ -73,4 +73,219 @@
   \end{cases}
 \end{equation}
 
+\subsubsection{Свойства определителей}
+
+\begin{enumerate}
+  \item {
+    Определители исходной и транспонированной матриц равны: 
+    \begin{equation}
+      \det{A}=\det{A^\tau}
+    \end{equation}
+  }
+  \item {
+    Если в исходной матрице попарно поменять местами 2 строки или 2
+    столбца, то знак определителя поменяется на противоположный.
+    %\begin{equation}
+    %  \det{
+    %    \begin{pmatrix}
+    %      a_{11} & a_{12} & a_{13} \\
+    %      a_{21} & a_{22} & a_{23} \\
+    %      a_{31} & a_{32} & a_{33} 
+    %    \end{pmatrix}
+    %  } = -\det{
+    %    \begin{pmatrix}
+    %      a_{11} & a_{12} & a_{13} \\
+    %      a_{31} & a_{32} & a_{33} \\
+    %      a_{21} & a_{22} & a_{23} 
+    %    \end{pmatrix}
+    %  }
+    %\end{equation}
+  }
+  \item {
+    Если в матрице есть нулевой столбец или строка, то ее определитель равен нулю.
+    %\begin{eqnarray}
+    %  \begin{vmatrix}
+    %    1 & 3 & -2 \\
+    %    4 & 9 & 0 \\
+    %    0 & 0 & 0
+    %  \end{vmatrix} = 
+    %  \begin{vmatrix}
+    %    3 & 3 & 0 \\
+    %    5 & 7 & 0 \\
+    %    4 & -14 & 0
+    %  \end{vmatrix} = 0
+    %\end{eqnarray}
+  }
+  \item {
+    Если в матрице есть два одинаковых столбца или строки, то ее определитель равен нулю.
+  }
+  \item {
+    Если в $\Delta$ $\exists$ строка или столбец: $\forall i,j : a_{ij} = \lambda a^{'}_{ij}$, то $\Delta = \lambda \Delta^{'}$
+    \begin{equation}
+      \det{
+        \begin{pmatrix}
+          4 & 8 & 14 \\
+          5 & 6 & 1 \\
+          10 & 7 & 0
+        \end{pmatrix}
+      } = 2 \times \det{
+        \begin{pmatrix}
+          2 & 3 & 7 \\
+          5 & 6 & 1 \\
+          10 & 7 & 0
+        \end{pmatrix}
+      }
+    \end{equation}
+  }
+  \item {
+    Свойсто, название которому не придумали
+    %\begin{eqnarray}
+      \begin{multline}
+      %\det{
+        \begin{vmatrix}
+          a_{11} & \dots & a_{1j} + b_{1j} & \dots & a_{1n} \\
+          \vdots & \ddots & \vdots & \ddots & \vdots \\
+          a_{n1} & \dots & a_{nj} + b_{nj} & \dots & a_{nn} \\
+        \end{vmatrix}
+      %}
+      = \\ = %\det{
+        \begin{vmatrix}
+          a_{11} & \dots & a_{1j} & \dots & a_{1n} \\
+          \vdots & \ddots & \vdots & \ddots & \vdots \\
+          a_{n1} & \dots & a_{nj} & \dots & a_{nn} \\
+        \end{vmatrix}
+      %} + \det{
+       +
+        \begin{vmatrix}
+          a_{11} & \dots & b_{1j} & \dots & a_{1n} \\
+          \vdots & \ddots & \vdots & \ddots & \vdots \\
+          a_{n1} & \dots & b_{nj} & \dots & a_{nn} \\
+        \end{vmatrix}
+      %}
+      \end{multline}
+    %\end{eqnarray}
+  }
+  \item {
+    Включение линейной комбинации
+    \begin{equation}
+      \begin{vmatrix}
+        a_{11} & a_{12} & \dots & a_{1j} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2j} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nj} & \dots & a_{jj} \\
+      \end{vmatrix}
+      =
+      \begin{vmatrix}
+        a_{11} + \lambda a_{1j} & a_{12} & \dots & a_{1j} & \dots & a_{1n} \\
+        a_{21} + \lambda a_{2j} & a_{22} & \dots & a_{2j} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+        a_{n1} + \lambda a_{nj} & a_{n2} & \dots & a_{nj} & \dots & a_{jj} \\
+      \end{vmatrix}
+    \end{equation}
+  }
+\end{enumerate}
+
+\subsection{Миноры и алгебраические дополнения}
+
+\paragraph{Минор} значения определителя матрицы, полученной на пересечении одного или нескольких строк и столбцов
+\paragraph{Алгебраическое дополнение} значение определителя матрицы, полученный за счет вычеркивания строк и столбцов, образующих минор
+
+\subsubsection{Общий случай}
+
+\textbf{Эта штука выглядит максимально страшно...}
+
+\begin{picture}(300,200)
+
+  \put(0,100){ $\begin{pmatrix}
+    a_{11} & a_{12} & \dots &
+    a_{1j_1} & a_{1j_2} & \dots &
+    a_{1j_{k}} & a_{1j_{k+1}} & \dots & a_{1n} \\
+    a_{21} & a_{22} & \dots &
+    a_{2j_1} & a_{2j_2} & \dots &
+    a_{2j_{k}} & a_{2j_{k+1}} & \dots & a_{2n} \\
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{i_11} & a_{i_12} & \dots &
+    a_{i_1j_1} & a_{i_1j_2} & \dots &
+    a_{i_1j_{k}} & a_{i_1j_{k+1}} & \dots & a_{i_1n} \\
+    a_{i_21} & a_{i_22} & \dots &
+    a_{i_2j_1} & a_{i_2j_2} & \dots &
+    a_{i_2j_{k}} & a_{i_2j_{k+1}} & \dots & a_{i_2n} \\
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{i_{k}1} & a_{i_{k}2} & \dots &
+    a_{i_{k}j_1} & a_{i_{k}j_2} & \dots &
+    a_{i_{k}j_{k}} & a_{i_{k}j_{k+1}} & \dots & a_{i_{k}n} \\
+    a_{i_{k+1}1} & a_{i_{k+1}2} & \dots &
+    a_{i_{k+1}j_1} & a_{i_{k+1}j_2} & \dots &
+    a_{i_{k+1}j_{k}} & a_{i_{k+1}j_{k+1}} & \dots & a_{i_{k+1}n} \\
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots &
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \dots &
+    a_{nj_1} & a_{nj_2} & \dots &
+    a_{nj_{k}} & a_{nj_{k+1}} & \dots & a_{nn} 
+  \end{pmatrix}$ }
+
+  \put(112,190){\color{magenta}\line(0,-1){180}}
+  \put(260,190){\color{magenta}\line(0,-1){180}}
+
+  \put(0,135){\color{magenta}\line(1,0){385}}
+  \put(0,70){\color{magenta}\line(1,0){385}}
+
+  
+  \put(186,102){\color{cyan}\oval(145, 65)}
+
+  \put(60,160){\color{green}\oval(100, 45)[br]}
+  \put(60,45){\color{green}\oval(100, 45)[tr]}
+  \put(312,160){\color{green}\oval(100, 45)[bl]}
+  \put(312,45){\color{green}\oval(100, 45)[tl]}
+
+\end{picture}
+
+Тогда $M_k$ - минор k-ого порядка, а $A_k$ - его алгебраическое дополнение
+
+\begin{equation}
+  M_k = \det{
+    \begin{pmatrix}
+      a_{i_1j_1} & a_{i_1j_2} & \dots & a_{i_1j_k} \\
+      a_{i_2j_1} & a_{i_2j_2} & \dots & a_{i_2j_k} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{i_kj_1} & a_{i_kj_2} & \dots & a_{i_kj_k}
+    \end{pmatrix}
+  }
+\end{equation}
+\begin{equation}
+  A_k =\det{
+    \begin{pmatrix}
+      a_{11} & a_{12} & \dots & a_{1,j_1-1} & a_{1j_{k+1}} & \dots & a_{1n} \\
+      a_{21} & a_{22} & \dots & a_{2,j_1-1} & a_{2j_{k+1}} & \dots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+      a_{i_1-1,1} & a_{i_1-1,2} & \dots & a_{i_1-1,j_1-1} & a_{i_1-1,j_{k+1}} & \dots & a_{i_1-1,n} \\
+      a_{i_{k+1}1} & a_{i_{k+1}2} & \dots & a_{i_{k+1},j_1-1} & a_{i_{k+1}j_{k+1}} & \dots & a_{i_{k+1}n} \\
+      \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+      a_{n1} & a_{n2} & \dots & a_{n,j_1-1} & a_{nj_{k+1}} & \dots & a_{nn}
+    \end{pmatrix}
+  }
+\end{equation}
+
+И еще кое-что: $S_m = (i_1+i_2+\dots+i_k) \times (j_1+j_2+\dots+j_k)$
+
+\subsubsection{Зачем все это?}
+
+\paragraph{Для вычисления определителя}
+
+При помощи алгебраических дополнений можно несколько проще считать определители для
+матриц больших размерностей:
+
+\begin{equation}
+  \Delta = \sum\limits_{j=1}^{n}(-1)^{k+j}M_{kj}A_{kj}
+\end{equation}
+
+В данной формуле представлено разложение по строке (с номером k), но такое можно
+делать и для столбцов. Также $M_{kj}$ - минор из одного элемента с координатами $(k; j)$,
+а $A_{kj}$ - его элгебраическое дополнение.
+
 \end{document}
