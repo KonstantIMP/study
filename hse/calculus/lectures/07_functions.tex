@@ -54,7 +54,7 @@
   calc,
   pgfplots.groupplots,
 }
-\pgfplotsset{compat=1.18}
+\pgfplotsset{compat=1.16}
 
 % Списки в два и более стобцов
 \usepackage{multicol}
@@ -225,5 +225,64 @@ $f(x) = \{x\}$ эквивалентно записы $\forall x \in \mathbb{R} \
   }
 \end{multicols}
 \end{enumerate}
+
+\subsubsection{Немного утверждений о модуле}
+
+%\begin{equation}
+  \begin{align}
+    |\sum\limits_{i=1}^wx_i| \leq \sum\limits_{i=1}^w|x_i| &&
+    |\prod\limits_{i=1}^wx_i| = \prod\limits_{i=1}^w|x_i|
+  \end{align}
+  \begin{align}
+    |x| < \varepsilon \Leftrightarrow -\varepsilon < x < \varepsilon \Leftrightarrow
+    \begin{cases}
+      x < \varepsilon \\
+      x > -\varepsilon
+    \end{cases} &&
+    |x| > \varepsilon \Leftrightarrow \left[
+      \begin{array}{ll}
+        x > \varepsilon \\
+        x < -\varepsilon
+      \end{array}
+    \right .
+  \end{align}
+%\end{equation}
+
+\subsection{Четность функции}
+
+\paragraph{Четной} называется функция $f: \mathbb{R} \hookrightarrow \mathbb{R}$, если
+\begin{enumerate}
+  \item $D(f)$ - симметрична относительно нуля, и
+  \item $f(x) = f(-x)$ $\forall x \in D(f)$
+\end{enumerate}
+
+\paragraph{Нечетной} называется функция $f: \mathbb{R} \hookrightarrow \mathbb{R}$, если
+\begin{enumerate}
+  \item $D(f)$ - симметрична относительно нуля, и
+  \item $f(x) = -f(-x)$ $\forall x \in D(f)$
+\end{enumerate}
+
+\paragraph{В других случаях} говорят, что функция не имеет четности
+
+\textbf{P.s.} $D(f)$ - область определения функции - является симметричной, если $D(f) = -D(f)$
+
+\subsection{Период функции}
+
+Число $T > 0$ называют периодом функции $f:\mathbb{R} \hookrightarrow \mathbb{R}$, если
+\begin{enumerate}
+  \item $f(x) = f(x + kT)$, $k \in \mathbb{Z}$ и
+  \item $D(f) + t = D(f) - t$
+\end{enumerate} 
+
+\subsection{Функция Дирихле}
+
+\begin{equation}
+  f_d(x) = \begin{cases}
+    1 \text{ если } x \in \mathbb{Q} \\
+    0 \text{ если } x \notin \mathbb{Q}
+  \end{cases}
+\end{equation}
+
+
 
 \end{document}
