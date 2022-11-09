@@ -8,4 +8,8 @@
 *.synctex*
 *.pdf
 
+# Beamer temp ignore
+*.nav
+*.snm
+*.toc
 
