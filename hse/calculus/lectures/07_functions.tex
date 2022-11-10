@@ -17,7 +17,10 @@
 % Поддержка изображений
 \usepackage{graphicx}
 % Путь до внешних изображений
-\graphicspath{ {./figures/}}
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
 
 % Умная запятая
 \usepackage{icomma}
@@ -283,6 +286,46 @@ $f(x) = \{x\}$ эквивалентно записы $\forall x \in \mathbb{R} \
   \end{cases}
 \end{equation}
 
+\subsection{Вычисление функции от множеств}
 
+Пусть $f: \mathbb{R} \mapsto \mathbb{R}$ и $\mathbb{A} \subseteq D(f)$, тогда образом множетсва
+$\mathbb{A}$ под действием $f$ называется такое множество:
+\begin{equation}
+  f(\mathbb{A}) = \{f(x) : x \in \mathbb{A}\}
+\end{equation}
+
+\subsubsection{Точные грани}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=3in]{lec_07_fig_01}
+\end{figure}
+
+Точной нижней гранью $f(x)$ на множестве $\mathbb{A}$ называется
+\[\inf\limits_{x \in \mathbb{A}}f(x) = \inf f(\mathbb{A})\]
+
+Точной верхней гранью $f(x)$ на множестве $\mathbb{A}$ называется
+\[\sup\limits_{x\in \mathbb{A}} f(x) = \sup f(\mathbb{A})\]
+
+\subsubsection{Возрастание и убывание функции на множестве}
+
+Пусть $f: \mathbb{R} \mapsto \mathbb{R}$ и $\mathbb{A} \subseteq D(f)$, тогда
+\begin{itemize}
+  \item {
+    $f(x)$ возрастает, если $\forall \underset{s < t}{s, t} \in \mathbb{A} \Rightarrow f(s) < f(t)$
+  }
+  \item {
+    $f(x)$ не убывает, если $\forall \underset{s < t}{s, t} \in \mathbb{A} \Rightarrow f(s) \leq f(t)$
+  }
+  \item {
+    $f(x)$ убывает, если $\forall \underset{s < t}{s, t} \in \mathbb{A} \Rightarrow f(s) > f(t)$
+  }
+  \item {
+    $f(x)$ не возрастает, если $\forall \underset{s < t}{s, t} \in \mathbb{A} \Rightarrow f(s) \geq f(t)$
+  }
+\end{itemize}
+
+\paragraph{Интересная взаимосвязь} Если $f$ возрастает, то верно и то, что она не убывает, однако
+это не работает в обратную сторону
 
 \end{document}
