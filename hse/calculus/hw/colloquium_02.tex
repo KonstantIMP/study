@@ -1,0 +1,129 @@
+% Презентация для представления  решения задач коллоквиума по матанализу
+% Михедов Константин Константинович БИБ224
+
+% Объявляем презентацию
+\documentclass[8pt]{beamer}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Какая-то тема
+\usetheme{Berlin}
+\usecolortheme{seahorse}
+
+% Поддержка графиков
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+% Информация для заголовка
+\title[Коллоквиум]
+{Разбор задач к коллоквиуму}
+\subtitle{Номера 35 - 37}
+\author[БИБ224]
+{Борисенкова~Д.А. \and Герцен~А.М. \and Ибрагимова~М.С. \and Колюх~Е.С. \and Михедов~К.К. \and Хисматуллина~А.А}
+\institute[НИУ ВШЭ]
+{НИУ Высшая Школа Экономики}
+\date{Москва, 2022}
+
+\begin{document}
+    
+  \frame{\titlepage}
+
+  \begin{frame}
+    \frametitle{Задание 35}    
+
+    \begin{block}{Вопрос}
+      Остается ли теорема Вейерштрасса об экстремумах верна, если в ее формулировке заменить
+      отрезок интервалом?
+    \end{block} \pause
+
+    \begin{alertblock}{Теорема Вейерштрасса об экстремумах}
+      Если функция $f(x)$ непрерывна на $[a; b]$, то она она ограничена на этом отрезке
+      и достигает своего наибольшего и наименьшего значения (экстремумов)
+    \end{alertblock} \pause
+
+    Для примера возьмем функцию $f(x) = \frac{1}{x}$ на интервале $(0; +\infty)$ \pause
+
+    Видно, что хоть $f(x) = \frac{1}{x}$ непрерывна на заданном интервале, ограниченной на
+    нем она не является \pause
+
+    \begin{flushright}
+        Ответ: не остается
+    \end{flushright}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Задание 36}
+
+    \begin{block}{Вопрос}
+      Бывает ли, что $\exists \lim\limits_{x \rightarrow a}f(x)$, $\nexists \lim\limits_{x \rightarrow a}g(x)$,
+      но $\exists \lim\limits_{x \rightarrow a}(f(x) + g(x))$?
+    \end{block} \pause
+
+    \begin{alertblock}{Теорема о сумме пределов}
+      Если $\exists \lim\limits_{x \rightarrow a}f(x) = l_1$ и $\exists \lim\limits_{x \rightarrow a}g(x) = l_2$,
+      то $\exists$ предел суммы этих функций, причем верно, что
+      $\lim\limits_{x \rightarrow a}(f(x) + g(x)) = \lim\limits_{x \rightarrow a}f(x) + \lim\limits_{x \rightarrow}g(x) = l_1 + l_2$
+    \end{alertblock} \pause
+
+    \begin{exampleblock}{Доказательство}
+      Пусть $\lim\limits_{x \rightarrow a}f(x) = l_1$, а 
+      $\lim\limits_{x \rightarrow a}g(x) = l_2$, тогда по теореме
+      о связи функции, её предела и бесконечно малой функции:
+      $f(x) = l_1 + \alpha (x)$ и $g(x) = l_2 + \beta (x)$ $\Rightarrow$
+      $f(x) + g(x) = l_1 + l_2 + (\alpha (x) + \beta (x))$, где $\alpha (x)$ и $\beta (x)$
+      - бесконечно-малые,
+      тогда $\lim\limits_{x \rightarrow a}(f(x) + g(x)) = l_1 + l_2 = \lim\limits_{x \rightarrow a}f(x) + \lim\limits_{x \rightarrow}g(x)$
+    \end{exampleblock} \pause
+
+    %В вопросе несостыковка с теоремой $\Rightarrow$ возникает противоречие
+
+    \begin{flushright}
+      Ответ: не бывает
+    \end{flushright}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Задание 37}
+
+    \begin{block}{Вопрос}
+      Бывает ли, что $\exists \lim\limits_{x \rightarrow a}f(x)$, $\nexists \lim\limits_{x \rightarrow a}g(x)$,
+      но $\exists \lim\limits_{x \rightarrow a}(f(x) \times g(x))$?
+    \end{block} \pause
+
+    \begin{alertblock}{Теорема о произведении пределов}
+      Если $\exists \lim\limits_{x \rightarrow a}f(x) = l_1$ и $\exists \lim\limits_{x \rightarrow a}g(x) = l_2$,
+      то $\exists$ предел суммы этих функций, причем верно, что
+      $\lim\limits_{x \rightarrow a}(f(x) \times g(x)) = \lim\limits_{x \rightarrow a}f(x) \times \lim\limits_{x \rightarrow}g(x) = l_1 \times l_2$
+    \end{alertblock} \pause
+
+    \begin{exampleblock}{Доказательство}
+      Пусть $\lim\limits_{x \rightarrow a}f(x) = l_1$, а 
+      $\lim\limits_{x \rightarrow a}g(x) = l_2$, тогда по теореме
+      о связи функции, её предела и бесконечно малой функции:
+      $f(x) = l_1 + \alpha (x)$ и $g(x) = l_2 + \beta (x)$ $\Rightarrow$
+      $f(x) \times g(x) = (l_1 + \alpha (x))(l_2 + \beta (x)) = l_1l_2 + (l_1\beta(x) + l_2\alpha(x) + \alpha(x)\beta(x))$,
+      где $\alpha (x)$ и $\beta (x)$
+      - бесконечно-малые тогда $\lim\limits_{x \rightarrow a}(f(x) \times g(x)) = l_1l_2 = \lim\limits_{x \rightarrow a}f(x) \times \lim\limits_{x \rightarrow}g(x)$
+    \end{exampleblock} \pause
+
+    \begin{flushright}
+      Ответ: не бывает
+    \end{flushright}
+  \end{frame}
+
+\end{document}
