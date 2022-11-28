@@ -13,3 +13,5 @@
 *.snm
 *.toc
 
+# Luatex
+*.xdv

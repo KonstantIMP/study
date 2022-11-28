@@ -5,7 +5,7 @@ printf "    with {.aux, .fdb_latexmk, .fls, .log, .out, .pdf, .sta, .synctex.gz}
 printf "\n"
 
 find . \( -iname "*.aux" -o -iname "*.fdb_latexmk" \
-    -o -iname "*.fls" -o -iname "*.log" -o -iname "*.out" \
+    -o -iname "*.fls" -o -iname "*.log" -o -iname "*.out" -o -iname "*.xdv" \
     -o -iname "*.nav" -o -iname "*.snm" -o -iname "*.toc" \
     -o -iname "*.pdf" -o -iname "*.sta" -o -iname "*.synctex.gz" \) \
     -exec rm {} \;
