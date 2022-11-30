@@ -1,0 +1,273 @@
+% Лекция по Математическому Анализу 10.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% зачеркивание
+\usepackage{cancel}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+\subsection{Пределы последовательностей}
+
+\subsubsection{Окрестность точки}
+
+$v_{\varepsilon}(a) = (a - \varepsilon; a + \varepsilon)$ - эпсилон($\varepsilon$) окрнесность точки $a$
+
+\begin{picture}(300, 50)
+  \put(50, 15){\vector(1,0){200}}
+
+  \put(150, 15){\circle*{4}}
+  \put(147.5, 0){$a$}
+
+  \put(100, 14.75){\circle{5}}
+  \put(87.5, 0){$a - \varepsilon$}
+
+  \put(200, 14.75){\circle{5}}
+  \put(187.5, 0){$a + \varepsilon$}
+
+  \bezier{0}(100,15)(100,25)(110,25)
+  \put(110,25){\line(1,0){80}}
+  \bezier{0}(200,15)(200,25)(190,25)
+
+  \put(100, 15){\line(1,1){10}}
+  \put(120, 15){\line(1,1){10}}
+  \put(140, 15){\line(1,1){10}}
+  \put(160, 15){\line(1,1){10}}
+  \put(180, 15){\line(1,1){10}}
+
+  \put(135, 35){$v_{\varepsilon}(a)$}
+\end{picture}
+
+\subsubsection{Вводное определение предела последовательности}
+
+$a = \lim{x_n} (\text{или } x_n \underset{n \rightarrow \infty}{\rightarrow} a)$, если
+$\forall v_{\varepsilon}(a)$ содержит почти все значения последовательности $\{x_n\}$
+
+Или по-другому $\forall \varepsilon > 0$ $x_n \in v_{\varepsilon}(a)$ верно для почти всех $x_n$
+
+\subsubsection{Точное определение предела последовательности}
+
+$a = \lim{x_n}$ если $\forall \varepsilon > 0$ $\exists N \in \mathbb{N}:$ $\forall n > N$ $|x_n - a| < \varepsilon$
+
+\paragraph{Пример} Докажем, что $\lim{\frac{n - 1}{n}} = 1$
+
+Зафиксируем $\varepsilon > 0$, тогда $x_n \in v_{\varepsilon}(a) \underset{a = 1}{\Leftrightarrow}$
+$\frac{n - 1}{n} \in (1 - \varepsilon; 1 + \varepsilon)$, что равносильно системе:
+\begin{equation}
+  \begin{cases}
+    \frac{n - 1}{n} &< 1 + \varepsilon \\
+    \frac{n - 1}{n} &> 1 - \varepsilon
+  \end{cases} \Leftrightarrow
+  \begin{cases}
+    \frac{-1}{n} &< \varepsilon \\
+    \frac{-1}{n} &> -\varepsilon
+  \end{cases} \Leftrightarrow
+  \begin{cases}
+    -1 &< n\varepsilon \\
+    -1 &> -n\varepsilon
+  \end{cases}
+\end{equation}
+
+Т.к. $\varepsilon > 0$ и $n >= 0$, то $-1 < n\varepsilon$ верно всегда, что же касается $-1 > -n\varepsilon$,
+то из него следует, что $1 < n\varepsilon$ $\Leftrightarrow$ $n > \varepsilon^{-1}$, что по теореме
+Архимеда верно для почти всех $n$ $\Rightarrow$ 1 действительно является пределом данной
+последовательности $(\blacksquare)$
+
+\subsubsection{Бесконечные пределы}
+
+Говорят, что $\{x_n\} \underset{n \rightarrow \infty}{\rightarrow} +\infty$, если $\forall E \in \mathbb{R}$
+условие $x_n > E$ выполняется для почти всех $n$. Аналогично $\{x_n\} \underset{n \rightarrow \infty}{\rightarrow} -\infty$,
+если $\forall I \in \mathbb{R}$ $x_n < I$ верно для почти всех $n$
+
+Еще $\{x_n\} \underset{n \rightarrow \infty}{\rightarrow} \infty$, если $\{|x_n|\} \underset{n \rightarrow \infty}{\rightarrow} +\infty$
+
+\subsubsection{Бесконечно-малые и -большие последовательности}
+
+Последовательность $\{x_n\}$ называют
+\begin{itemize}
+  \item {
+    Бесконечно-малой, если $\lim\limits_{n \rightarrow \infty}{x_n} = 0$
+  }
+  \item {
+    Бесконечно-большой, если $\lim\limits_{n \rightarrow \infty}{x_n} = \infty$
+  }
+\end{itemize}
+
+\subsubsection{Теорема}
+
+Пусть $x_n \neq 0$, тогда $\{x_n\}$ бесконечно-мала, только тогда, когда $\{\frac{1}{x_n}\}$ бесконечно-велика
+
+\subsubsection{Еще теорема}
+
+$\lim\limits_{n \rightarrow \infty}{x_n} = a \in \mathbb{R}$ в том, и только том случае, если последовательность
+$\{x_n\}$ представима в виде $x_n = a + \alpha_n$, где $\alpha_n$ - бесконечно-малая последовательность
+
+\subsubsection{Арифметические свойства пределов}
+
+\begin{enumerate}
+  \item {
+    $x_n \underset{n \rightarrow \infty}{\rightarrow} a$ и $c \in \mathbb{R}$:
+    $cx_n \underset{n \rightarrow \infty}{\rightarrow} ca$
+  }
+  \item {
+    $x_n \underset{n \rightarrow \infty}{\rightarrow} a$ и $y_n \underset{n \rightarrow \infty}{\rightarrow} b$, то
+    $x_n + y_n \underset{n \rightarrow \infty}{\rightarrow} a + b$ (верно также для $-$, $\times$, а еще для
+    $\div$ при $b \neq 0$ )
+  }
+\end{enumerate}
+
+\subsubsection{Теорема о предельном переходе в неравенство}
+
+Пусть $\exists$ $\{x_n\}$ и $\{y_n\}$, такие что $\{x_n\} \leq \{y_n\}$ и $\lim\limits_{n \rightarrow \infty}x_n = a$,
+а $\lim\limits_{n \rightarrow \infty}y_n = b$, тогда $a \leq b$
+
+\paragraph{Доказательство} Предположим, что это не так, тогда $a > b$
+
+Пусть $\varepsilon = \frac{a - b}{2}$ ($\varepsilon > 0$, т.к. $a > b$), тогда
+
+\[\begin{aligned}
+  v_{\varepsilon}(b) = (b - \varepsilon; b + \varepsilon) =
+  (b - \frac{a - b}{2}; b + \frac{a - b}{2}) = (\frac{3b - a}{2}; \frac{b + a}{2}) \\
+  v_{\varepsilon}(a) = (a - \varepsilon; a + \varepsilon) =
+  (a - \frac{a - b}{2}; a + \frac{a - b}{2}) = (\frac{a + b}{2}; \frac{3a - b}{2})
+\end{aligned}\]
+
+Так как почти все $x_n \in v_{\varepsilon}(a)$ и почти все $y_n \in v_{\varepsilon}(b)$, то
+$y_n \in (\frac{3b - a}{2}; \frac{a + b}{2})$, а $x_n \in (\frac{a + b}{2}; \frac{3a - b}{2})$, то
+есть $y_n < x_n$, но это противоречит условию $\Rightarrow$ теорема верна $(\blacksquare)$
+
+\subsection{Теорема о двух миллиционерах}
+
+Пусть $\{x_n\}$, $\{y_n\}$ и $\{z_n\}$ - последовательности, причем $\forall n \in \mathbb{N}$ верно
+$x_n \leq y_n \leq z_n$ и $\lim\limits_{n \rightarrow \infty}x_n = \lim\limits_{n \rightarrow \infty}y_n = c \in \mathbb{R}$,
+тогда и $\lim\limits_{n \rightarrow \infty}z_n = c \in \mathbb{R}$
+
+\paragraph{Доказательство} Зафиксируем $\varepsilon > 0$, тогда:
+\begin{equation}
+  \begin{aligned}
+    \text{т.к. } x_n \underset{n \rightarrow \infty}{\rightarrow} c, \text{ то } x_n \in
+    v_{\varepsilon}(c)& \text{ верно для почти всех } n, \text{ и} \\
+    \text{т.к. } y_n \underset{n \rightarrow \infty}{\rightarrow} c, \text{ то } y_n \in
+    v_{\varepsilon}(c)& \text{ также верно для почти всех } n
+  \end{aligned}
+\end{equation}
+
+$\Rightarrow$ выражения $x_n > c - \varepsilon$ и $z_n < c + \varepsilon$ верны для почти всех $n$ 
+
+По условию $x_n \leq y_n \leq z_n$, тогда из ранее доказанного для почти всех $n$ будет верно, что
+$c - \varepsilon < x_n \leq y_n \leq z_n < c + \varepsilon$ $\Leftrightarrow$
+$c - \varepsilon < y_n < c + \varepsilon$
+
+Получается, что $y_n \in (c - \varepsilon; c + \varepsilon) = v_{\varepsilon}(c)$ для почти
+всех $n$, следовательно $\lim\limits_{n \rightarrow \infty}y_n = c$ $(\blacksquare)$
+
+\subsubsection{Теорема Вейерштрасса (какая?)}
+
+Любая монотонная ограниченная последовательность имеет предел
+(если $\{x_n\}$ ограничена и монотонна, то $\exists \lim\limits_{n \rightarrow \infty}x_n = c$, причем $c \in \mathbb{R}$)
+
+\paragraph{Доказательство} (для неубывающей последовательности)
+
+Пусть $\{x_n\}$ неубывающая и ограничена, тогда $\exists \sup{x_n} = A \in \mathbb{R}$ и
+$\exists \inf(x_n) = B \in \mathbb{R}$. Зафиксируем $\varepsilon > 0$, тогда $A - \varepsilon \neq \sup{x_n}$,
+то есть $A - \varepsilon$ - неточная верхняя грань. Тогда $\exists k \in \mathbb{N}$, что
+$x_k > A - \varepsilon$ $\Rightarrow$ $\forall n > k:$ $A - \varepsilon < x_k \leq x_n$
+$\Rightarrow$ $\forall n > k:$ $A-\varepsilon < x_n < A + \varepsilon$ $\Rightarrow$
+$A = \lim\limits_{n \rightarrow \infty}x_n$ $(\blacksquare)$
+
+\subsubsection{Вложенные отрезки}
+
+$\{[a_n; b_n]\}$ - называется последовательностью вложенных отрезков, если верно, что $[a_1; b_1] \supseteq [a_2; b_2]
+\supseteq \dots \supseteq [a_n; b_n]$, или что $\forall n\in \mathbb{N}:$ $a_{n + 1} \geq a_n$ и $b_n \leq b_{n + 1}$
+
+Причем $[a_n; b_n] \underset{n \rightarrow \infty}{\rightarrow} 0$ $\Leftrightarrow$
+$b_n - a_n \underset{n \rightarrow \infty}{\rightarrow} 0$
+
+\subsubsection{Теорема о вложенных отрезках}
+
+Для любой последовательности вложенных отрезков $\{[a_n; b_n]\}$ $\exists ! c \in \mathbb{R}:$
+$c \in [a_n; b_n] \forall n$ (причем $c = \lim\limits_{n \rightarrow \infty}a_n = \lim\limits_{n \rightarrow \infty}b_n $)
+
+\paragraph{Доказательство} Исходя из определения последовательности вложенных отрезков, последовательность
+$\{a_n\}$ - неубываюшая и ограниченная ($a_1 \in \mathbb{R}$ и $a_n \leq b_n$), а последовательность
+$\{b_n\}$ - невозрастающая и ограниченная ($b_1 \in \mathbb{R}$ и $b_n \geq a_n$)
+
+$\Rightarrow$ $\exists \lim\limits_{n \rightarrow \infty} a_n = \sup{a_n}$ и $\exists \lim\limits_{n \rightarrow \infty} b_n = \inf b_n$
+
+Заметим, что $\lim\limits_{n \rightarrow \infty}(b_n - a_n) = \lim\limits_{n \rightarrow \infty}b_n -
+\lim\limits_{n \rightarrow \infty} a_n = 0$ $\Rightarrow$ $\lim\limits_{n \rightarrow \infty} a_n = 
+\lim\limits_{n \rightarrow \infty} b_n$ 
+
+P.s. последовательности монтонны и ограничены, поэтому обязательно имеют действительный предел ($= c \in \mathbb{R}$)
+
+Предположим, что $\exists \tilde{c}:$ $\forall n$ $\tilde{c} \in [a_n; b_n]$ и $\tilde{c} \neq c$.
+Т.к. $\tilde{c} \neq c$, то или $\underline{c < \tilde{c}}$, или $c > \tilde{c}$
+$\Rightarrow$ $\forall n$ $[c; \tilde{c}] \subseteq [a_n; b_n]$ $\Rightarrow$
+$b_n - a_n \geq \tilde{c} - c = const > 0$ $\Rightarrow$ возникает противоречие уловию:
+$b_n - a_n \cancel{\underset{n \rightarrow \infty}{\rightarrow}} 0$ и
+$a \underset{n \rightarrow \infty}{\rightarrow} \tilde{c} - c$ $(\blacksquare)$
+
+\end{document}
