@@ -1,8 +1,9 @@
-% Вся собранная информация по физике
-% Михедов Константин Константиновчи БИБ224
+% Дополнительно к физике: об ускорении
+% Михедов Константин Константиновчи, БИБ 224
 
 % Тип документа: статья, размер бумаги - A4, написано 14 кегелем
-\documentclass[a4paper,12pt]{article}
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
 
 % Поиск по скомпилированному PDF
 \usepackage{cmap}
@@ -15,8 +16,15 @@
 
 % Поддержка изображений
 \usepackage{graphicx}
+\usepackage{graphbox}
 % Путь до внешних изображений
-\graphicspath{ {./figures/}}
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .eps support
+\usepackage{epstopdf}
+% .svg support
+\usepackage{svg}
+\usepackage{svg-extract}
 
 % Умная запятая
 \usepackage{icomma}
@@ -48,37 +56,5 @@
 \usepackage{import}
 
 \begin{document}
-  % Титульная страница
-  \begin{titlepage}
-    \begin{center}
-      \vspace*{1.5cm}
-
-      \Huge
-      \textbf{Физика}
-
-      \vspace{0.5cm} \large
-      \textbf{Сборник лекций и семинаров}
-
-      \vspace{1.5cm} \normalsize
-      \textbf{Михедов Константин Константинович}
-
-      \vfill
-
-      \includegraphics[width=0.2\textwidth]{hse_logo}
-
-      \vspace{1cm} \footnotesize
-      Национальный Исследовательский Университет "Высшая Школа Экономики" \\
-      Московский Институт Электроники и Математики им. А. Н. Тихонова \\
-      Информационная Безопасность, БИБ224 \\
-      Москва, 2022
-    \end{center}
-  \end{titlepage}
-
-  \section{Базовые определения и абстракции}
-  \import{extra/}{01_base}
-
-  \section{Механика}
-  \import{lectures/}{01_kinematics}
-  \import{extra/}{02_acceleration}
-
+  \subsubsection{Подробнее про ускорение}
 \end{document}

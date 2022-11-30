@@ -1,8 +1,9 @@
-% Вся собранная информация по физике
-% Михедов Константин Константиновчи БИБ224
+% Дополнительно к физике: базовые определения и абстракции
+% Михедов Константин Константиновчи, БИБ 224
 
 % Тип документа: статья, размер бумаги - A4, написано 14 кегелем
-\documentclass[a4paper,12pt]{article}
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
 
 % Поиск по скомпилированному PDF
 \usepackage{cmap}
@@ -15,8 +16,15 @@
 
 % Поддержка изображений
 \usepackage{graphicx}
+\usepackage{graphbox}
 % Путь до внешних изображений
-\graphicspath{ {./figures/}}
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .eps support
+\usepackage{epstopdf}
+% .svg support
+\usepackage{svg}
+\usepackage{svg-extract}
 
 % Умная запятая
 \usepackage{icomma}
@@ -48,37 +56,10 @@
 \usepackage{import}
 
 \begin{document}
-  % Титульная страница
-  \begin{titlepage}
-    \begin{center}
-      \vspace*{1.5cm}
-
-      \Huge
-      \textbf{Физика}
-
-      \vspace{0.5cm} \large
-      \textbf{Сборник лекций и семинаров}
-
-      \vspace{1.5cm} \normalsize
-      \textbf{Михедов Константин Константинович}
-
-      \vfill
-
-      \includegraphics[width=0.2\textwidth]{hse_logo}
-
-      \vspace{1cm} \footnotesize
-      Национальный Исследовательский Университет "Высшая Школа Экономики" \\
-      Московский Институт Электроники и Математики им. А. Н. Тихонова \\
-      Информационная Безопасность, БИБ224 \\
-      Москва, 2022
-    \end{center}
-  \end{titlepage}
-
-  \section{Базовые определения и абстракции}
-  \import{extra/}{01_base}
-
-  \section{Механика}
-  \import{lectures/}{01_kinematics}
-  \import{extra/}{02_acceleration}
-
+  \paragraph{Материальная точка}- это тело, обладающее массой, размерами которого можно пренебречь
+  \paragraph{Абсолютно твердое тело} - это тело, которое ни при каких условиях не может деформироваться
+  и расстояние между точками которого всегда остается постоянным
+  \paragraph{Поступательное движение} - движение, при котором в любой момент времени все точки одного тела движутся одинаково
+  \paragraph{Вращательное движение} - движение, при котором все точки тела движутся по окружностям,
+  центры которых лежат на одной и той же прямой, называемой \textbf{осью вращение}
 \end{document}
