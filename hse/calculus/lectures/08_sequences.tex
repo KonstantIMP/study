@@ -1,0 +1,136 @@
+% Лекция по Математическому Анализу 03.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+\subsection{Последовательности}
+
+\textbf{Последовательностью} называют функцию, определенную на множестве натуральных
+чисел, то есть $f: \mathbb{N} \rightarrow \mathbb{R}$ (в последовательностях можно
+делать вот так: $f(n) = f_n$ )
+
+\subsubsection{Почти все...}
+
+Пусть $P$ - какое-то свойство $\mathbb{N}$
+
+Говорят, что \textbf{почти все} числа $n \in \mathbb{N}$ обладают свойством $P$, если
+только конечный набор чисел $n \in \mathbb{N}$ этим свойством не обладает:
+\begin{equation}
+  \card \{n \in \mathbb{N}: \lnot P\} < \infty
+\end{equation}
+
+где $\card$ - мощность множества (количество элементов, от cardinality)
+
+\subsubsection{Теорема Архимеда}
+
+Для любого числа $c \in \mathbb{R}$ условие $n > c$
+верно для почти всех чисел $n \in \mathbb{N}$
+
+\paragraph{Доказательство} Зафиксируем $c \in \mathbb{R}$. По принципу Архимеда 
+$\exists N \in \mathbb{N}$, что $N > c$, тогда $\forall n \in \mathbb{N}: n \geq N$ верно:
+$n \geq N > c \Rightarrow n > c$
+
+Данное сравнение неверно только для первых $N$ чисел, то есть неверно только для
+$n = \{0, 1, 2, \dots, N - 1\}$, то есть неверно только для конечного числа
+элементов
+
+\paragraph{Пример} Пусть $\{x_n\} = \{\frac{1}{n}\}$ где $n \in \mathbb{N}$, верно ли,
+что почти все элементы данной последовательности $\in \mathbb{M}$, где $\mathbb{M} = (-0.1; 0.1)$
+
+\begin{equation}
+  x_n \in \mathbb{M} \Leftrightarrow \frac{1}{n} \in (-0.1; 0.1) \Leftrightarrow
+  \begin{cases}
+    \frac{1}{n} &> -0.1 \\
+    \frac{1}{n} &< 0.1
+  \end{cases}
+  \Leftrightarrow n > 10
+\end{equation}
+
+Тогда по теореме Архимеда $n > 10$ верно почти для всех $n$ $\Rightarrow$ и исходное
+выражение верно для почти всех $n$ $(\blacksquare)$
+
+\subsubsection{Монотонность}
+
+Последовательность $\{x_n\}$ называют
+\begin{itemize}
+  \item {
+    возрастающей, если $\forall n \in \mathbb{N}:$ $x_n < x_{n + 1}$ 
+  }
+  \item {
+    убывающей, если $\forall n \in \mathbb{N}:$ $x_n > x_{n + 1}$ 
+  }
+  \item {
+    невозрастающей, если $\forall n \in \mathbb{N}:$ $x_n \geq x_{n + 1}$ 
+  }
+  \item {
+    неубывающей, если $\forall n \in \mathbb{N}:$ $x_n \leq x_{n + 1}$ 
+  }
+\end{itemize}
+
+Последовательность называют монотонной, если она неубывающая или невозрастающая
+
+\end{document}
