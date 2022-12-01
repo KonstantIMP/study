@@ -1,0 +1,163 @@
+% Лекция по Математическому Анализу 17.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+% Перечеркивание элементов
+\usepackage{cancel}
+
+\begin{document}
+
+\subsection{Подпоследовательности}
+
+Пусть $\{x_n\}$ - последовательность действительных чисел, а $\{n_k\}$ - последовательность
+натуральных (бесконечно-большая), тогда $\{y_k\} = \{x_{n_k}\}$ - подпоследовательность $\{x_n\}$
+
+\subsubsection{Свойства подпоследовательностей}
+
+\begin{enumerate}
+    \item {
+        Если $x_n \underset{n \rightarrow \infty}{\rightarrow} a$, то любая ее
+        подпоследовательность тоже $\underset{k \rightarrow \infty}{\rightarrow} a$
+    }
+    \item {
+        Если $x_n \underset{n \rightarrow \infty}{\cancel{\rightarrow}} a$, то $\exists$
+        некие $\{x_{n_k}\}$ и $\varepsilon > 0$: $\forall k$
+        $x_{n_k} \notin v_{\varepsilon}(a)$
+    }
+    \item {
+        Если $\{x_n\}$ неограничена ($\sup{|x_n|} = \infty$), то 
+        $\exists \{x_{n_k}\}$: $x_{n_k} \underset{k \rightarrow \infty}{\rightarrow} \infty$
+    }
+    \item {
+        Если $x_n \in E$ верно для бесконечно-большого набора чисел $n \in \mathbb{N}$, то
+        $\exists$ подпоследовательность $\{x_{n_k}\}$ такая, что $x_{n_k} \in E$ $\forall k$
+    }
+\end{enumerate}
+
+\subsubsection{Теорема Больцано-Вейерштрасса}
+
+Если $\{x_n\}$ ограничена ($\sup{|x_n|} < \infty$ $\forall n \in \mathbb{N}$), то у нее 
+обязательно имеется сходящаяся подпоследовательность ($\exists$ $x_{n_k} \underset{k \rightarrow \infty}{\rightarrow} a \in \mathbb{R}$ )
+
+\subsubsection{Критерии Коши}
+
+Для числовой последовательности $\{x_n\}$ следующие условия эквивалентны:
+
+\begin{enumerate}
+    \item {
+        $\{x_n\}$ сходится $\Leftrightarrow$ $\exists \lim{x_n} \in \mathbb{R}$
+    }
+    \item {
+        $\forall p_k$ и $q_k$ $\underset{k \rightarrow \infty}{\rightarrow} \infty$ $\Leftrightarrow$
+        $(x_{p_k} - x_{q_k}) \underset{k \rightarrow \infty}{\rightarrow} 0$
+    }
+    \item {
+        Для любой последовательности $\{\gamma_n\} \in \mathbb{N}$ $(x_{k + \gamma_k} - x_k) \underset{k \rightarrow \infty}{\rightarrow} 0$
+    }
+\end{enumerate}
+
+\subsubsection{Число Непера (e)}
+
+\paragraph{Лемма} $\exists \lim\limits_{n \rightarrow \infty}(1 + \frac{1}{n})^n = e \in \mathbb{R}$
+
+\paragraph{Доказательство} Рассмотрим последовательность $\{y_n\} = \{(1 + \frac{1}{n})^{n + 1}\}$
+
+\begin{multline}
+    \frac{y_{n - 1}}{y_n} =
+    \frac{(1 + \frac{1}{n - 1})^n}{(1 + \frac{1}{n})^{n + 1}} =
+    \frac{\left(\frac{n}{n - 1}\right)^n}{\left(\frac{n + 1}{n}\right)^{n + 1}} =
+    \frac{\frac{n^n}{(n-1)^n}}{\frac{(n + 1)(n + 1)^n}{n^{n + 1}}} = \\
+    = \frac{n \times n^{n + 1}}{(n - 1)^n(n + 1)(n + 1)^n} =
+    \frac{n\times n^{2n}}{(n + 1)(n^2 - 1)^n} = \\
+    = \left(\frac{n^2}{n^2 - 1}\right)^n \times \frac{n}{n + 1} =
+    \left(1 + \frac{1}{n^2 - 1}\right)^n \times \frac{n}{n + 1}
+\end{multline}
+
+По неравенству Бернулли: $\left(1 + \frac{1}{n^2 - 1}\right)^n \geq 1 + \frac{n}{n ^2 -1}$ $\Rightarrow$
+
+\begin{equation}
+    \frac{y_{n - 1}}{y_n} \geq \left(1 + \frac{n}{n^2 - 1}\right)\frac{n}{n + 1}
+    \overset{\frac{n}{n^2 - 1} \geq \frac{n}{n^2}}{\geq}
+    (1 + \frac{n}{n^2})\frac{n}{n + 1} = 1
+\end{equation}
+
+$\Rightarrow$ $\frac{y_{n - 1}}{y_n} \geq 1$ $\forall n \in \mathbb{N}$ $\Rightarrow$
+$y_{n - 1} \geq y_n$ $\Leftrightarrow$ $y_n \geq y_{n + 1}$ $\Rightarrow$ $\{y_n\}$
+невозрастающая
+
+Получается, что $\{y_n\}$ монотонная (невозрастающая) и всегда $> 0$ (из определения)
+$\Rightarrow$ $\{y_n\}$ имеет действительный предел
+
+\begin{equation}
+    \lim\limits_{n \rightarrow \infty}{\left(1 + \frac{1}{n}\right)^n} =
+    \lim\limits_{n \rightarrow \infty}{\frac{\left(1 + \frac{1}{n}\right)^{n + 1}}{1 + \frac{1}{n}}} =
+    \frac{\lim\limits_{n \rightarrow \infty}y_n}{\lim\limits_{n \rightarrow \infty}{\left(1 + \frac{1}{n}\right)}} =
+    \frac{\lim\limits_{n \rightarrow \infty}y_n}{1} = \lim\limits_{n \rightarrow \infty}y_n
+\end{equation}
+
+Данный предел существует и равен $e$ (без доказательства) $(\blacksquare)$
+
+\end{document}

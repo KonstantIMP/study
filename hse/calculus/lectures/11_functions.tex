@@ -1,0 +1,320 @@
+% Лекция по Математическому Анализу 02.11.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Функция sgn
+\DeclareMathOperator{\sgn}{sgn}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+% Перечеркивание элементов
+\usepackage{cancel}
+
+\begin{document}
+
+\subsection{Непрерывные функции}
+
+\textit{Здесь могла быть ваша реклама, а должны быть рисунки}
+
+Если функция $f(x)$ непрерывна в точке $a$, то из того, что $x_n \underset{n \rightarrow \infty}{\rightarrow} a$
+$\Rightarrow$ $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$, иначе такой переход совершать нельзя
+
+\paragraph{Точное определение} $f(x)$ непрерывна в точке $a$ на множестве $\mathbb{E}$, если функция $f(x)$
+определена на этом множетсве, $a \in \mathbb{E}$ и $\forall x_n \in \mathbb{E}$
+$x_n \underset{n \rightarrow \infty}{a}$ $\Rightarrow$ $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$
+
+\paragraph{И еще определение} $f(x)$ непрерывна на множестве $\mathbb{E}$, если 
+$\forall x_n \in \mathbb{E}$ $\forall a \in \mathbb{E}$: $x_n \underset{n \rightarrow \infty}{\rightarrow} a$
+$\Rightarrow$ $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$
+
+\textit{Здесь примеры прерывной функции (sgn) и непрерывной (x), img}
+
+\subsubsection{Операции с непрерывными функциями}
+
+Пусть $f$ и $g$ - непрерывные функции на множестве $\mathbb{E}$, тогда
+
+\begin{enumerate}
+    \item {
+        $\forall c \in \mathbb{R}$ $c \times f$ также непрерывна на $\mathbb{E}$
+    }
+    \item {
+        $f + g$, $f - g$, $f \times g$ также непрерывны на $\mathbb{E}$
+    }
+    \item {
+        Если $f \neq 0$ на $\mathbb{E}$, то и $\frac{g}{f}$ также непрерывна на $\mathbb{E}$
+    }
+\end{enumerate}
+
+\paragraph{Доказательство}
+
+Пусть $\exists \{x_n\}$ и $a \in \mathbb{E}$: $x_n \underset{n \rightarrow \infty}{\rightarrow} a$,
+тогда $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$ и
+$g(x_n) \underset{n \rightarrow \infty}{\rightarrow} g(a)$ и $\Rightarrow$
+$f(x_n)g(x_n) \underset{n \rightarrow \infty}{ \rightarrow} f(a)g(a) = (fg)(a) = (fg)(x_n)$
+
+Получается, $\forall \{x_n\}$ и $a \in \mathbb{E}$ $x_n \underset{n \rightarrow \infty}{ \rightarrow} a$
+$\Rightarrow$ $(fg)(x_n) \underset{n \rightarrow \infty}{\rightarrow} (fg)(a)$
+
+Вывод: $fg$ непрерывна на $\mathbb{E}$ $(\blacksquare)$
+
+\subsubsection{Теорема о сохранении знака}
+
+Пусть $f(x)$ определена в некой $v_{\varepsilon}(a)$ и непрерывна в точке a, тогда
+если $f(a) \neq 0$, то $\exists \delta > 0$ $\forall x \in v_{\delta}(a)$
+$\sgn{f(x)} = \sgn{f(a)}$
+
+\paragraph{Доказательство} Пусть $f(a) > 0$, тогда предположим, что исходное
+утверждение неверно: $\forall \delta > 0$ $\exists$ $x \in v_{\delta}(a)$
+$\sgn{f(x)} \neq \sgn{f(a)} = 1$
+
+$\Rightarrow$ $\forall \delta > 0$ $\exists$ $x \in v_{\delta}(a)$: $f(x) \leq 0$
+$\Rightarrow$ $\forall n \in \mathbb{N}$ $\exists$ $x_n \in v_{\frac{1}{n}}(a)$
+$f(x_n) \leq 0$
+
+$\Rightarrow$ $\forall n \in \mathbb{N}^{*}$ $\exists$
+$x_n \in (a - \frac{1}{n}; a + \frac{1}{n})$: $f(x_n) \leq 0$
+
+Рассмотрим эту последовательность $\{x_n\}$
+
+$\underbrace{a - \frac{1}{n}}_{\underset{n \rightarrow \infty}{\longrightarrow  a}}
+< x_n < \underbrace{a + \frac{1}{n}}_{\underset{n \rightarrow \infty}{\longrightarrow  a}}$ и
+$f(x_n) \leq 0$ $\Rightarrow$
+$x_n \underset{n \rightarrow \infty}{\rightarrow} a$ $\Rightarrow$
+$f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$
+
+(По теореме о двух миллиционерах)
+
+$\Rightarrow$ $\exists$ $\lim\limits_{n \rightarrow \infty}f(x) = f(a) > 0$, но с другой
+стороны $f(x_n) \leq 0$ $\Rightarrow$ по теореме о переходе к пределу
+$\lim\limits_{n \rightarrow \infty}f(x_n) \leq \lim f(a) = 0$, что противоречит
+условию $\Rightarrow$ теорема верна $(\blacksquare)$
+
+\subsubsection{Композиция непрерывных функций}
+
+Пусть $f$ и $g$ - две функции, тогда
+$f \circ g$ - композиция этих функций, причем $f \circ g = g(f(x))$
+
+\paragraph{Теорема} Если $f$ и $g$ - непрерывные на всей области определения функции,
+то их композиция тоже непрерывна на всей области определения
+
+\paragraph{Доказательство} Пусть $a \in \mathbb{R}$ - точка из области определения функций
+$f$ и $g$, то есть $\exists$ $g(f(a))$, тогда рассмотрим произвольную последовательность
+$\{x_n\}$ из области определения $g \circ f$ такую, что $x_n \underset{n \rightarrow \infty}{\rightarrow} a$
+
+$\Rightarrow$ $x_n \in D(g \circ f)$, $x_n \in D(f)$, $a \in D(g \circ f)$ и $a \in D(f)$
+$\Rightarrow$ так как $f$ непрерывна, то $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$
+
+\begin{multicols}{2}
+
+    Так как $x_n \in D(g \circ f)$, то
+    \begin{enumerate}
+        \item {
+            $\exists$ $f(x_n)$ $\Rightarrow$ $x_n \in D(f)$
+        }
+        \item {
+            $\exists$ $g(f(x_n))$ $\Rightarrow$ $f(x_n) \in D(g)$ 
+        }
+    \end{enumerate}
+
+    \columnbreak
+
+    Так как $a \in D(g \circ f)$, то
+    \begin{enumerate}
+        \item {
+            $a \in D(f)$ 
+        }
+        \item {
+            $f(a) \in D(g)$
+        }
+    \end{enumerate}
+
+\end{multicols}
+
+Исходная функция непрерывна, поэтому из $g(f(x_n)) \underset{n \rightarrow \infty}{\rightarrow} g(f(a))$
+следует, что $(g\circ f)(x_n) \underset{n \rightarrow \infty}{\rightarrow} (g \circ f)(a)$
+
+$\Rightarrow$ $g \circ f$ непрерывна в точке $a$, где $a$ - любая точка из $D(g \circ f)$ $(\blacksquare)$
+
+\subsubsection{Теорема Коши о промежуточном значении}
+
+Если $f(x)$ определена и непрерывна на $[a; b]$, то $\forall c$: $\min\{a; b\} < c < \max\{a; b\}$
+$\exists$ $d \in (a; b)$: $f(d) = c$
+
+\paragraph{Лемма о промежуточном значении} Пусть $\phi: [a; b] \longrightarrow \mathbb{R}$,
+причем $\sgn{\phi(a)} \neq \sgn{\phi(b)}$ ($\phi(a) > 0 > \phi(b)$ или $\phi(a) < 0 < \phi(b)$);
+тогда обязательно $\exists$ $d \in (a; b)$: $\phi(d) = 0$ 
+
+\paragraph{Доказательство леммы} Будем считать, что $\phi(a) < 0 < \phi(b)$
+
+\textit{Опять таки не хватает рисуночка}
+
+Возьмем отрезок $[a_0; b_0]$, где $a_0 = a$ и $b_0 = b$ (тогда $\phi(a_0) < 0 < \phi(b_0)$),
+и разделим его пополам (середина в точке $\zeta $)
+
+Возможны несколько случаев:
+\begin{itemize}
+    \item {
+        $\phi(\zeta) = 0$, тогда $c = \zeta$ и $\phi(c) = 0$ (конец)
+    }
+    \item {
+        $\phi(\zeta) < 0$, тогда $a_1 = \zeta$, а $b_1 = b_0$ ($\phi(a_1) < 0 < \phi(b_1)$)
+    }
+    \item {
+        $\phi(\zeta) > 0$, тогда $b_1 = \zeta$, а $a_1 = a_0$ ($\phi(a_1) < 0 < \phi(b_1)$)
+    }
+\end{itemize}
+
+В результате мы или сразу найдем нужную точку $c$, или найдем $[a_1; b_1] \subseteq [a_0; b_0]$
+
+Если результат еще не найден, то проделываем тоже самое с отрезком $[a_1; b_1]$; тут снова
+возможны два варианта: или мы найдем точку $c$, или - отрезок $[a_2; b_2] \subseteq [a_1; b_1]$
+
+Организовав этот выбор бесконечное число раз, мы получим последовательность вложенных отрезков:
+$[a_0; b_0] \supseteq [a_1; b_1] \supseteq \dots \supseteq [a_n; b_n]$, при этом
+$(b_n - a_n) \underset{n \rightarrow \infty}{\rightarrow} 0$, а $\phi(a_n) < 0 < \phi(b_n)$
+
+Тогда по теореме о вложенных отрезках $\exists$ $c$: 
+$c = \lim\limits_{n \rightarrow \infty}a_n = \lim\limits_{n \rightarrow \infty}b_n$ и также
+$c \in \overset{\infty}{\underset{n = 0}{\cap}}[a_n; b_n]$
+$\Rightarrow$ $a_n \rightarrow c \leftarrow b_n$
+
+Т.к. $\phi(x)$ непрерывна, то $0 > \phi(a_n) \underset{n \rightarrow \infty}{\rightarrow} \phi(c)$
+и $0 < \phi(b_n) \underset{n \rightarrow \infty}{\rightarrow} \phi(c)$
+
+$\Rightarrow$ $0 \leq \phi(c) \leq 0$ $\Rightarrow$ $\phi(c) = 0$ (по теореме о предельном переходе
+в неравенстве) $(\blacksquare)$
+
+\paragraph{Вернемся к теоереме} Рассмотрим $\phi(x) = f(x) - c$, непрерывную на $[a; b]$,
+тогда или $\phi(a) < 0 < \phi(b)$, или $\phi(b) < 0 < \phi(a)$ и по лемме $\exists$ $d$:
+$\phi(d) = 0$
+
+Тогда так как $f(x) = \phi(x) + c$, то $f(d) = \phi(d) + c = 0 + c = c$ $(\blacksquare)$
+
+\subsubsection{Теорема Вейерштрасса об ограниченности}
+
+Если $f(x)$ определена и непрерывна на $[a; b]$, то она ограничена на $[a; b]$
+
+\paragraph{Доказательство} Предположим, что $f(x)$ неограничена на $[a; b]$, тогда
+найдется такая $\{x_n\} \subseteq [a; b]$, что $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} \infty$
+
+По теореме Больцано-Вейерштрасса найдня некая сходящаяся подпоследовательность для $\{x_n\}$:
+$\{\underset{\in [a; b]}{x_{n_k}} \underset{k \rightarrow \infty}{\rightarrow} \underset{\in [a; b]}{c}\}$
+(причем $c \in [a; b]$)
+
+$\Rightarrow$ $f(x_{n_k}) \underset{k \rightarrow \infty}{\rightarrow} f(c)$ ($f(x)$ непрерывная) и что
+$f(x_n) \underset{k \rightarrow \infty}{\rightarrow} \infty$, а так, как $f(x_{n_k}) = f(x_n)$, то
+$f(c) = \infty$, что невозможно
+$\Rightarrow$ $f$ ограничена $(\blacksquare)$
+
+\subsubsection{Теорема Вейерштрасса об экстремумах}
+
+Если $f(x)$ непрерывна и определена на $[a; b]$, то она достигает своих локальных экстремумов
+на $[a; b]$
+\begin{equation}
+    \begin{aligned}
+        \exists\: \alpha\in [a; b]: \:
+        \underset{x \in [a; b]}{\min f(x)} = f(\alpha), & &
+        \exists\: \beta \in [a; b]: \:
+        \underset{x \in [a; b]}{\max f(x)} = f(\beta) 
+    \end{aligned}
+\end{equation}
+
+\paragraph{Доказательство} (существования максимума, дальше аналогично)
+
+По теоереме Вейерштрасса об ограниченности $f(x)$ ограничена сверху $\Rightarrow$
+$\exists$ $A$: $f(x) \leq A$ $\forall x \in [a; b]$
+
+Пусть $E = \{f(x): x\in [a; b]\}$, тогда $E \leq A$ и $E \subseteq \mathbb{R}$
+
+Получается, что $E$ - ограниченное сверху множество $\Rightarrow$ $\exists$
+$\underset{x \in [a; b]}{\sup f(x)} = c$ (причем $c \leq A$, $c \in \mathbb{R}$). 
+$\forall \varepsilon > 0$ $E \nleq c - \varepsilon$ $\Rightarrow$
+$\forall n \in \mathbb{N}^{*}$ $E \nleq c - \frac{1}{n}$
+
+$\forall n \in \mathbb{N}^{*}$ $\exists$ $x_n \in E$: $f(x_n) > c - \frac{1}{n}$ $\Rightarrow$
+$\exists$ $x_n \subseteq [a; b]$: $c - \frac{1}{n} < f(x_n) \leq c$ $\Rightarrow$ по
+теореме Больцано-Вейерштрасса $\exists$ $\{x_{n_k}\} \underset{k \rightarrow \infty}{\rightarrow} d$
+$\Rightarrow$
+$f(x_{n_k}) \underset{k \rightarrow \infty}{\rightarrow} f(d)$
+
+$\Rightarrow$ $\exists$ $d \in [a; b]$: $f(d) = c = \sup \{f(x): \forall x \in [a; b]\}$
+$\Rightarrow$ $f(d) = \max f(x)$ 
+
+\subsubsection{Равномерная непрерывность}
+
+Говорят, что $f(x)$ равномерно непрерывна на $\mathbb{M}$, если она
+на нем определена и $\forall \alpha_n$ и $\beta_n \in \mathbb{M}$ таких, что
+$\alpha_n - \beta_n \underset{n \rightarrow \infty}{\rightarrow} 0$ $\Rightarrow$
+$f(\alpha_n) - f(\beta_n) \underset{n \rightarrow \infty}{\rightarrow} 0$
+
+\paragraph{Пример} $f(x) = kx + b$ (непрерывна на $\mathbb{R}$)
+
+Если $\alpha_n - \beta_n \underset{n \rightarrow \infty}{\rightarrow} 0$, то
+$f(\alpha_n) - f(\beta_n) = k\alpha_n + b - k\beta_n - b = k\alpha_n - k\beta_n =
+k(\alpha_n - \beta_n)
+\underset{n \rightarrow \infty}{\rightarrow} 0$
+
+\subsubsection{Теорема Кантора}
+
+Всякая $f(x)$ непрерывная на $[a; b]$ равномерно непрерывна на $[a; b]$
+
+\end{document}
+

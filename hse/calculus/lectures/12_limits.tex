@@ -1,0 +1,126 @@
+% Лекция по Математическому Анализу 16.11.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% зачеркивание
+\usepackage{cancel}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+Функция $f(x)$ имеет предел $A$ в точке $a \in \mathbb{R}$, если 
+$f(x)$ определена в некой $\dot{v_{\varepsilon}(a)} = v_{\varepsilon}(a) \setminus \{a\} =
+(a - \varepsilon; a) \cup (a; a + \varepsilon)$ и $\forall x_n \in v_{\varepsilon}(a)$:
+$x_n \underset{n \rightarrow \infty}{\rightarrow} a$ $\Rightarrow$
+$f(x_n) \underset{n \rightarrow \infty}{\rightarrow} A$
+
+\subsection{Пределы справа и слева}
+
+Предел справа: $\lim\limits_{x \rightarrow a + 0}f(x) = A$ $\Leftrightarrow$
+$\forall x_n \in v_{\varepsilon}(a)$ $x_n > a$, $x_n \underset{n \rightarrow \infty}{\rightarrow} a$
+$\Rightarrow$ $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} A$
+
+Предел слева: $\lim\limits_{x \rightarrow a - 0}f(x) = A$, определение аналогично
+
+\subsection{Связь предела и непрерывности}
+
+Пусть $f(x)$ определена в окрестности точки $a$ и непрерывна в $a$, тогда
+$f(a) = \lim\limits_{n \rightarrow a}f(x)$
+
+\paragraph{Доказательство} $\forall x_n \in \dot{v_{\varepsilon}(a)}$
+$x_n \underset{n \rightarrow \infty}{\rightarrow} a$ $\Rightarrow$
+$f(x_n) \underset{n \rightarrow \infty}{\rightarrow} f(a)$ $\Rightarrow$
+$\lim\limits_{x \rightarrow a}f(x) = f(a)$
+
+\subsection{Теорема о замене переменных}
+
+$g(y) = g(f(x))$ при $y = f(x)$
+
+Пусть $f$ и $g$ - две функции, причем $\lim\limits_{n \rightarrow a}f(x) = b$, и
+$\lim\limits_{y \rightarrow b}g(y) = c$, и $\forall x \in \dot{v_{\varepsilon}(a)}$
+$f(x) \neq b$, тогда $\lim\limits_{x \rightarrow a}g(f(x)) = \lim\limits_{y \rightarrow b}g(y) = c$
+
+\paragraph{Доказательство} Пусть $x_n \in \dot{v_{\varepsilon}(a)}$, тогда $x_n \underset{n \rightarrow \infty}{\rightarrow}
+a$ и $f(x_n) \underset{n \rightarrow \infty}{\rightarrow} b$. С другой стороны
+$f(x_n) \neq b$ $\Rightarrow$ $f(x_n) \in v_{\varepsilon}(b)$ и 
+$f(x_n) \underset{n \rightarrow \infty}{\rightarrow} b$
+$\Rightarrow$ $g(f(x_n)) \underset{n \rightarrow \infty}{\rightarrow} c$
+
+\subsection{Арифметические операции над пределами функций}
+
+Пусть $f$ и $g$ имеют пределы в точке $a$, тогда
+\begin{enumerate}
+  \item {
+    $\lim\limits_{x \rightarrow a}(f(x)g(x)) = \lim\limits_{x \rightarrow a}f(x)\lim\limits_{x \rightarrow a}g(x)$
+  }
+  \item {
+    $\lim\limits_{x \rightarrow a}(f(x)\pm g(x)) = \lim\limits_{x \rightarrow a}f(x)\pm\lim\limits_{x \rightarrow a}g(x)$
+  }
+  \item {
+    Если $\lim\limits_{x \rightarrow a}g(x) \neq 0$, то $\lim\limits_{x \rightarrow a}(\frac{f(x)}{g(x)}) = \frac{\lim\limits_{x \rightarrow a}f(x)}{\lim\limits_{x \rightarrow a}g(x)}$
+  }
+\end{enumerate}
+
+\end{document}
