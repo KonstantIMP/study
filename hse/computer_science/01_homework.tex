@@ -1,0 +1,533 @@
+% ДЗ по информатике на 08.12.22
+% Михедов Константин Константинович БИБ224
+
+%Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+\documentclass[a4paper,12pt]{article}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+\usepackage{graphbox}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setmonofont{Dejavu Sans Mono}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\singlespace
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Листинг кода
+\usepackage{listings}
+% Цвета для подсветки синтаксиса
+\usepackage{xcolor, colortbl}
+
+% .eps support
+\usepackage{epstopdf}
+
+% Определения цветов
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Применение стиля для листингов
+\lstdefinestyle{basestyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=basestyle}
+
+% Russian letters in listings
+\makeatletter
+\lst@InputCatcodes
+\def\lst@DefEC{%
+ \lst@CCECUse \lst@ProcessLetter
+  ^^80^^81^^82^^83^^84^^85^^86^^87^^88^^89^^8a^^8b^^8c^^8d^^8e^^8f
+  ^^90^^91^^92^^93^^94^^95^^96^^97^^98^^99^^9a^^9b^^9c^^9d^^9e^^9f
+  ^^a0^^a1^^a2^^a3^^a4^^a5^^a6^^a7^^a8^^a9^^aa^^ab^^ac^^ad^^ae^^af
+  ^^b0^^b1^^b2^^b3^^b4^^b5^^b6^^b7^^b8^^b9^^ba^^bb^^bc^^bd^^be^^bf
+  ^^c0^^c1^^c2^^c3^^c4^^c5^^c6^^c7^^c8^^c9^^ca^^cb^^cc^^cd^^ce^^cf
+  ^^d0^^d1^^d2^^d3^^d4^^d5^^d6^^d7^^d8^^d9^^da^^db^^dc^^dd^^de^^df
+  ^^e0^^e1^^e2^^e3^^e4^^e5^^e6^^e7^^e8^^e9^^ea^^eb^^ec^^ed^^ee^^ef
+  ^^f0^^f1^^f2^^f3^^f4^^f5^^f6^^f7^^f8^^f9^^fa^^fb^^fc^^fd^^fe^^ff
+  ^^^^0428^^^^0429^^^^042a^^^^042b^^^^042c^^^^042d^^^^042e^^^^042f
+  ^^^^0430^^^^0431^^^^0432^^^^0433^^^^0434^^^^0435^^^^0436^^^^0437^^^^0438^^^^0439%
+  ^^^^043a^^^^043b^^^^043c^^^^043d^^^^043e^^^^043e
+  ^^^^0440^^^^0441^^^^0442^^^^0444^^^^0444^^^^0445^^^^0446^^^^0447^^^^0448^^^^0449%
+  ^^^^044a^^^^044b^^^^044c^^^^044d^^^^044e^^^^044e
+  ^^00}
+\lst@RestoreCatcodes
+\makeatother
+
+\begin{document}
+  % Титульная страница
+  \begin{titlepage}
+    \begin{center}
+      ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ \\
+      ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ \\
+      <<НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ \\
+      <<ВЫСШАЯ ШКОЛА ЭКОНОМИКИ>>
+
+      \textit{
+        Московский институт электроники и математики им. А.Н.Тихонова
+      }
+
+      \vspace{5cm}
+
+      \textbf{
+        Теория информации и основы кодирования в информационных
+        системах
+      }
+
+      \textbf{
+        Построение произвольного дискретного канала связи без памяти
+      }
+
+      \vspace{2cm}
+
+      Домашняя работа № 1\\
+      по направлению 10.03.01 Информационная безопасность \\
+      студента образовательной программы бакалавриата \\
+      <<Информационная безопасность>>
+    \end{center}
+
+    \vspace{2cm}
+
+    \begin{flushright}
+        Проверил:
+
+        $\underset{\text{И.О. Фамилия}}{\underline{\hspace{0.3\textwidth}}}$
+
+        $\underset{\text{Подпись}}{\underline{\hspace{0.3\textwidth}}}$
+    \end{flushright}
+
+    \vspace{1.25cm}
+
+    \begin{flushright}
+        Выполнил:
+
+        $\overset{\text{К.К. Михедов}}{\underset{\text{И.О. Фамилия}}{\underline{\hspace{0.3\textwidth}}}}$
+        
+        $\underset{\text{Подпись}}{\underline{\hspace{0.3\textwidth}}}$
+    \end{flushright}
+
+    \vfill
+
+    \begin{center}
+        Москва 2022 г.
+    \end{center}
+  \end{titlepage}
+
+  \setcounter{page}{2}
+  \section*{Задание 1}
+
+  \textbf{Расчет энтропии информационной последовательности}
+
+  Для выполнения данного задания потребуется таблица встречаемости символов русского алфавита
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c |}
+        \hline
+        Буква & Частотность & Буква & Частотность & Буква & Частотность \\
+        \hline
+        О & 0.10983 & М & 0.03203 & Й & 0.01208 \\
+        Е & 0.08483 & Д & 0.02977 & Х & 0.00966 \\
+        А & 0.07998 & П & 0.02804 & Ж & 0.00940 \\
+        И & 0.07367 & У & 0.02615 & Ш & 0.00718 \\
+        Н & 0.06700 & Я & 0.02001 & Ю & 0.00639 \\
+        Т & 0.06318 & Ы & 0.01898 & Ц & 0.00486 \\
+        С & 0.05473 & Ь & 0.01735 & Щ & 0.00361 \\
+        Р & 0.04746 & Г & 0.01687 & Э & 0.00331 \\
+        В & 0.04533 & З & 0.01641 & Ф & 0.00267 \\
+        Л & 0.04343 & Б & 0.01592 & Ъ & 0.00037 \\
+        К & 0.03486 & Ч & 0.01450 & Ё & 0.00013 \\
+        \hline
+    \end{tabular}
+    \caption{частота появления символов русского алфавита}
+    \label{table:1}
+  \end{table}
+
+  В качестве информационной последоватьельности будет взята последовательность <<МИХЕДОВ КОНСТАНТИН КОНСТАНТИНОВИЧ>> (пробелы не
+  учитываются, так как их частотность не входит в таблицу \ref{table:1})
+
+  Так как вероятность появления каждого отдельного символа различна, то количество
+  информации, переносимое в среднем одним элементом равно энтропии источника и может быть
+  вычислено как $I = -\sum\limits_{i = 1}^Np_ilog_2p_i$, где $N$ - мощность алфавита
+  (в данном случае $N = 33$)
+
+  Вычислим количество информации, переносимое одним символом:
+  \begin{multline}
+    I = -\sum\limits_{i = 1}^{33}p_ilog_2p_i = \\
+    = -0.10983\cdot log_2{0.10983} - 0.08483\cdot \log_2{0.08483}
+    -0.07998\cdot \log_2{0.07998} - 0.07367\cdot \log_2{0.07367} - \\
+    - 0.06700 \cdot \log_2{0.06700 } - 0.06318\cdot \log_2{0.06318} -
+    0.05473\cdot \log_2{0.05473} - 0.04746\cdot \log_2{0.04746} -\\
+    - 0.04533\cdot \log_2{0.04533} - 0.04343\cdot \log_2{0.04343} -
+    0.03486\cdot \log_2{0.03486} - 0.03203\cdot \log_2{0.03203} - \\
+    - 0.02977\cdot \log_2{0.02977} - 0.02804\cdot log_2{0.02804} -
+    0.02615\cdot \log_2{0.02615} - 0.02001\cdot\log_2{0.02001} -\\
+    - 0.01898\cdot\log_2{0.01898} - 0.01735\cdot\log_2{0.01735} -
+    0.01687\cdot\log_2{0.01687} - 0.01641 \cdot\log_2{0.01641 } -\\
+    - 0.01592\cdot\log_2{0.01592} - 0.01450\cdot \log_2{0.01450} -
+    0.01208\cdot\log_2{0.01208} - 0.00966\cdot\log_2{0.00966} -\\
+    - 0.00940\cdot\log_2{0.00940} - 0.00718\cdot\log_2{0.00718} -
+    0.00639\cdot\log_2{0.00639} - 0.00486\cdot\log_2{0.00486} - \\
+    - 0.00361\cdot\log_2{0.00361} - 0.00331\cdot\log_2{0.00331} -
+    0.00267\cdot\log_2{0.00267} - 0.00037\cdot\log_2{0.00037} - \\
+    - 0.00013\cdot\log_2{0.00013} \approx 4.46 \text{ бит}
+  \end{multline}
+  
+  Информационная последовательность содержит 30 символов ($K = 30$), тогда количество информации,
+  содержащееся в этой последовательности, определяется по формуле
+  $I_K = K\cdot I = 30 \cdot 4.46 \text{ бит } \approx 144$ бит
+
+  Мощность исходного алфавита равна 33, тогда
+  инфорационный вес одного символа при равномерном кодировании определяется как
+  $i = \log_2N = \log_233 \approx 6$ (округление в большую сторону)
+
+  Тогда для кодирования исходной информационной последовательности с помощью равномерных
+  кодов потребуется $I_{KP} = K\cdot i = 30 \cdot 6 \text{ бит } = 180$ бит
+
+  \begin{flushright}
+    \textbf{Ответ:} последовательность содержит 144 бит информации, \\
+    а при равномерном кодировании потребуется 180 бит
+  \end{flushright}
+
+  \section*{Задание 2}
+
+  \textbf{Построить дерево Хаффмана для русского алфавита}
+
+  В качестве таблицы встречаемости символов использовалась таблица из задания 1
+  (таблица \ref{table:1} на странице \pageref{table:1})
+
+  Первоначльно я пытался построить дерево Хаффмана вручную, но, как оказалось, сделать
+  это для алфавита из 33 символов довольно сложно, поэтому была написана программа
+  на языке Python, которая по заданным вероятностям строит текстовое описание необхохимого дерева:
+
+  \lstinputlisting[
+    language=Python,
+    extendedchars=\true,
+    caption=код построения дерева Хаффмана для русского алфавита
+  ]{russian_huffman.py}
+  Данный код сгенерирует текстовое описание диаграммы (в формате PlantUML) из которого
+  можно будет получить (немного кривое, но весьма информативное) дерево Хаффмана (рис.
+  \ref{img:huffman} на стр. \pageref{img:huffman}) 
+
+  \begin{figure}[p]
+    \centering
+    \includegraphics[width=0.95\textwidth]{02_01}
+    \caption{дерево Хаффмана для символов русского алфавита}
+    \label{img:huffman}
+  \end{figure}
+
+  Из полученного дерева можно выделить следующее неравномерное распределение кодов:
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c |}
+      \hline
+      Буква & Код & Буква & Код & Буква & Код \\
+      \hline
+      О & 010 & Л & 11101 & Ь & 101101 \\
+      А & 1101 & М & 10010 & Ж & 1110010 \\
+      В & 0001 & П & 00111 & Х & 1110011 \\
+      Е & 1111 & У & 00110 & Ш & 0111110 \\
+      И & 1100 & Я & 00000 & Ю & 0000110 \\
+      Н & 1010 & Б & 100110 & Ц & 01111111 \\
+      Р & 0010 & Г & 101100 & Щ & 01111110 \\
+      С & 0110 & З & 100111 & Э & 00001111 \\
+      Т & 1000 & Й & 000010 & Ф & 000011101 \\
+      Д & 01110 & Ч & 011110 & Ё & 0000111000 \\
+      К & 10111 & Ы & 111000 & Ъ & 0000111001 \\
+      \hline
+    \end{tabular}
+    \caption{распределение кодов для русских букв}
+  \end{table}
+  \pagebreak
+  \section*{Задание 3}
+
+  \textbf{Рассчитать дискретный канал связи без памяти (по заданным параметрам)}
+
+  \begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{| p{0.05\textwidth} | p{0.05\textwidth} | p{0.05\textwidth} | p{0.05\textwidth} | p{0.05\textwidth} | p{0.05\textwidth} |}
+      \hline
+      \multicolumn{6}{| c |}{Вариант \textbf{19}} \\
+      \hline \hline
+      \multicolumn{6}{| c |}{Распределение условных вероятностей} \\
+      \hline
+      \cellcolor{gray}{} & $y_1$ & $y_2$ & $y_3$ & $y_4$ & $y_5$ \\
+      \hline
+      $x_1$ & $\frac{9}{18}$ & $0$ &
+      $\frac{4}{18}$ & $\frac{5}{18}$ & $0$ \\
+      \hline
+      $x_2$ & $\frac{8}{26}$ & $\frac{9}{26}$ & $\frac{9}{26}$ &
+      $0$ & $0$ \\
+      \hline
+      $x_3$ & $0$ & $\frac{2}{6}$ & $\frac{4}{6}$ &
+      $0$ & $0$ \\
+      \hline
+      $x_4$ & $0$ & $\frac{3}{6}$ & $0$ & $\frac{3}{6}$ & $0$ \\
+      \hline
+      $x_5$ & $0$ & $\frac{2}{5}$ & $0$ & $0$ & $\frac{3}{5}$ \\
+      \hline \hline 
+      \multicolumn{6}{| c |}{Распределение вероятностей над входным алфавитом} \\
+      \hline
+      \cellcolor{gray}{} & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ \\
+      \hline
+      $p(x)$ & $\frac{3}{18}$ & $\frac{1}{18}$ & $\frac{4}{18}$ &
+      $\frac{7}{18}$ & $\frac{3}{18}$ \\
+      \hline
+    \end{tabular}
+    \caption{входные данные}
+  \end{table}
+
+  При входной и выходной алфавиты имеют вид:
+  \begin{equation}
+    \begin{aligned}
+      \mathbb{X} = \{x_1, x_2, x_3, x_4, x_5\} & &
+      \mathbb{Y} = \{y_1, y_2, y_3, y_4, y_5\}
+    \end{aligned}
+  \end{equation}
+
+  Выполним проверку суммы вероятностей для входного алфавита:
+  \begin{equation}
+    \sum\limits_{i = 1}^5p(x_i) = \frac{3}{18} + \frac{1}{18}
+    + \frac{4}{18} + \frac{7}{18} + \frac{3}{18} = 
+    \frac{18}{18} = 1 \text{ (всё верно)}
+  \end{equation}
+
+  Также проверим все распределения вероятностей выходных результатов:
+  \begin{equation}
+    \begin{aligned}
+      \sum\limits_{i = 1}^5P_{\mathbb{X}|\mathbb{Y}}(x_1|\mathbb{Y} = y_i) =&
+      \frac{9}{18} + 0 + \frac{4}{18} + \frac{5}{18} + 0 = \frac{18}{18} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{X}|\mathbb{Y}}(x_2|\mathbb{Y} = y_i) =&
+      \frac{8}{26} + \frac{9}{26} + \frac{9}{26} + 0 + 0 = \frac{26}{26} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{X}|\mathbb{Y}}(x_3|\mathbb{Y} = y_i) =&
+      0 + \frac{2}{6} + \frac{4}{6} + 0 + 0 = \frac{6}{6} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{X}|\mathbb{Y}}(x_4|\mathbb{Y} = y_i) =&
+      0 + \frac{3}{6} + 0 + \frac{3}{6} + 0 = \frac{6}{6} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{X}|\mathbb{Y}}(x_5|\mathbb{Y} = y_i) =&
+      0 + \frac{2}{5} + 0 + 0 + \frac{3}{5} = \frac{5}{5} = 1
+    \end{aligned}
+  \end{equation}
+
+  Тут также все верно, поэтому можем приступить к вычислению совместных вероятностей:
+  \begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{| c | c | c | c | c | c |}
+      \hline
+      \cellcolor{gray}{} & $y_1$ & $y_2$ & $y_3$ & $y_4$ & $y_5$ \\
+      \hline
+      $x_1$ & $\frac{9}{18} \cdot \frac{3}{18} = \frac{1}{12}$ & $0$ &
+      $\frac{4}{18} \cdot \frac{3}{18} = \frac{1}{27}$ &
+      $\frac{5}{18} \cdot \frac{3}{18} = \frac{5}{108}$ & $0$ \\
+      \hline
+      $x_2$ & $\frac{8}{26} \cdot \frac{1}{18} = \frac{2}{117}$ &
+      $\frac{9}{26} \cdot \frac{1}{16} = \frac{1}{52}$ &
+      $\frac{9}{26} \cdot \frac{1}{16} = \frac{1}{52}$ & $0$ & $0$ \\
+      \hline
+      $x_3$ & $0$ & $\frac{2}{6}\cdot \frac{4}{18} = \frac{2}{27}$ &
+      $\frac{4}{6}\cdot \frac{4}{18} = \frac{4}{27}$ & $0$ & $0$ \\
+      \hline
+      $x_4$ & $0$ & $\frac{3}{6} \cdot \frac{7}{18} = \frac{7}{36}$ &
+      $0$ & $\frac{3}{6} \cdot \frac{7}{18} = \frac{7}{36}$ & $0$ \\
+      \hline
+      $x_5$ & $0$ & $\frac{2}{5} \cdot \frac{3}{18} = \frac{2}{30}$ &
+      $0$ & $0$ & $\frac{3}{5} \cdot \frac{3}{18} = \frac{1}{10}$ \\
+      \hline
+    \end{tabular}
+    \caption{совместные вероятности}
+  \end{table}
+
+  Необходимо снова выполнить проверку суммы:
+  \begin{equation}
+    \sum\limits_{i = 1}^5\sum\limits_{j = 1}^5P_{\mathbb{X}\mathbb{Y}}(x_i, y_j) =
+    \frac{1}{12} + \frac{1}{27} + \frac{5}{108} + \frac{2}{117} + \frac{1}{52} +
+    \frac{1}{52} + \frac{2}{27} +
+    \frac{4}{27} + \frac{7}{36} + \frac{7}{36} + \frac{2}{30} + \frac{1}{10} = 1
+  \end{equation}
+
+  Сумма сошлась с эталонным значением, теперь вычислим вероятности над выходным алфавитом:
+  \begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{| c | c | c | c | c | c |}
+      \hline
+      \cellcolor{gray}{} & $y_1$ & $y_2$ & $y_3$ & $y_4$ & $y_5$ \\
+      \hline
+      $p(y)$ & $\frac{1}{12} + \frac{2}{117} = \frac{47}{468}$ &
+      $\frac{1}{52} + \frac{2}{27} + \frac{7}{36} + \frac{2}{10} = \frac{622}{1755}$ &
+      $\frac{1}{27} + \frac{1}{52} + \frac{4}{27} = \frac{287}{1404}$ &
+      $\frac{5}{108} + \frac{7}{36} = \frac{13}{54}$ &
+      $\frac{1}{10}$ \\
+      \hline
+    \end{tabular}
+    \caption{вероятности над выходным алфавитом}
+  \end{table}
+
+  Снова выполним проверку суммы: $\sum\limits_{i = 1}^5P_{\mathbb{Y}}(y_i) = 
+  \frac{47}{468} + \frac{622}{1755} + \frac{287}{1404} + \frac{13}{54} + \frac{1}{10} = 1$ (верно)
+
+  Теперь рассчитаем условные вероятности при фиксированных $\mathbb{Y}$
+  \begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{| c | c | c | c | c | c |}
+      \hline
+      \cellcolor{gray}{} & $y_1$ & $y_2$ & $y_3$ & $y_4$ & $y_5$ \\
+      \hline
+      $x_1$ & $\frac{1}{12} \div \frac{47}{468} = \frac{39}{47}$ &
+      $0$ & $\frac{1}{27} \div \frac{287}{1404} = \frac{52}{287}$ &
+      $\frac{5}{108} \div \frac{13}{54} = \frac{5}{26}$ & $0$ \\
+      \hline
+      $x_2$ & $\frac{2}{117} \div \frac{47}{468} = \frac{8}{47}$ &
+      $\frac{1}{52} \div \frac{622}{1755} = \frac{135}{2488}$ &
+      $\frac{1}{52} \div \frac{287}{1404} = \frac{27}{287}$ &
+      $0$ & $0$ \\ \hline
+      $x_3$ & $0$ & $\frac{2}{27} \div \frac{622}{1755} = \frac{65}{311}$ &
+      $\frac{4}{27} \div \frac{287}{1404} = \frac{208}{287}$ & $0$ & $0$ \\
+      \hline
+      $x_4$ & $0$ & $\frac{7}{36} \div \frac{622}{1755} = \frac{1365}{2488}$ &
+      $0$ & $\frac{7}{36} \div \frac{13}{54} = \frac{11}{26}$ & $0$ \\
+      \hline
+      $x_5$ & $0$ & $\frac{2}{30} \div \frac{622}{1755} = \frac{117}{622}$ &
+      $0$ & $0$ & $\frac{1}{10} \div \frac{1}{10} = 1$ \\
+      \hline
+    \end{tabular}
+    \caption{вероятности при фиксированных $\mathbb{Y}$}
+  \end{table}
+
+  Сделаем проверку суммы по всем $\mathbb{X}$:
+  \begin{equation}
+    \begin{aligned}
+      \sum\limits_{i = 1}^5P_{\mathbb{Y}|\mathbb{X}}(y_1|\mathbb{X} = x_i) = &
+      \frac{39}{47} + \frac{8}{47} + 0 + 0 + 0 = \frac{47}{47} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{Y}|\mathbb{X}}(y_2|\mathbb{X} = x_i) = &
+      0 + \frac{135}{2488} + \frac{65}{311} + \frac{1365}{2488} + \frac{117}{622} =
+      \frac{2488}{2488} = 1\\
+      \sum\limits_{i = 1}^5P_{\mathbb{Y}|\mathbb{X}}(y_3|\mathbb{X} = x_i) = &
+      \frac{52}{287} + \frac{27}{287} + \frac{208}{287} + 0 + 0 = \frac{287}{287} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{Y}|\mathbb{X}}(y_4|\mathbb{X} = x_i) = &
+      \frac{5}{26} + 0 + 0 + \frac{11}{26} + 0 = \frac{26}{26} = 1 \\
+      \sum\limits_{i = 1}^5P_{\mathbb{Y}|\mathbb{X}}(y_5|\mathbb{X} = x_i) = &
+      0 + 0 + 0 + 0 + 1 = 1
+    \end{aligned}
+  \end{equation}
+
+  Все суммы верны, теперь рассчитаем энтропию источника:
+  \begin{equation}
+    H(\mathbb{X}) = -\sum\limits_{i = 1}^5 p(x_i)log_2p(x_i) =
+    -\frac{3}{18}\log_2\frac{3}{18} - \frac{1}{18}\log_2\frac{1}{18} -
+    \frac{4}{18}\log_2\frac{4}{18} - \frac{7}{18}\log_2\frac{7}{18} - 
+    \frac{3}{18}\log_2\frac{3}{18} \approx 2.11
+  \end{equation}
+
+  А также вычислим взаимную информацию (при заданном распределении вероятностей
+  над входным алфавитом):
+  \begin{multline}
+    H(\mathbb{Y}|\mathbb{X}) = -\sum\limits_{i = 1}^5\sum\limits_{j = 1}^5P_{\mathbb{XY}(x_i, y_j)}
+    \log_2P_{\mathbb{Y}|\mathbb{X}}(y_j|\mathbb{X} = x_i) = \\
+    = (-\frac{1}{12}\log_2\frac{39}{47} - 0 - \frac{1}{27}\log_2\frac{52}{287}
+    - \frac{5}{108}\log_2\frac{5}{26}) +\\
+    +(-\frac{2}{117}\log_2\frac{8}{47} - \frac{1}{52}\log_2\frac{135}{2488} -
+    \frac{1}{52}\log_2\frac{27}{287} - 0 - 0 ) +\\
+    + ( 0 - \frac{2}{27}\log_2\frac{65}{311} - \frac{4}{27}\log_2\frac{208}{287} - 0 - 0 ) +\\
+    + ( 0 - \frac{7}{36}\log_2\frac{1365}{2488} - 0 - \frac{7}{36}\log_2\frac{11}{26} - 0 ) +\\
+    + ( 0 - \frac{2}{30}\log_2\frac{117}{622} - 0 - 0 -\frac{1}{10}\log_21 ) \approx 1.22
+  \end{multline}
+
+  Теперь рассчитаем взаимную информацию: $I(\mathbb{X}:\mathbb{Y}) = H(\mathbb{X}) - H (\mathbb{Y}|\mathbb{X}) \approx 0.89$
+
+  \begin{flushright}
+    \textbf{Вывод:} взаимная информация дискретного канала связи без \\
+    памяти (с заданными параметрами) состваляет $0.89$ бит
+  \end{flushright}
+
+  \pagebreak
+  \section*{Список литературы}
+
+  \begin{enumerate}
+    \item {
+        Сайт Инженерный справочник DPVS.ru \\
+        URL: \href{https://dpva.ru/Guide/GuideUnitsAlphabets/Alphabets/FrequencyRuLetters/}{DPVA.ru}
+        (дата обращения: 06.12.2022)
+    }
+    \item {
+      Харрис Д., Харрис С. Цифровая схемотехника и архитектура компьютера. \\
+      Издательство: Litres (2022 год)
+    }
+    \item {
+      Габидулин, Э.М. and Пилипчук, Н.И. Лекции по теории информации. \\
+      Издательство: МФТИ (2007 год)
+    }
+  \end{enumerate}
+
+\end{document}

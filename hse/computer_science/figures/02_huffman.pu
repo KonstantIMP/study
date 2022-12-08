@@ -1,0 +1,524 @@
+' ДЗ по информатике на 08.12.22
+@startuml "Huffman's tree for the russian language"
+
+left to right direction
+
+card l01 [
+    Ё
+    ----
+    0.00013
+]
+
+card l02 [
+    Ъ
+    ----
+    0.00037
+]
+
+card l03 [
+    ЪЁ
+    ----
+    0.00050
+]
+
+l01 -[hidden]down- l02
+l01 -right-> l03 : 0
+l02 -right-> l03 : 1
+
+card l04 [
+    Ф
+    ----
+    0.00267
+]
+
+card l05 [
+    ФЪЁ
+    ----
+    0.00317
+]
+
+l03 -[hidden]down- l04
+l03 -right-> l05 : 0
+l04 -right-> l05 : 1
+
+card l06 [
+    Э
+    ----
+    0.00331
+]
+
+card l07 [
+    ЭФЪЁ
+    ----
+    0.00648
+]
+
+l05 -[hidden]down- l06
+l05 -right-> l07 : 0
+l06 -right-> l07 : 1
+
+card l08 [
+    Щ
+    ----
+    0.00361
+]
+
+card l09 [
+    Ц
+    ----
+    0.00486
+]
+
+card l10 [
+    ЦЩ
+    ----
+    0.00847
+]
+
+l08 -[hidden]down- l09
+l08 -right-> l10 : 0
+l09 -right-> l10 : 1
+
+card l11 [
+    Ю
+    ----
+    0.00639
+]
+
+card l12 [
+    ЭФЪЁЮ
+    ----
+    0.01287
+]
+
+l11 -[hidden]down- l07
+l11 -right-> l12 : 0
+l07 -right-> l12 : 1
+
+card l13 [
+    Ш
+    ----
+    0.00718
+]
+
+card l14 [
+    ЦЩШ
+    ----
+    0.01565
+]
+
+l13 -[hidden]down- l10
+l13 -right-> l14 : 0
+l10 -right-> l14 : 1
+
+card l15 [
+    Ж
+    ----
+    0.00940
+]
+
+card l16 [
+    Х
+    ----
+    0.00966
+]
+
+card l17 [
+    ХЖ
+    ----
+    0.01906
+]
+
+l15 -[hidden]down- l16
+l15 -right-> l17 : 0
+l16 -right-> l17 : 1
+
+card l18 [
+    Й
+    ----
+    0.01208
+]
+
+card l19 [
+    ЭФЪЁЮЙ
+    ----
+    0.02495
+]
+
+l18 -[hidden]down- l12
+l18 -right-> l19 : 0
+l12 -right-> l19 : 1
+
+card l20 [
+    Ч
+    ----
+    0.01450
+]
+
+card l21 [
+    ЦЩШЧ
+    ----
+    0.03015
+]
+
+l20 -[hidden]down- l14
+l20 -right-> l21 : 0
+l14 -right-> l21 : 1
+
+card l22 [
+    Б
+    ----
+    0.01592
+]
+
+card l23 [
+    З
+    ----
+    0.01641
+]
+
+card l24 [
+    ЗБ
+    ----
+    0.03233
+]
+
+l22 -[hidden]down- l23
+l22 -right-> l24 : 0
+l23 -right-> l24 : 1
+
+card l25 [
+    Г
+    ----
+    0.01687
+]
+
+card l26 [
+    Ь
+    ----
+    0.01735
+]
+
+card l27 [
+    ЬГ
+    ----
+    0.03422
+]
+
+l25 -[hidden]down- l26
+l25 -right-> l27 : 0
+l26 -right-> l27 : 1
+
+card l28 [
+    Ы
+    ----
+    0.01898
+]
+
+card l29 [
+    ХЖЫ
+    ----
+    0.03804
+]
+
+l28 -[hidden]down- l17
+l28 -right-> l29 : 0
+l17 -right-> l29 : 1
+
+card l30 [
+    Я
+    ----
+    0.02001
+]
+
+card l31 [
+    ЭФЪЁЮЙЯ
+    ----
+    0.04496
+]
+
+l30 -[hidden]down- l19
+l30 -right-> l31 : 0
+l19 -right-> l31 : 1
+
+card l32 [
+    У
+    ----
+    0.02615
+]
+
+card l33 [
+    П
+    ----
+    0.02804
+]
+
+card l34 [
+    ПУ
+    ----
+    0.05419
+]
+
+l32 -[hidden]down- l33
+l32 -right-> l34 : 0
+l33 -right-> l34 : 1
+
+card l35 [
+    Д
+    ----
+    0.02977
+]
+
+card l36 [
+    ЦЩШЧД
+    ----
+    0.05992
+]
+
+l35 -[hidden]down- l21
+l35 -right-> l36 : 0
+l21 -right-> l36 : 1
+
+card l37 [
+    М
+    ----
+    0.03203
+]
+
+card l38 [
+    ЗБМ
+    ----
+    0.06436
+]
+
+l37 -[hidden]down- l24
+l37 -right-> l38 : 0
+l24 -right-> l38 : 1
+
+card l39 [
+    К
+    ----
+    0.03486
+]
+
+card l40 [
+    КЬГ
+    ----
+    0.06908
+]
+
+l27 -[hidden]down- l39
+l27 -right-> l40 : 0
+l39 -right-> l40 : 1
+
+card l41 [
+    Л
+    ----
+    0.04343
+]
+
+card l42 [
+    ЛХЖЫ
+    ----
+    0.08147
+]
+
+l29 -[hidden]down- l41
+l29 -right-> l42 : 0
+l41 -right-> l42 : 1
+
+card l43 [
+    В
+    ----
+    0.04533
+]
+
+card l44 [
+    ВЭФЪЁЮЙЯ
+    ----
+    0.09029
+]
+
+l31 -[hidden]down- l43
+l31 -right-> l44 : 0
+l43 -right-> l44 : 1
+
+card l45 [
+    Р
+    ----
+    0.04746
+]
+
+card l46 [
+    ПУР
+    ----
+    0.10165
+]
+
+l45 -[hidden]down- l34
+l45 -right-> l46 : 0
+l34 -right-> l46 : 1
+
+card l47 [
+    С
+    ----
+    0.05473
+]
+
+card l48 [
+    ЦЩШЧДС
+    ----
+    0.11465
+]
+
+l47 -[hidden]down- l36
+l47 -right-> l48 : 0
+l36 -right-> l48 : 1
+
+card l49 [
+    Т
+    ----
+    0.06318
+]
+
+card l50 [
+    ЗБМТ
+    ----
+    0.12754
+]
+
+l49 -[hidden]down- l38
+l49 -right-> l50 : 0
+l38 -right-> l50 : 1
+
+card l51 [
+    Н
+    ----
+    0.06700
+]
+
+card l52 [
+    КЬГН
+    ----
+    0.13608
+]
+
+l51 -[hidden]down- l40
+l51 -right-> l52 : 0
+l40 -right-> l52 : 1
+
+card l53 [
+    И
+    ----
+    0.07367
+]
+
+card l54 [
+    А
+    ----
+    0.07998
+]
+
+card l55 [
+    АИ
+    ----
+    0.15365
+]
+
+l53 -[hidden]down- l54
+l53 -right-> l55 : 0
+l54 -right-> l55 : 1
+
+card l56 [
+    Е
+    ----
+    0.08483
+]
+
+card l57 [
+    ЕЛХЖЫ
+    ----
+    0.16630
+]
+
+l42 -[hidden]down- l56
+l42 -right-> l57 : 0
+l56 -right-> l57 : 1
+
+card l58 [
+    ПУРВЭФЪЁЮЙЯ
+    ----
+    0.19194
+]
+
+l44 -[hidden]down- l46
+l44 -right-> l58 : 0
+l46 -right-> l58 : 1
+
+card l59 [
+    О
+    ----
+    0.10983
+]
+
+card l60 [
+    ЦЩШЧДСО
+    ----
+    0.22448
+]
+
+l59 -[hidden]down- l48
+l59 -right-> l60 : 0
+l48 -right-> l60 : 1
+
+card l61 [
+    КЬГНЗБМТ
+    ----
+    0.26362
+]
+
+l50 -[hidden]down- l52
+l50 -right-> l61 : 0
+l52 -right-> l61 : 1
+
+card l62 [
+    ЕЛХЖЫАИ
+    ----
+    0.31995
+]
+
+l55 -[hidden]down- l57
+l55 -right-> l62 : 0
+l57 -right-> l62 : 1
+
+card l63 [
+    ЦЩШЧДСОПУРВЭФЪЁЮЙЯ
+    ----
+    0.41642
+]
+
+l58 -[hidden]down- l60
+l58 -right-> l63 : 0
+l60 -right-> l63 : 1
+
+card l64 [
+    ЕЛХЖЫАИКЬГНЗБМТ
+    ----
+    0.58357
+]
+
+l61 -[hidden]down- l62
+l61 -right-> l64 : 0
+l62 -right-> l64 : 1
+
+card l65 [
+    ЕЛХЖЫАИКЬГНЗБМТЦЩШЧДСОПУРВЭФЪЁЮЙЯ
+    ----
+    1.0
+]
+
+l63 -[hidden]down- l64
+l63 -right-> l65 : 0
+l64 -right-> l65 : 1
+
+@enduml
