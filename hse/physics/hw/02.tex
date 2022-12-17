@@ -1,0 +1,242 @@
+% ДЗ на 06.12.2022
+% Михедов Константин БИБ224
+
+% Статья на А4, 12 кегель
+\documentclass[a4paper,12pt]{article}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+\begin{document}
+    \paragraph{Работу выполнил} Михедов Константин Константинович БИБ224
+
+    \section*{Задача }
+ 
+    \paragraph{Условие} Тело массой $m_1 = 0.25$кг, соединенное невесомой нитью посредством блока
+    (в виде полого тонкостенного цилиндра) с телом массов $m_2 = 0.2$кг, скользит по поверхности
+    горизонтального стола. Масса блока $m = 0.15$кг, а коэффициент трения $f$ тела о поверхность
+    равен $0.2$. Пренебрегая трением в подшипникам определите: ускорение $a$, с которым будут
+    двигаться эти тела и силы натяжения $T_1$ и $T_2$ нити по обе стороны блока.
+
+    \begin{figure}[H]
+        \minipage{0.2\textwidth}
+            \begin{tabular}{p{0.8\textwidth} |}
+                \textbf{Дано} \\
+                \hline
+                $m_1 = 0.25$кг \\
+                $m_2 = 0.2$кг \\
+                $m = 0.15$кг \\
+                $f = 0.2$ \\
+                \hline
+                $T_1=$ ? $T_2=$ ? \\
+                $a = $ ? \\
+                $ $ \\ $ $ \\
+            \end{tabular}
+            %\vspace{1.5cm}
+        \endminipage
+        \minipage{0.79\textwidth}
+            \begin{wrapfigure}{r}{0.40\textwidth}
+                \begin{picture}(10, 150)
+                    \put(0,100){\line(1,0){90}}
+                    \put(90,100){\line(0,-1){30}}
+
+                    \put(110,95){\circle{30}}
+
+                    \thicklines
+                    \put(90,95.5){\line(1,0){20}}
+                    \put(90,95){\line(1,0){20}}
+                    \put(90,94.5){\line(1,0){20}}
+                    \thinlines
+
+                    \put(20,100){\line(0,1){20}}
+                    \put(20,120){\line(1,0){30}}
+                    \put(50,120){\line(0,-1){20}}
+
+                    \put(50,111.5){\line(1,0){60}}
+                    \put(126.5,95){\line(0,-1){50}}
+
+                    \put(116.5,45){\line(1,0){20}}
+                    \put(116.5,15){\line(1,0){20}}
+                    \put(116.5,45){\line(0,-1){30}}
+                    \put(136.5,45){\line(0,-1){30}}
+
+                    \put(10,70){\vector(1,0){40}}
+                    \put(45,60){$x$}
+                    \put(15,75){\vector(0,-1){40}}
+                    \put(20,40){$y$}
+
+                    \put(0,120){$\vec{F_{\text{тр}}}$}
+                    \put(40, 125){$\vec{N}$}
+                    \put(60, 117){$\vec{T_1}$}
+                    \put(90, 117){$\vec{T_{b1}}$}
+                    \put(40, 90){$m_1\vec{g}$}
+                    \put(130, 0){$m_2\vec{g}$}
+                    \put(130, 50){$\vec{T_2}$}
+                    \put(130, 80){$\vec{T_{b2}}$}
+
+                    \linethickness{0.35mm}
+                    \put(35,111.5){\vector(1,0){30}}
+                    \put(35,111.5){\vector(0,1){20}}
+                    \put(35,111.5){\circle*{3}}
+                    \put(35,111.5){\vector(-1,0){30}}
+                    \put(35,111.5){\vector(0,-1){20}}
+
+                    \put(126.5,30){\vector(0,1){30}}
+                    \put(126.5,30){\circle*{3}}
+                    \put(126.5,30){\vector(0,-1){30}}
+
+                    \put(126.5,95){\circle*{3}}
+                    \put(110,111){\vector(-1,0){20}}
+                    \put(110,111){\circle*{3}}
+                    \put(126.5,95){\vector(0,-1){20}}
+                \end{picture}
+            \end{wrapfigure}
+            \textbf{Решение}
+            
+            Так как по условию нить не рвется при движении блоков, можем считать ее нерастяжимой.
+            Тогда по 3 закону Ньютона верно, что:
+            \begin{equation}
+                \begin{aligned}
+                    |\vec{T_{b1}}| = |\vec{T_1}| &= T_1 \\
+                    |\vec{T_{b1}}| = |\vec{T_1}| &= T_2 \\
+                    |\vec{a_1}| = |\vec{a_2}| &= a 
+                \end{aligned}
+            \end{equation}
+        \endminipage
+    \end{figure}
+
+    Распишем второй закон Ньютона для тела массой $m_1$:
+    \begin{equation}
+        \left.
+        \begin{aligned}
+            OX: & \:\:\: T_1 - F_{\text{тр}} = m_1a \\
+            OY: & \:\:\: m_1g - N = 0
+        \end{aligned} \:\:\: \right\} \underset{F_{\text{тр}} = fN}{\Leftrightarrow}
+        \begin{cases}
+            N = m_1g\\
+            T_1 - fN = m_1a
+        \end{cases} \Rightarrow
+        T_1 = m_1(a + fg)
+    \end{equation}
+
+    И также распишем второй закон Ньютона для тела массой $m_2$:
+    \begin{equation}
+        \left.
+        \begin{aligned}
+            OX: & \:\:\: 0 = 0 \\
+            OY: & \:\:\: m_2g - T_2 = m_2a
+        \end{aligned}
+        \right\} \Leftrightarrow T_2 = m_2(g - a)
+    \end{equation}
+    
+    Рассмотрим момент инерции блока (который представляет собой тонкостенный цилиндр):
+    \begin{equation}
+        J = \int_0^m{r^2dm} = r^2m, \text{ где } r \text{ - радиус блока}
+    \end{equation}
+
+    Так как мы пренебрегаем трением подшипника и нити о блок, можем основным законом
+    динамики вращательного движения:
+    \begin{equation}
+        \sum{M} = J\varepsilon \Leftrightarrow M_{T_2} + M_{T_1} = J\varepsilon
+    \end{equation}
+
+    Трение нити о блок не учитывается, тогда:
+    \begin{equation}
+        \varepsilon = \frac{d\omega}{dt} = \frac{d\varphi}{dt^2} = \frac{\frac{dS}{r}}{dt^2} = 
+        \frac{\int vdt}{rdt^2} = \frac{\int \int a dtdt}{rdt^2} = \frac{at^2}{rdt^2} = \frac{a}{r}
+    \end{equation}
+
+    Тогда, так как $M_{T_2} = T_2r$ и $M_{T_1} = -T_1r$, можно утрвеждать, что:
+    \begin{equation}
+        M_{T_2} + M_{T_1} = J\varepsilon \Leftrightarrow r(T_2 - T_1) = mr^2 \cdot \frac{a}{r}
+        \Leftrightarrow T_2 - T_1 = ma
+    \end{equation}
+
+    Получаем систему с термя неизвестными и тремя уравнениями
+    \begin{equation}
+        \begin{cases}
+            T_2 - T_1 = ma \\
+            T_2 = m_2(g - a) \\
+            T_1 = m_1(a + fg)
+        \end{cases} \Rightarrow
+        \begin{cases}
+            a = \frac{g(m_2 - m_1f)}{m + m_1 + m_2} \\
+            T_1 = \frac{m_1g(fm + m_2(1 + f))}{m + m1 + m2} \\
+            T_2 = \frac{m_2g(m + m_1(1 + f))}{m + m_1 + m_2}
+        \end{cases}
+    \end{equation}
+
+    Выполняем расчеты:
+    \begin{equation}
+        a = \frac{9.8\text{м/c}^2(0.2\text{кг} - 0.25\text{кг}\cdot 0.2)}{0.15\text{кг} + 0.2\text{кг} + 0.25\text{кг}} = 2.45 \text{м/с}^2
+    \end{equation}
+    \begin{equation}
+        T_1 = \frac{0.25\text{кг}9.8\text{м/с}^2(0.2\cdot 0.15\text{кг} + 0.2\text{кг}(1 + 0.2))}{0.15\text{кг} + 0.2\text{кг} + 0.25\text{кг}} \approx 1.29\text{Н}
+    \end{equation}
+    \begin{equation}
+        T_2 = \frac{0.2\text{кг}9.8\text{м/с}^2(0.15\text{кг} + 0.25\text{кг}(1 + 0.2))}{0.15\text{кг} + 0.2\text{кг} + 0.25\text{кг}} = 1.47\text{Н}
+    \end{equation}
+
+    \begin{flushright}
+        \textbf{Ответ:} $a = 2.45$м/с$^2$, $T_1 = 1.29$Н, $T_2 = 1.47$Н
+    \end{flushright}
+\end{document}
