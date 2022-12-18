@@ -48,13 +48,36 @@
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}
 
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
 \begin{document}
   \subsection{Определители}
   
   \subsubsection{Определители 3 на 3}
 
   %\begin{equation}
-    \begin{multline}
+    \begin{equation}
       \det{
         \begin{pmatrix}
           a_{11} & a_{12} & a_{13} \\
@@ -64,11 +87,11 @@
       }
       = a_{11}a_{22}a_{33}
       + a_{12}a_{23}a_{31}
-      + a_{21}a_{32}a_{13} - \\
+      + a_{21}a_{32}a_{13}
       - a_{31}a_{22}a_{13}
       - a_{21}a_{12}a_{33}
       - a_{32}a_{23}a_{11}
-    \end{multline}
+    \end{equation}
   %\end{equation}
 
   \subsubsection{Определители 2 на 2}

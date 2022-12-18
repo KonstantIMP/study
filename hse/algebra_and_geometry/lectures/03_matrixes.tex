@@ -1,0 +1,460 @@
+% Лекция по Алгебре и геометрии 04.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Вращения текста
+\usepackage{rotating}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+% Ранг матрицы
+\DeclareMathOperator{\rank}{rank}
+
+\begin{document}
+
+\subsection{Линейное преобразование}
+
+Преобразование $f$ называется линейным, если $\forall x, y, \alpha, \beta \in \mathbb{R}$ верно:
+\begin{equation}
+    f(\alpha\cdot x + \beta\cdot y) = \alpha f(x) + \beta f(y)
+\end{equation}
+
+Предположим, что $\exists$ $n$ переменных: $x_1, x_2, \dots, x_n \in \mathbb{R}$, тогда
+$y = ax + b$ - линейная функция ($y$ - зависимый аргумент,  $x$ - независимый аргумент,
+$a, b \in \mathbb{R}$)
+
+\subsubsection{Отношение к матрицам}
+
+Пусть $x_1, x_2, \dots, x_n \in \mathbb{R}$ и $y_1, y_2, \dots, y_n \in \mathbb{R}$ и есть некоторое
+линейное преобразование вида:
+\begin{equation}
+    \begin{cases}
+        y_1 = a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n\\
+        y_2 = a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n\\
+        \vdots \\
+        y_n = a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n\\
+    \end{cases}
+\end{equation}
+
+Тогда существует матрица $A$ этого линейного преобразования:
+\begin{eqnarray}
+    A = \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn} \\
+    \end{pmatrix}
+\end{eqnarray}
+
+\textbf{P.s.} количество $x$ может быть отличным от количества $y$
+
+\subsection{Алгебра матриц}
+
+\subsubsection{Умножение матриц}
+
+Введем два линейных преобразование:
+\begin{equation}
+    \begin{aligned}
+        \begin{cases}
+            y_1 = a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n\\
+            y_2 = a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n\\
+            \vdots \\
+            y_n = a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n\\
+        \end{cases} & &
+        \begin{cases}
+            z_1 = b_{11}y_1 + b_{12}y_2 + \dots + b_{1n}y_n\\
+            z_2 = b_{21}y_1 + b_{22}y_2 + \dots + b_{2n}y_n\\
+            \vdots \\
+            z_n = b_{n1}y_1 + b_{n2}y_2 + \dots + b_{nn}y_n\\
+        \end{cases}
+    \end{aligned}
+\end{equation}
+
+И матрицы этих линейных преобразований:
+\begin{eqnarray}
+    \begin{aligned}
+        A = \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} \\
+            a_{21} & a_{22} & \dots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nn} \\
+        \end{pmatrix} & &
+        B = \begin{pmatrix}
+            b_{11} & b_{12} & \dots & b_{1n} \\
+            b_{21} & b_{22} & \dots & b_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            b_{n1} & b_{n2} & \dots & b_{nn} \\
+        \end{pmatrix}
+    \end{aligned}
+\end{eqnarray}
+
+Тогда пусть $y = f_A(x)$, а $z = f_B(y) = f_B(f_A(x)) = f_{A\cdot B}(x)$, получаем еще одно
+линейное преобразование вида:
+\begin{eqnarray}
+    \begin{cases}
+        z_1 = b_{11}(a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n) + \dots + b_{1n}(a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n) \\
+        z_2 = b_{21}(a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n) + \dots + b_{2n}(a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n) \\
+        \vdots \\
+        z_1 = b_{n1}(a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n) + \dots + b_{nn}(a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n)
+    \end{cases}
+\end{eqnarray}
+
+Рассмотрим множители для каждого $x_n$:
+\begin{equation}
+    \begin{aligned}
+        \text{При } x_1: & & z_1: & & b_{11}a_{11} + b_{12}a_{21} + \dots + b_{1n}a_{n1} = c_{11}\\
+        & & z_2: & & b_{21}a_{11} + b{22}a_{21} + \dots + b_{2n}a_{n1} = c_{12} \\
+        & & \dots \\
+        & & z_n: & & b_{n1}a_{11} + b{n2}a_{21} + \dots + b_{nn}a_{n1} = c_{1n} \\
+        \text{При } x_2: & & \dots
+    \end{aligned}
+\end{equation}
+
+Получается, любой элемент реузльтирующей матрицы: $c_{ij} = \sum\limits_{k = 1}^nb_{ik}a_{kj}$
+
+Итого - строки умножаем на столбцы поэлементно, сумму произведений записываем
+
+\subsubsection{Сложение и вычитание}
+
+\begin{equation}
+    \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn} \\
+    \end{pmatrix} \pm \begin{pmatrix}
+        b_{11} & b_{12} & \dots & b_{1n} \\
+        b_{21} & b_{22} & \dots & b_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        b_{n1} & b_{n2} & \dots & b_{nn} \\
+    \end{pmatrix} = \begin{pmatrix}
+        a_{11} \pm b_{11} & a_{12} \pm b_{12} & \dots & a_{1n} \pm b_{1n} \\
+        a_{21} \pm b_{21} & a_{22} \pm b_{22} & \dots & a_{2n} \pm b_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} \pm b_{n1} & a_{n2} \pm b_{n2} & \dots & a_{nn} \pm b_{nn} \\
+    \end{pmatrix}
+\end{equation}
+
+\subsubsection{Умножение на число}
+
+\begin{equation}
+    \lambda \cdot \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn}
+    \end{pmatrix} = \begin{pmatrix}
+        \lambda a_{11} & \lambda a_{12} & \dots & \lambda a_{1n} \\
+        \lambda a_{21} & \lambda a_{22} & \dots & \lambda a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \lambda a_{n1} & \lambda a_{n2} & \dots & \lambda a_{nn}
+    \end{pmatrix}
+\end{equation}
+
+\textbf{Осторожно} не путать с умножение определителя на число
+
+\subsubsection{Нулевая и единичная матрицы}
+
+Матрицы $Z$, состоящая только из нулей, обладает следующим свойством: $A + Z = Z + A = A$
+
+Матрица $E$, состоящая из нулей везде, кроме главной диагонали, и из 1 на главной диагонали,
+обладает следующим свойством: $A\cdot E = E\cdot A = A$
+
+\subsection{Линейное векторное пространство}
+
+$F$ - поле ($F \subseteq \mathbb{R}$ или $F \subseteq \mathbb{C}$), тогда $V(F)$ -
+линейное векторное пространство:
+\begin{equation}
+    \begin{aligned}
+        x\in V + y \in V = z \in V & & x \in V \cdot y \in V = z\in V
+    \end{aligned}
+\end{equation}
+
+Для такого пространства работают коммутативность, ассоциативность,
+существование 0, 1 и обратного элемента, дистрибутивность и комбинация операций
+
+\subsubsection{Линейно-зависимое}
+
+$\left\{x_1, x_2, \dots, x_n\right\}$ - линейно-зависимое, если $\exists \alpha_i \neq 0:$
+$\alpha_1x_1 + \alpha_2x_2 + \dots + \alpha_nx_n = 0$
+
+\subsubsection{Линейно-независимые}
+
+Вектора $\{\vec{x_1}, \vec{x_2}, \dots, \vec{x_n}\}$ линейно-независимы, если
+$\nexists (\alpha_1, \alpha_2, \dots, \alpha_n) \neq (0, 0, \dots, 0)$ таких, что
+$\vec{x_1}\alpha_1 + \vec{x_2}\alpha_2 + \dots + \vec{x_n}\alpha_n = (0, 0, \dots, 0)$
+
+$\dim{V}$ - максимальное количество линейно-независимых векторов вида $\left(\begin{aligned}
+    \mathbb{R} \\ \mathbb{R}
+\end{aligned}\right)$ (так называемый базис пространства $V$)
+
+Базис - набор векторов, с помощью которых можно выразить любой другой (максимальная по 
+мощности система линейно-независимых векторов)
+
+$\rank{A}$ - количество линейно-независимых строк (или столбцов) в матрице $A$
+
+\subsection{Системы линейных преобразований}
+
+Пусть $y - f_A(x)$, то есть $y = A\cdot x$ $\Leftrightarrow$ $x = y\cdot A^{-1}$, причем
+\begin{equation}
+    \begin{aligned}
+        y = \begin{pmatrix}
+            y_1 \\ y_2 \\ \vdots \\ y_n
+        \end{pmatrix} & &
+        A = \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} \\
+            a_{21} & a_{22} & \dots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nn}
+        \end{pmatrix} & &
+        x = \begin{pmatrix}
+            x_1 \\ x_2 \\ \vdots \\ x_n
+        \end{pmatrix}
+    \end{aligned}
+\end{equation}
+
+\subsection{Обратная матрица}
+
+Если матрица $A$ не вырождена, то $\exists A^{-1}$: $A\cdot A^{-1} = A^{-1}\cdot A = E$
+
+\subsubsection{Поиск матодом Гаусса}
+
+Чтобы найти обратную матрицу для матрицы $A$, нужно при помощи базовых преобразований
+привести матрицу вида $\left(A | E\right)$, к виду $\left(E | B\right)$, тогда матрица
+$B$ будетя являться обратной к A
+
+\paragraph{Например} пусть $A = \begin{pmatrix}
+    4 & 5 & 10 \\ 1 & 2 & 3 \\ 0 & 1 & 1
+\end{pmatrix}$, тогда $\left(A | E\right) = \begin{pmatrix}
+    4 & 5 & 10 & \vrule & 1 & 0 & 0 \\
+    1 & 2 & 3 & \vrule & 0 & 1 & 0 \\
+    0 & 1 & 1 & \vrule & 0 & 0 & 1
+\end{pmatrix} \rightarrow$
+\begin{multline}
+    \begin{pmatrix}
+        0 & -3 & -2 & \vrule & 1 & -4 & 0 \\
+        1 & 2 & 3 & \vrule & 0 & 1 & 0 \\
+        0 & 1 & 1 & \vrule & 0 & 0 & 1
+    \end{pmatrix} \rightarrow
+    \begin{pmatrix}
+        0 & 1 & 0 & \vrule & -1 & 4 & -2 \\
+        1 & 2 & 3 & \vrule & 0 & 1 & 0 \\
+        0 & 1 & 1 & \vrule & 0 & 0 & 1
+    \end{pmatrix} \rightarrow
+    \begin{pmatrix}
+        0 & 1 & 0 & \vrule & -1 & 4 & -2 \\
+        1 & 2 & 3 & \vrule & 0 & 1 & 0 \\
+        0 & 0 & 1 & \vrule & 1 & -4 & 3
+    \end{pmatrix} \rightarrow \\
+    \begin{pmatrix}
+        1 & 0 & 3 & \vrule & 2 & -7 & 4 \\
+        0 & 1 & 0 & \vrule & -1 & 4 & -2 \\
+        0 & 0 & 1 & \vrule & 1 & -4 & 3
+    \end{pmatrix} \rightarrow
+    \begin{pmatrix}
+        1 & 0 & 0 & \vrule & -1 & 5 & -5 \\
+        0 & 1 & 0 & \vrule & -1 & 4 & -2 \\
+        0 & 0 & 1 & \vrule & 1 & -4 & 3
+    \end{pmatrix} 
+\end{multline}
+
+Отсюда получается, что $A^{-1} = \begin{pmatrix}
+    -1 & 5 & -5 \\ -1 & 4 & -2 \\ 1 & -4 & 3
+\end{pmatrix}$
+
+\subsubsection{Поиск через матрицу алгебраических дополнений}
+
+Если составить матрицу, состоящую из алгебраических дополнений исходной матриц, транспонировать ее и
+поделить на определитель исходной, то получиться обратная матриц
+
+\paragraph{Пример} возьмем исходную матрицу их предыдушего примера
+\begin{equation}
+    A = \begin{pmatrix}
+        4 & 5 & 10 \\ 1 & 2 & 3 \\ 0 & 1 & 1
+    \end{pmatrix} \rightarrow
+    A^{*} = \begin{pmatrix}
+        (-1)^{1 + 1} \begin{vmatrix}
+            2 & 3 \\ 1 & 1
+        \end{vmatrix} &
+        (-1)^{1 + 2} \begin{vmatrix}
+            1 & 3 \\ 0 & 1
+        \end{vmatrix} &
+        (-1)^{1 + 3} \begin{vmatrix}
+            1 & 2 \\ 0 & 1
+        \end{vmatrix} \\
+        (-1)^{2 + 1} \begin{vmatrix}
+            5 & 10 \\ 1 & 1
+        \end{vmatrix} &
+        (-1)^{2 + 2} \begin{vmatrix}
+            4 & 10 \\ 0 & 1
+        \end{vmatrix} &
+        (-1)^{2 + 3} \begin{vmatrix}
+            4 & 5 \\ 0 & 1
+        \end{vmatrix} \\
+        (-1)^{3 + 1} \begin{vmatrix}
+            5 & 10 \\ 2 & 3
+        \end{vmatrix} &
+        (-1)^{3 + 2} \begin{vmatrix}
+            4 & 10 \\ 1 & 3
+        \end{vmatrix} &
+        (-1)^{3 + 3} \begin{vmatrix}
+            4 & 5 \\ 1 & 2
+        \end{vmatrix}
+    \end{pmatrix}
+\end{equation}
+\begin{eqnarray}
+    A^{*} = \begin{pmatrix}
+        -1 & -1 & 1 \\
+        5 & 4 & -4 \\
+        -5 & -2 & 3
+    \end{pmatrix} \rightarrow
+    A^{*\tau} = \begin{pmatrix}
+        -1 & 5 & -5 \\
+        -1 & 4 & -2 \\
+        1 & -4 & 3
+    \end{pmatrix}
+\end{eqnarray}
+
+Так как $\det{A} = 1$, то $A^{-1} = \frac{A^{*\tau}}{\det{A}} = \frac{A^{*\tau}}{1} = A^{*\tau}$,
+что совпадает с результатом, полученным ранее
+
+\subsection{Ранг матрицы}
+
+Ранг матрицы - максимальное число линейно-независимых строк/столбцов
+\begin{equation}
+    A = \begin{pmatrix}
+        \vec{a_1} \\ \vec{a_2} \\ \vdots \\ \vec{a_n}
+    \end{pmatrix} = \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn}
+    \end{pmatrix} \rightarrow \begin{pmatrix}
+        a_{11}^{'} & a_{12}^{'} & \dots & a_{1n}^{'} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{r1}^{'} & a_{r2}^{'} & \dots & a_{rn}^{'} \\
+        \dots & \dots & \emptyset & \dots
+    \end{pmatrix} \Rightarrow \rank{A} = r
+\end{equation}
+
+Ранг матрицы - порядок наибольшего ненулевого минора, отсюда вытекает метод
+окаймляющих миноров - проверяем минор $k$-ого порядка, если он ненулевой, то
+ищем окаймляющие его (если таких нет, ранг матрицы найден), иначе рассматриваем
+другой минор $k$-ого порядка
+
+\subsubsection{Теорема Кронекера-Капелли}
+
+Пусть есть некая СЛАУ:
+\begin{equation}
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n = b_1 \\
+        a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n = b_2 \\
+        \dots \\
+        a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n = b_n 
+    \end{cases}
+\end{equation}
+
+Из нее получаем следующие матрицы:
+\begin{equation}
+    \begin{aligned}
+        A = \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} \\
+            a_{21} & a_{22} & \dots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nn}
+        \end{pmatrix} & & B = \begin{pmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{pmatrix} & &
+        \overline{A} = (A | B) = \begin{pmatrix}
+            a_{11} & a_{12} & \dots & a_{1n} & \vrule & b_1 \\
+            a_{21} & a_{22} & \dots & a_{2n} & \vrule & b_2 \\
+            \vdots & \vdots & \ddots & \vdots & \vrule & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nn} & \vrule & b_n
+        \end{pmatrix}
+    \end{aligned}
+\end{equation}
+
+Тогда исходная система имеет хотя бы одно решение (совместна) тогда и только тогда, когда $\rank{A} = \rank{\overline{A}}$
+
+\textbf{Доказательство}
+
+\begin{enumerate}
+    \item {
+        Если система имеет хотя бы одно решение, то столбец свободных членов - линейная комбинация
+        столбцов матрицы $A$ $\Rightarrow$ добавление этого столбца в матрицу не изменит ранга
+    }
+    \item {
+        Если $\rank{A} = \rank{\overline{A}}$, то они имеют один и тот же базисный минор $\Rightarrow$
+        столбец свободных членов - линейная комбинация, то есть решение есть по пункту 1
+    }
+\end{enumerate}
+
+\end{document}
+

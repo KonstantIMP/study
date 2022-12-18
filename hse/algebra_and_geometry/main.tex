@@ -47,6 +47,29 @@
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}
 
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
 \begin{document}
   % Титульная страница
   \begin{titlepage}
@@ -80,5 +103,8 @@
   \section{Матрицы}
   \import{lectures/}{01_matrixes}
   \import{lectures/}{02_matrixes}
+
+  \section{Матричная алгебра}
+  \import{lectures/}{03_matrixes}
 
 \end{document}
