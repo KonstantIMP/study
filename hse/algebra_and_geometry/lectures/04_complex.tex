@@ -1,0 +1,284 @@
+% Лекция по Алгебре и геометрии 04.10.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Вращения текста
+\usepackage{rotating}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+% Ранг матрицы
+\DeclareMathOperator{\rank}{rank}
+
+\begin{document}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \begin{picture}(180,140)
+        \put(90,70){\oval(180, 140)}
+        \put(90,80){\oval(170, 110)}
+        \put(155,90){\oval(30, 80)}
+        \put(72.5,90){\oval(125, 80)}
+        \put(72.5,100){\oval(115, 55)}
+        \put(72.5,110){\oval(105, 30)}
+
+        \put(112.5, 105){$\mathbb{N}$}
+        \put(112.5, 80){$\mathbb{Z}$}
+        \put(112.5, 55){$\mathbb{Q}$}
+        \put(152.5, 55){$\mathbb{I}$}
+        \put(150, 32.5){$\mathbb{R}$}
+        \put(150, 10){$\mathbb{C}$}
+    \end{picture}
+\end{wrapfigure}
+
+$2 + x = 5$ $\Rightarrow$ $\mathbb{N}$ - натуральные числа
+
+$3 + x = 1$ и $3 + x = 3$ $\Rightarrow$ $\mathbb{Z}$ - целые числа 
+
+$3x + 4 = 8$ $\Rightarrow$ $\mathbb{Q}$ - рациональные числа 
+
+$x^2 - 2 = 0$ $\Rightarrow$ $\mathbb{I}$ - иррациональные числа 
+
+$\mathbb{N} \cup \mathbb{Z} \cup \mathbb{Q} \cup \mathbb{I} = \mathbb{R}$ - действительные числа 
+
+$x^2 + 1 = 0$ $\Rightarrow$ $\mathbb{C}$ - комплексные числа
+
+\paragraph{Фундаментальная идея} если корней нет, то почему бы их не придумать
+
+\subsection{Мнимая единица}
+
+Некая мнимая единица: $i = \sqrt{-1}$ (почти эквивалентно записи $i^2 = -1$)
+
+\subsection{Операции над комплексными числами}
+
+\begin{itemize}
+    \item {
+        Сложение и вычитание:
+        $(a + bi) \pm (c + di) = (a \pm c) + (b \pm d)i$
+    }
+    \item {
+        Умножение:
+        $(a + bi)(c + di) = ac + adi + bci + bdi^2 = (ac - bd) + (ad + bc)i$
+    }
+    \item {
+        Сопряжение: $z = a + bi$ $\Rightarrow$ $\overline{z} = a - bi$
+    }
+    \item {
+        Деление:
+        \begin{equation}
+            \frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c - di)} =
+            \frac{ac - adi + bci -bdi^2}{c + d} = \frac{(ac + bd) + (bc - ad)i}{c + d}
+        \end{equation}
+    }
+    \item {
+        Взятие действительной части: $\Re{(a + bi)} = a$
+    }
+    \item {
+        Взятие мнимой части $\Im{(a + bi)} = b$
+    }
+\end{itemize}
+
+Определены также взятия корня $n$-ой степени и возведения в степень, но о них позже
+
+\subsubsection{Геометрическое определение комплексного числа}
+
+\begin{wrapfigure}{l}{0.3\textwidth}
+    \centering
+    \begin{picture}(120, 120)
+        \put(0, 20){\vector(1,0){120}}
+        \put(20, 0){\vector(0,1){120}}
+
+        \put(5,110){$I$}
+        \put(110,5){$R$}
+
+        \put(20,20){\line(4,5){60}}
+        \put(80,95){\circle*{4}}
+        \put(85,90){$A$}
+
+        \multiput(20,95)(10,0){6}{
+            \put(0,0){\line(1,0){5}}
+        }
+        \multiput(80,20)(0,10){8}{
+            \put(0,0){\line(0,1){5}}
+        }
+
+        \qbezier(35,20)(35,25)(28,30)
+        \put(35,30){$\varphi$}
+
+        \put(50,65){$r$}
+
+        \put(80,10){$a_r$}
+        \put(10,90){$a_i$}
+    \end{picture}
+\end{wrapfigure}
+
+$A(a_r; a_i) = a_r + a_ii$
+
+$r = \sqrt{a_i^2 + a_r^2}$ (по теореме Пифагора)
+
+$\cos{\varphi} = \frac{a_r}{r}$ и $\sin{\varphi} = \frac{a_i}{r}$
+
+$A = a_r + a_ii = r(\frac{a_r}{r} + \frac{a_i}{r}i) = r(\cos{\varphi} + i\sin\varphi)$
+
+Это тригонометрическая форма комплексного числа.
+
+Так как $e^{i\varphi} = (\cos{\varphi} + i\sin{\varphi})$, то $A = re^{i\varphi}$ (а это уже экспоненциальная форма тригонометрического числа)
+
+В этих формах можно удобно умножать и делить комплексные числа:
+\begin{equation}
+    \begin{aligned}
+        z_1 =& r_1(\cos{\varphi_1} + i\sin{\varphi_1}) & & z_2 = r_2(\cos{\varphi_2} + i\sin{\varphi_2}) \\
+        z_1\cdot{z_2} =& r_1r_2(\cos{(\varphi_1 + \varphi_2)} + i\sin{(\varphi_1 + \varphi_2)}) & &
+        \frac{z_1}{z_2} = \frac{r_1}{r_2}(\cos{(\varphi_1 - \varphi_2)} + i\sin{(\varphi_1 - \varphi_2)})
+    \end{aligned}
+\end{equation}
+
+\subsection{Формула Муавра}
+
+Применяется для возведения комплексного числа в степень:
+\begin{equation}
+    (r(\cos{\varphi} + i\sin{\varphi}))^n = r^n(\cos{(n\varphi) + i\sin{(n\varphi)}})
+\end{equation}
+
+\textbf{Доказательство} (по индукции)
+\begin{enumerate}
+    \item {
+        Для $n = 2$:
+        \begin{multline}
+            \text{По определению: } (r(\cos{\varphi} + i\sin{\varphi}))^2 = r^2(\cos{\varphi} + i\sin{\varphi})^2 =\\
+            = r^2(\cos^2\varphi + 2\sin{\varphi}\cos{\varphi} + \sin^2\varphi)
+            = r^2((\cos^2\varphi + \sin^2\varphi) + 2\sin{\varphi}\cos{\varphi}) =\\
+            = r^2(\cos{(2\varphi)} + \sin{(2\varphi)})
+        \end{multline}     
+    
+        Что абсолютно удовлетворяет формуле Муавра $\Rightarrow$ она верна для $n = 2$
+    }
+    \item {
+        Допустим, что формула верна для $n=k$
+    }
+    \item {
+        Рассмотрим случай, когда $n = k + 1$
+        \begin{multline}
+            (r(\cos{\varphi} + i\sin{\varphi}))^{k + 1} = 
+            (r(\cos{\varphi} + i\sin{\varphi}))^k\cdot (r(\cos{\varphi} + i\sin{\varphi})) = \\ =
+            (r^k(\cos{(k\varphi)} + i\sin{(k\varphi)}))\cdot(r(\cos{\varphi} + i\sin{\varphi})) = \\ =
+            r^{k + 1}(\cos{(k\varphi)} + i\sin{(k\varphi)})\cdot(\cos{\varphi} + i\sin{\varphi}) =\\
+            = r^{k + 1}(\cos{(k\varphi)}\cos{\varphi} + i\sin{(n\varphi)}\cos{\varphi}
+            +i\cos{(n\varphi)\cos{\varphi} - \sin{(k\varphi)\sin{\varphi}}}) =\\
+            = r^{k + 1}(\cos{((k + 1)\varphi)} + i\sin{((k + 1)\varphi)}) (\blacksquare)
+        \end{multline}
+    }
+\end{enumerate}
+
+\subsubsection{Синус и косинус n-ого угла}
+
+Пусть $z$ - комплексное число такое, что $|z| = 1$
+
+Тогда $z = \cos{\varphi} + i\sin{\varphi}$,
+тогда $z^n = 1^n(\cos{(n\varphi)} + i\sin{(n\varphi)}) = \cos{(n\varphi)} + i\sin{(n\varphi)}$,
+или же $z^n = (\cos{\varphi} + i\sin{\varphi})^n$. Разложим второе равенство по формуле бинома Ньютона:
+\begin{multline}
+    (\cos{\varphi} + i\sin{\varphi})^n =
+    C_n^0\cos^n\varphi + C_n^1\cos^{n-1}\varphi\cdot{i\sin{\varphi}} - C_n^2\cos^{n-1}\varphi\cdot\sin^2\varphi - \\
+    - C_n^3\cos^{n-3}\varphi\cdot{i\sin^3\varphi} + C_n^4\cos^{n-4}\varphi\cdot{\sin^4\varphi} +
+    C_n^5\cos^{n-5}\varphi\cdot{i\sin^5\varphi} - \dots = \\
+    = \cos{(n\varphi)} + i\sin{(n\varphi)}
+\end{multline}
+
+Плюсы и минусы в разложении берутся исходя из возведения мнимой единицы в степень. В правой части
+$\cos$ не умножается на $i$, а $\sin$ - умножается, поэтому:
+\begin{equation}
+    \cos{(n\varphi)} = C_n^0\cos^n\varphi - C_n^2\cos^{n-2}\varphi\cdot{\sin^2{\varphi}} +
+    C_n^4\cos^{n-4}\varphi\cdot{\sin^4\varphi}
+    - C_n^6\cos^{n-6}\varphi\cdot{\sin^6{\varphi}} + \dots
+\end{equation}
+\begin{equation}
+    \sin{(n\varphi)} = C_n^1\cos^{n-1}\varphi\cdot\sin{\varphi} -
+    C_n^3\cos^{n-3}\varphi\cdot{\sin^3{\varphi}} + C_n^5\cos^{n-5}\varphi\cdot{\sin^5{\varphi}} -
+    \dots
+\end{equation}
+
+\subsection{Корень из комплексного числа}
+
+$z_1 = \sqrt[n]{z_2} \Leftrightarrow z_1^n = z_2$, то есть
+$r_1^n(\cos{(n\varphi_1)} + i\sin{(n\varphi_1)}) = r_2(\cos{\varphi_2} + i\sin{\varphi_2})$ $\Rightarrow$
+\begin{equation}
+\Rightarrow \begin{cases}
+    r_2 = r_1^n \\
+    n\varphi_1 = \varphi_2
+\end{cases} \Rightarrow
+\begin{cases}
+    r_1 = \sqrt[n]{r_2}\\
+    \varphi_1 = \frac{\varphi_2 + 2\pi{k}}{n}, k = 0, 1, \dots, n-1
+\end{cases}
+\end{equation}
+
+\end{document}
+

@@ -1,0 +1,498 @@
+% Лекция по Алгебре и геометрии 15.11.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Вращения текста
+\usepackage{rotating}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Список в несколько строк
+\usepackage{multicol}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% перечеркивания
+\usepackage{cancel}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+% Ранг матрицы
+\DeclareMathOperator{\rank}{rank}
+
+\begin{document}
+
+Полиномом $n$-ой степени называют выражение $f(x) = a_0 + a_1x + a_2x^2 + \dots + a_nx^n$ 
+(притом $a_i \in \mathbb{C}$, $a_n \neq 0$, степени $x$ строго неотрицательны)
+
+Степень данного полинома: $\deg{f(x)} = n$ (degree - степень)
+
+\subsection{Операции над полиномами}
+
+\begin{enumerate}
+    \item {
+        Сложение и вычитание:
+
+        $f(x) \pm g(x) = c(x) = c_0 + c_1x + c_2x^2 + \dots + c_nx^n$ ($n = \deg{c(x)} = \max{(\deg{f(x)}, \deg{g(x)})}$)
+    }
+    \item {
+        Умножение:
+
+        $c(x) = f(x)\cdot g(x)$ ($\deg{c(x)} = \deg{f(x)} + \deg{g(x)}$)
+    }
+    \item {
+        Деление:
+
+        Если $\deg{f(x)} > \deg{g(x)}$ $\Rightarrow$ $\exists!$ $q(x)$ и $r(x)$:
+        $\deg{q(x)} > \deg{r(x)}$ и $f(x) = g(x)q(x) + r(x)$ 
+
+        Причем важно, что подобное разложение \textbf{единственно}:
+
+        Пусть существуют еще многочлены $\overline{q}(x)$ и $\overline{r}(x)$,
+        также удовлетворяющие исходному равенству ($f(x) = g(x)\overline{q}(x) + \overline{r}(x)$).
+        Приравняем исходное и полученное выражение:
+        \begin{equation}
+            g(x)\overline{q}(x) + \overline{r}(x) = g(x)q(x) + r(x) \Leftrightarrow
+            g(x)(\overline{q}(x) - q(x)) = r(x) - \overline{r}(x)
+        \end{equation}
+
+        Так как $\deg{(r(x) - \overline{r}(x))} < \deg{g(x)}$ (из определения деления), то следовательно, если было бы, что 
+        $\deg{(\overline{q}(x) - q(x))} \neq 0$, то $\deg{(g(x)(\overline{q}(x) - q(x)))}$
+        была бы $\geq \deg{g(x)}$, что не могло бы произойти исходя из первого высказывания.
+        Тогда $\deg{(\overline{q}(x) - q(x))}$ должна быть $= 0$, то есть
+        $\overline{q}(x) = q(x)$, отсюда $\deg{(\overline{q}(x) - q(x))} = 0$
+        $\Rightarrow$ $\deg{(r(x) - \overline{r}(x))} = 0$ $\Rightarrow$ $r(x) = \overline{r}(x)$ $(\blacksquare)$
+    
+        и в принципе \textbf{существует}:
+
+        Пусть есть полиномы $f(x)$ и $g(x)$ такие, что $\deg{f(x)} = n$, а $\deg{g(x)} = 1$
+
+        \begin{enumerate}
+            \item {
+                Если $n < s$, то $q(x) = 0$, а $r(x) = f(x)$
+            }
+            \item {
+                Иначе, можно поэлементно все делить, для этого распишем $f(x)$ и $g(x)$
+                \begin{equation}
+                    \begin{aligned}
+                        f(x) &= a_0x^n + a_1x^{n-1} + a_2x^{n-2} + \dots + a_{n-1}x + a_n\\
+                        g(x) &= b_0x^s + b_1x^{s-1} + b_2x^{s-2} + \dots + b_{s-1}x + b_s
+                    \end{aligned}
+                \end{equation}
+
+                Тогда можем выразить:
+                \begin{equation}
+                    f_1(x) = f(x) - \frac{a_0}{b_0}x^{n-s}g(x)
+                \end{equation}
+
+                Обозначим $n_1 = \deg{f_1(x)} < \deg{f(x)}$ и $a_{1,0}$ - как множитель при $x^{n_1}$ в полиноме $f_1(x)$.
+                Теперь можем выразить:
+                \begin{eqnarray}
+                    f_2(x) = f_1(x) - \frac{a_{1,0}}{b_0}x^{n_1-s}g(x)
+                \end{eqnarray}
+
+                Таким образом поэлементное деление можно произваодить вплоть до:
+                \begin{equation}
+                    f_{k} = f_{k-1} - \frac{a_{k-1,0}}{b_0}x^{n_{k - 1} - 1}g(x)
+                \end{equation}
+
+                Сложив все подобные равенства в одно целое, получим:
+                \begin{equation}
+                    f(x) - (\frac{a_0}{b_x}x^{n-s} + \frac{a_{1,0}}{b_0}x^{n_1 - s} + \dots +
+                    \frac{a_{k-1,n}}{b_0}x^{n_{k-1} - s})g(x) = f_k(x)
+                \end{equation}
+
+                То есть многочлены:
+                \begin{equation}
+                    \begin{aligned}
+                        q(x) &= \frac{a_0}{b_x}x^{n-s} + \frac{a_{1,0}}{b_0}x^{n_1 - s} + \dots +
+                        \frac{a_{k-1,n}}{b_0}x^{n_{k-1} - s} \\
+                        r(x) &= f_k(x) \:\:\: (\blacksquare)
+                    \end{aligned}
+                \end{equation}
+            }
+        \end{enumerate}
+    }
+\end{enumerate}
+
+\subsection{Делители полиномов}
+
+Пусть есть полиномы, определенные на множестве комплексных чисел: $f(x), \varphi(x), x \in \mathbb{C}$ 
+
+Говорят, что $f(x)$ делится на $\varphi(x)$ (короткая записа $f(x) \vdots \varphi(x)$),
+если $\exists \varPsi(x)$: $f(x) = \varphi(x)\varPsi(x)$
+
+Верны также следующие утверждения
+\begin{multicols}{2}
+    \begin{enumerate}
+        \item {
+            $f(x) \vdots \varphi(x)$ $\land$ $\varphi(x)\vdots\varPsi(x)$ $\Rightarrow$ $f(x)\vdots\varPsi(x)$
+        }
+        \item {
+            $f(x)$ и $g(x)\vdots\varphi(x)$ $\Rightarrow$ $(\alpha{f(x)} + \beta{g(x)})\vdots\varphi(x)$
+        }
+        \item {
+            $f(x)\vdots\varphi(x)$ $\Rightarrow$ $f(x)h(x)\vdots\varphi(x)$
+        }
+        \columnbreak
+        \item {
+            $f(x)\vdots\varphi(x)$ $\Rightarrow$ $cf(x)\vdots\varphi(x)$
+        }
+        \item {
+            $f(x)\vdots{g(x)}$ и $g(x)\vdots{f(x)}$ $\Rightarrow$ $f(x) = g(x)$
+        }
+        
+    \end{enumerate}
+\end{multicols}
+
+\subsection{Наибольший общий делитель}
+
+НОД двух многочленов - их общий делитель наивысшей степени
+
+НОД можно расписать с помощью так называемых коэффициентов Безу ($v(x)$ и $\nu(x)$):
+\begin{equation}
+    d(x) = (f(x), g(x)) \Rightarrow \exists v(x), \nu(x): \:\:\:
+    d(x) = v(x)f(x) + \nu(x)g(x)
+\end{equation}
+
+\paragraph{Доказательство} так называемой теоремы о линейном представлении НОД
+\begin{equation}
+    \begin{aligned}
+        f(x) &= q_1(x)g(x) + r_1(x) \\
+        g(x) &= q_2(x)r_1(x) + r_2(x) \\
+        r_1(x) &= q_3(x)r_2(x) + r_3(x) \\
+        r_2(x) &= q_4(x)r_3(x) + r_4(x) \\
+        &\dots \\
+        r_{k - 2}(x) &= q_k(x)r_{k - 1}(x) + r_k(x) \\
+        r_k(x) &= q_{k + 2}r_{k + 1}(x) + 0
+    \end{aligned}
+\end{equation}
+
+Тогда $d(x) = r_k(x) = r_{k - 2}(x) - q_kr_{k-1}(x)$. Пусть $\nu(x) = 1$, а $v(x) = -q_k$, тогда верно, что
+$d(x) = \nu(x)r_{k - 2}(x) + v(x)r_{k - 1}(x) = r_{k - 2}(x)$ $(\blacksquare)$
+
+Тут, для нахождения НОД использовался алгоритм Евклида: делить рекуррентно делился на частное,
+пока не нашелся такой остаток ($r_k(x)$), на который бы без остатка делилось все
+
+\subsection{Корни многочленов}
+
+Если $f(c) = 0$, то говорят, что $c$ - корень многочлена $f(x)$ (эквивалентно $f(x) \vdots (x - c)$)
+
+\subsubsection{Теорема Безу}
+
+$P_n(x) = (x - \alpha)Q_{n - 1}(x) + r$, тогда $r = P_n(\alpha)$
+
+\textbf{Доказательство:} $P_n(\alpha) = (\alpha - \alpha)Q_{n - 1}(x) + r = 0\cdot{Q_{n - 1}(x)} + r = r$
+
+\textbf{Следствия}
+\begin{enumerate}
+    \item {
+        Если $P_n(\alpha) = 0$ $\Rightarrow$ $\alpha$ - корень многочлена
+    }
+    \item {
+        $(P_n(x) - P_n{\alpha})\vdots{(x - \alpha)}$
+    }
+    \item {
+        Пусть $P_n(x) = a_nx^n + \dots + a_1x + a_0$ ($a_i \in \mathbb{Z}$ $\forall i$)
+
+        Тогда $\alpha \in \mathbb{Z}$ $\land$ $P_n(\alpha) = 0$ $\Rightarrow$ $Q_{n - 1}(x)$ - многочлен с целыми коэффициентами
+    }
+\end{enumerate}
+
+\subsubsection{Кратные корни}
+
+Число $c \in \mathbb{C}$ является кратным корнем многочлена $P_N(x)$, если
+$P_n^{(i)}(c) = 0$, а $P_n^{(k + 1)}(c) \neq 0$ ($i = 0, 1, 2, \dots, k - 1, k$) (здесь
+степень означает номер производной)
+
+Или если $P_n(x) \vdots (x - c)^k$ и $P_n(x)\cancel{\vdots}(x - c)^{k + 1}$
+
+\subsection{Основная теорема алгербры}
+
+Всякий многочлен, степень которого не меньше единицы, имеет хотя бы один корень, в общем случае комплексный
+
+Для ее доказательство потребуется несколько сторонних теорем
+\subsubsection{Лемма о непрерывности произвольного многочленов}
+
+\textbf{Формулировка} любой многочлен непрерывен на всей комплексной плоскости
+
+Если свободный член многочлена $P_n(x)$ равен нулю ($P_n(0) = 0$, а сам многочлен
+имеет вид $P_n(x) = a_0x^n + a_1x^{n - 1} + \dots + a_{n - 1}x$), то $\forall \varepsilon > 0$
+можно подобрать такое $\delta$, то $|x| < \delta$ $\Rightarrow$ $|P_n(x)| < \varepsilon$ $\forall x$
+
+Пусть $A = \max\{|a_0|, |a_1|, \dots, |a_{n - 1}|\}$, а число $\varepsilon$ - зафиксировано,
+тогда возьмем $\delta = \frac{\varepsilon}{A + \varepsilon}$.
+
+Исходя из свойств модуля верно, что $|P_n(x)| < |a_0||x^n| + |a_1||x^{n - 1}| + \dots + |a_{n - 1}||x|$, что
+в свою очередь $< A(|x|^n + |x|^{n - 1} + \dots + |x|) = A\frac{|x| - |x|^{n + 1}}{1 - |x|}$
+(сумма n членов геометрической прогрессии)
+
+Так как по условию $|x| < \delta$, а $\delta = \frac{\varepsilon}{A + \varepsilon} < 1$,
+то $\frac{|x| - |x|^{n + 1}}{1 - |x|} < \frac{|x|}{1 - |x|}$, тогда
+\begin{equation}
+    f(x) < A\frac{x}{1 - x} < A\frac{\delta}{1 - \delta} <
+    \frac{\frac{A\varepsilon}{A + \varepsilon}}{1 - \frac{\varepsilon}{A + \varepsilon}} = \varepsilon (\blacksquare)
+\end{equation}
+
+\subsubsection{Формула Тейлора}
+\begin{equation}
+    P_n(x + h) = P_n(x) + hP_n^{'}(x) + \frac{h^2}{2!}P_n^{''}(x) + \dots + \frac{h^n}{n!}P_n^{(n)}(x)
+\end{equation}
+
+\subsubsection{Теорема о непрерывности произвольного многочлена}
+
+\textbf{Формулировка} произвольный многочлент $P_n(x)$ непрерывен в любой точке $x_0$ точке комплексной плоскости
+
+По формуле Тейлора: $P_n(x_0 + h) - P_n(x_0) = c_1h + c_2h^2 + \dots + c_nh^n = \varphi(h)$,
+где $c_1 = P_n^{'}(x_0)$, $c_2 = \frac{P_n^{''}(x_0)}{2!}$, $\dots$, $c_n = \frac{P_n^{(n)}(x_0)}{n!}$
+ 
+Видно, что $\varphi(h)$ - многочлен без свободного члена, тогда по лемме о непрерывности произвольного
+многочлена $\forall \varepsilon > 0$ можно подобрать такое $\delta > 0$, что $|h| < d$ $\Rightarrow$ 
+$|\varphi(h)| < \varepsilon$, а так как $\varphi(h) = P_n(x_0 + h) - P_n(x_0)$, то
+$|h| < d$ $\Rightarrow$ $|P_n(x_0 + h) - P_n(x_0)| < \varepsilon$
+
+По свойству модуля: $||P_n(x_0 + h)| - |P_n(x_0)|| \leq |P_n(x_0 + h) - P_n(x_0)| < \varepsilon$,
+откуда вытекает непрерывность многочлена в точке $x_0$
+
+\subsubsection{Лемма о модуле старшего члена}
+
+Пусть дан полином $P_n(x) = a_0x^n + a_1x^{n - 1} + \dots + a_n$, тогда для $\forall k > 0$
+при $x \rightarrow \infty$: $|a_0x^n| > k|a_1x^{n-1} + \dots + a_n|$, то есть модуль старшего
+члена больше модуля суммы всех остальных членов во сколько угодно раз
+
+\paragraph{Доказательство} Пусть $A = \max\{|a_0|, |a_1|, \dots, |a_n|\}$, тогда по свойству модулей
+\begin{equation}
+    |a_1x^{n - 1} + \dots + a_n| \leq |a_1||x|^{n - 1} + \dots + |a_n|
+    \leq A(|x|^{n - 1} + \dots + 1) = A\frac{|x|^n - 1}{|x| - 1}
+\end{equation}
+
+Если $|x| > 1$, то $\frac{|x|^n - 1}{|x| - 1} < \frac{|x|^n}{|x| - 1}$ $\Rightarrow$
+$|a_1x^{n - 1} + \dots + a_n| \leq A\frac{|x|^n}{|x| - 1}$
+
+Выберем $x$ так, чтобы $|x| > 1$ (верно, так как при достаточно больших) и
+$x > \frac{kA}{|a_0|} + 1$, тогда $kA = \frac{x - 1}{|a_0|}$ $\Rightarrow$
+$kA\frac{|x|^n}{|x| - 1} \leq |a_0x^n|$ $(\blacksquare)$
+
+\subsubsection{Лемма о возрастании модуля многочлена}
+
+Для любого комплексного полинома со степенью большей или равной 1 и $\forall M \in \mathbb{R} > 0$
+(причем сколь угодно большого), можно подобрать такое действительное положительное число $N$:
+$|x| > N$ $\Rightarrow$ $|P_n(x)| > M$
+
+\paragraph{Доказательство} Пусть $P_n(x) = a_0x^n + a_1x^{n - 1} + \dots + a_n$, тогда
+по свойства модулей \[|P_n(x)| = |a_0x^n + (a_1x^{n - 1} + \dots + a_n)|
+\geq |a_0x^n| - |a_1x^{n - 1} + \dots + a_n|\]
+
+По лемме о модуле старшего члена (при $|x| > N_1$):
+\begin{equation}
+    |a_0x^n| > 2|a_1x^{n - 1} + \dots + a_n| \Leftrightarrow
+    |a_1x^{n - 1} + \dots + a_n| < 0.5|a_0x^n|
+\end{equation}
+
+Тогда верно, что $|P_n(x)| > 0.5|a_0x^n|$ $\Rightarrow$ $0.5|a_0x^n|$ будет больше, чем $M$
+при $|x| > \sqrt[n]{\frac{2M}{|a_0|}} = N_2$
+
+Тогда при $|x| > \max\{N_1, N_2\}$ $|P_n(x)|$ будет больше $M$ ($\blacksquare$)
+
+\subsubsection{Лемма Д'Аламбера}
+
+Если $P_n(c) \neq 0$, то $\exists h$: $|P_n(c + h)| < |P_n(h)|$
+
+По формуле Тейлора: $P_n(x + h) = P_n(x) + hP_n^{'}(x) + \frac{h^2}{2!}P_n^{''}(x) + \dots + \frac{h^n}{n!}P_n^{(n)}(x)$
+
+По условию $c$ не является корнем $P_n(x)$, но оно случайно может оказаться корнем какой-либо
+производной. Тогда пусть $k$-ая производная - первая, для которой
+$c$ не является корнем: $P_n^{'}(c) = P_n^{''}(c) = \dots = P_n^{(k - 1)}(c) = 0$, а
+$P_n^{k}(c) \neq 0$. Она обязательно существкет, так $P_n^{(n)}(c) = a_0n!$, тогда
+\begin{equation}
+    P_n(c + h) = P_n(c) + \frac{h^kP_n^{(k)}(c)}{k!} + \frac{h^{k + 1}}{(k + 1)!}P_n^{(k + 1)}(c) + \dots + \frac{h^n}{n!}P_n^{(n)}(c)
+\end{equation}
+
+Обе части высказывания поделим на $P_n(c)$, которое по условию не равно нулю:
+\begin{equation}
+    \frac{P_n(c + h)}{P_n(c)} = 1 + C_kh^k + C_{k + 1}h^{k + 1} + \dots + C_nh^n (C_j = \frac{P_n^{(j)}(c)}{j!P_n(c)}) 
+\end{equation}
+
+Так как $P_n^{(k)}(c) \neq 0$, то верно:
+\begin{equation}
+    \frac{P_n(c + h)}{P_n(c)} = (1 + C_k) + C_kh^k(\frac{C_{k + 1}h}{C_k} + \dots + \frac{C_n}{C_k})
+\end{equation}
+
+Данное выражение в модульном эквиваленте:
+\begin{equation}
+    \left|\frac{P_n(c + h)}{P_n(c)}\right| \leq |(1 + C_k)| + |C_kh^k|\left|(\frac{C_{k + 1}h}{C_k} + \dots + \frac{C_n}{C_k})\right|
+\end{equation}
+
+Теперь каким-нибудь образом зафиксируем число $h$
+
+Выберем $|h|$ так, чтобы $\frac{C_{k + 1}}{C_k}h + \dots + \frac{C_n}{C_k} < \frac{1}{2}$ и $|h| < d_1$.
+Так как $C_kh^k$ - тоже многочлен без свободного члена, то может быть такое, что $|C_kh^k| < 1$
+(при $|h| < d_2 < \sqrt[k]{|C_k^{-1}|}$)
+
+Соответственно пусть $|h| = \min\{d_1, d_2\}$, тогда $\left|\frac{P_n(c + h)}{P_n(c)}\right|
+< |1 + C_kh^k| + 0.5|C_kh^k|$
+
+Теперь выберем аргумент $h$ так, чтобы $C_kh^k$ было бы отрицательным действительным (не комплексным)
+числом, то есть $\arg(C_kh^k) = \arg{C_k} + k\arg{h} = \pi$, то есть $\arg{h} = \frac{\pi - \arg{C_k}}{k}$
+
+Тогда цисло будет отличаться от своего модуля только знаком: $C_kh^k = -|C_kh^k|$
+
+Тогда $1 + C_kh^k = 1 - |C_kh^k|$, тогда можно утверждать, что
+\begin{equation}
+    \left|\frac{P_n(c + h)}{P_n(c)}\right|
+< |1 + C_kh^k| + 0.5|C_kh^k| = 1 - |C_kh^k| + 0.5|C_kh^k| = 1 - 0.5|C_kh^k|
+\end{equation}
+
+А так как $h$ был выбран так, что $|C_kh^k| > 1$ (а по определениб модуля еще и $|C_kh^k| \geq 0$),
+то:
+\begin{equation}
+    1 - 0.5|C_kh^k| < 1 \Rightarrow \left|\frac{P_n(c + h)}{P_n(c)}\right| < 1 \Leftrightarrow
+    |P_n(c + h)| < |P_n(c)| (\blacksquare)
+\end{equation}
+
+\subsubsection{Доказательство основной теоремы}
+
+Пусть есть $P_n(x)$, такой, что его степень $\geq 1$
+
+\begin{enumerate}
+    \item {
+        Если свободный член $P_n(x)$ равен нулю, то $P_n(0) = 0$, то есть
+        существует минимум один корен $(\blacksquare)$
+    }
+    \item {
+        Иначе очевидно, что свободный член $a_n = P_n(0) \neq 0$
+
+        Исходный многочлен непрерывен на всей плоскости комплексных чисел,
+        тогда можно найти число $M = \inf{|P_n(x)|}$, то есть существует
+        такая точка $z_0$, что $M = |P_n(z_0)| \leq |P_n(z)|$ $\forall z \in \mathbb{C}$
+
+        Если $P_n(z_0) \neq 0$, то по лемме Д'Аламбера найдется такой $z^{'}$,
+        что $|P_n(z^{'})| < |P_n(z_0)|$, чего быть не может $(\blacksquare)$
+    }
+\end{enumerate}
+
+\subsubsection{Следствие}
+
+Любой неконстантный многочлен над полем комплексных чисел можно разложить в произведелние линейных
+множителей (разложение единственно):
+\begin{equation}
+    P_n(z) = a_n(z - z_0)^{k_0}(z - z_1)^{k_1}\dots(z - z_n)^{k_n}
+\end{equation}
+
+\subsection{Интерполяционный многочлен Лагранжа}
+
+Призван решать задачу поиска полинома, который проходит через заданный набор точек с
+координатами вида ($x$, $y$).
+
+Базовая формула для его вычисления, при заданных точках
+$(x_0, y_0), (x_1, y_1), \dots, (x_n, y_n)$:
+\begin{equation}
+    \begin{aligned}
+        L(x) = \sum\limits_{i = 0}^n(y_il_i(x)) & & & &
+        l_i(x) = \underset{j \neq i}{\prod\limits_{j = 0}^n}\frac{x - x_j}{x_i - x_j}
+    \end{aligned}
+\end{equation}
+
+\subsection{Формулы Виета}
+
+Пусть задан полином $n$-ой степени:
+\begin{equation}
+    P_n(x) = a_0x^n + a_1x^{n - 1} + \dots + a_{n - 1}x + a_n
+\end{equation}
+
+По следствию из ОТА можно записать следующее равенство:
+\begin{equation}
+    a_0x^n + a_1x^{n - 1} + \dots + a_{n - 1}x + a_n = a_0(x - x_0)^{k_0}\dots(x - x_n)^{k_n}
+\end{equation}
+
+Можно покоэффициентно составить выражение для каждого a:
+\begin{equation}
+    \begin{aligned}
+        a_0 =& a_0 \\
+        a_1 =& -a_0 \cdot (x_0 + x_1 + \dots + x_n) \\
+        \dots & \\
+        a_n =& a_0 (-1)^{n}x_0x_2\dots{x_n}
+    \end{aligned}
+\end{equation}
+
+Откуда вытекает, что сумма корней $= -\frac{a_1}{a_0}$ (обратное к коэффициенту при степени на единицу
+меньшей, чем степень многочлена),
+а произведение корней $= (-1)^{n}\cdot\frac{a_n}{a_0}$ (где $n$ - степень многочлена)
+
+\subsection{Теорема о разложении многочлена с вещественными коэффициентами}
+
+Многочлен, у которого все коэффициенты при $x$ - действительные числа может быть
+разложен следующим образом:
+
+$P_n(x) = a_0(x - \alpha_0)^{k_0}\dots(x - \alpha_v)^{k_v}(x^2 + p_1x + q^1)\dots(x^2 + p_sx + q_s) \:\:\:\: (n = v + s)$
+
+Здесь слева - действительные корни многочлена, а справа - комплексные. Но записаны они 
+в виде произведения $(x - z)(x - \overline{z})$, так как если комплексное
+число $z$ является корнем уравнения, то и $\overline{z}$ также является ее корнем.
+
+
+\end{document}
+
