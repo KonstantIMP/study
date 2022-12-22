@@ -1,0 +1,177 @@
+% Лекция по Математическому Анализу 16.11.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% зачеркивание
+\usepackage{cancel}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+Пусть $a$ - точка на прямой $\mathbb{R}$ или символ бесконечности (возможно со знаком),
+а $f_1$ и $f_2$ - функции, определенные в выколотой окрестности $a$, тогда говорят, что
+$f_1$ эквивалентна $f_2$ пр  $x \rightarrow a$, если существует функция $\Theta$,
+определенная в выколотой окрестности $a$:
+\begin{equation}
+    \begin{cases}
+        \Theta(x) \underset{x \rightarrow a}{\longrightarrow} 1 \\
+        f_1(x) = \Theta(x)f_2(x)
+    \end{cases} \Rightarrow f_1(x) \underset{x \rightarrow a}{\sim } f_2(x)
+\end{equation}
+
+\subsection{Примеры для стандартных функций}
+\begin{multicols}{2}
+    \begin{enumerate}
+        \item $\sin x \underset{x \rightarrow 0}{\sim} x$
+        \item $\tg x \underset{x \rightarrow 0}{\sim} x$
+        \item $e^x - 1 \underset{x \rightarrow 0}{\sim} x$
+        \item $a^x - 1 \underset{x \rightarrow 0}{\sim} x\ln{a}$
+    \end{enumerate}
+\end{multicols}
+
+\subsection{Свойства асимптотической эквивалентности}
+
+\begin{enumerate}
+    \item {
+        Если $f_1(x) \underset{x \rightarrow a}{\sim} f_2(x)$, то
+        \begin{equation}
+            \begin{aligned}
+                f_1(x) = 0, x\in \overset{\cdot}{v}_\varepsilon(a) \Leftrightarrow
+                f_2(x) = 0, x\in \overset{\cdot}{v}_\varepsilon(a) \\
+                f_1(x) \neq 0, x\in \overset{\cdot}{v}_\varepsilon(a) \Leftrightarrow
+                f_2(x) \neq 0, x\in \overset{\cdot}{v}_\varepsilon(a) \\
+            \end{aligned}
+        \end{equation}
+    }
+    \item {
+        Рефлексивность: $f_1(x) \underset{x \rightarrow a}{\sim} f_1(x)$
+    }
+    \item {
+        Симметричность: $f_1(x) \underset{x \rightarrow a}{\sim} f_2(x) \Rightarrow
+        f_2(x) \underset{x \rightarrow a}{\sim} f_1(x)$
+    }
+    \item {
+        Транзитивность
+        \begin{equation}
+            f_1(x) \underset{x \rightarrow a}{\sim} f_2(x) \land
+            f_2(x) \underset{x \rightarrow a}{\sim} f_3(x) \Rightarrow f_1(x) \underset{x \rightarrow a}{\sim} f_3(x)
+        \end{equation}
+    }
+    \item {
+        Мультипликативность
+        \begin{equation}
+            \begin{cases}
+                f_1(x) \underset{x \rightarrow a}{\sim} f_2(x) \\
+                g_1(x) \underset{x \rightarrow a}{\sim} g_2(x)
+            \end{cases} \Rightarrow
+            f_1(x)g_1(x) \underset{x \rightarrow a}{\sim} f_2(x)g_2(x) \land
+            \frac{f_1(x)}{g_1(x)} \underset{x \rightarrow a}{\sim} \frac{f_2(x)}{g_2(x)}
+        \end{equation}
+    }
+    \item {
+        Связь с пределом
+        \begin{equation}
+            f_1(x) \underset{x \rightarrow a}{\sim} f_2(x) \underset{x \rightarrow a}{\longrightarrow} A
+            \Rightarrow f_1(x) \underset{x \rightarrow a}{\longrightarrow} A
+        \end{equation}
+    }
+\end{enumerate}
+
+\subsection{Асимптотическое сравнение функций}
+
+Говорят, что функции $f$ бесконечно мала по сравнению с функцией $g$ при $x \rightarrow a$ 
+(запись выглядит так:  $f(x) \underset{x \rightarrow a}{<<} g(x)$), если $\exists \alpha$:
+$f(x) = \alpha(x)g(x)$ при $\alpha(x) \underset{x \rightarrow a}{\longrightarrow} 0$
+
+\subsection{Шкала бесконечности}
+
+\begin{equation}
+    C << \log_a{x} << x^{\lambda} << a^x (x \rightarrow +\infty)
+\end{equation}
+
+\end{document}

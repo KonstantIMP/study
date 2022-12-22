@@ -47,6 +47,29 @@
 % Дополнительные символы
 \usepackage{mathbbol}
 
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
 % Подключние пакетов для импорта других .tex
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}

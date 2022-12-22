@@ -1,0 +1,535 @@
+% Лекция по Математическому Анализу 16.11.2022
+% Михедов Константин Константиновчи, БИБ 224
+
+% Тип документа: статья, размер бумаги - A4, написано 14 кегелем
+% Предназначено для импорта из другого документа
+\documentclass[class=article,a4paper,12pt,crop=false]{standalone}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/} {./../figures/}}
+
+% .esp support
+\usepackage{epstopdf}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Подключние пакетов для импорта других .tex
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+% Функция card
+\DeclareMathOperator{\card}{card}
+
+% зачеркивание
+\usepackage{cancel}
+
+% Теперь мы еще и графики рисуем
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  pgfplots.groupplots,
+}
+\pgfplotsset{compat=1.16}
+
+% Списки в два и более стобцов
+\usepackage{multicol}
+
+\begin{document}
+
+Если функция определена в некоторой окрестности точки $a$ и существует конечный предел:
+\begin{equation}
+    \lim\limits_{t \rightarrow 0}\frac{f(a + t) - f(a)}{t} =
+    \lim\limits_{x \rightarrow a}\frac{f(x) - f(a)}{x - a} \in \mathbb{R}
+\end{equation}
+то его называют производной этой функции в точке $a$: обозначается $f^{'}(a)$.
+Про такую функцию также говорят, что она дифференцируема в точке $a$.
+
+Функцию также можно дифференцировать на неком множестве $\mathbb{E}$:
+\begin{equation}
+    \forall a \in \mathbb{E} \:\:\:\: \exists f^{'}(a) = \lim\limits_{t \rightarrow 0}\frac{f(a + t) - f(a)}{t} \in \mathbb{R}
+\end{equation}
+
+\subsection{Теорема о связи непрерывности и дефференцируемости}
+
+Если функция $f$ дифференцируема в точке $a$, то она непрерывна в этой точке
+
+\textbf{Доказательство} Если $f$ определена в окресности точки $a$ и дифференцируема в ней, то
+существует конечный предел вида:
+\begin{equation}
+    \lim\limits_{t \rightarrow 0}\frac{f(a + t) - f(a)}{t} = f^{'}(a)
+\end{equation}
+
+Тогда верно, что
+\begin{multline}
+    \lim\limits_{t \rightarrow 0}f(a + t) - f(a) = 
+    \lim\limits_{t \rightarrow 0}f(a + t) - \lim\limits_{t \rightarrow 0}f(a) =
+    \lim\limits_{t \rightarrow 0}(f(a + t) - f(a)) = \\
+    = \lim\limits_{t \rightarrow 0}(\frac{f(a + t) - f(a)}{t}\cdot{t}) = 
+    \lim\limits_{t \rightarrow 0}\frac{f(a + t) - f(a)}{t}\cdot\lim\limits_{t \rightarrow 0}t =
+    f^{'}(a)\cdot{0} = 0
+\end{multline}
+
+Откуда получаем, что $\lim\limits_{x \rightarrow a}f(x) = \lim\limits_{t \rightarrow 0}f(a + t) = f(a)$,
+что по теореме о связи между пределом и непрерывностью означает, что $f$ непрерывна в точке $a$ $(\blacksquare)$
+
+\subsection{Арифметические действия над производными}
+
+Если функции $f$ и $g$ дифференцируемы в точке $x$, то верны следующие свойства
+
+\begin{enumerate}
+    \item {
+        Вынесение константы за знак производной
+        \begin{equation}
+            (C\cdot f)^{'}(x) = C\cdot{f^{'}(x)}, \:\: C \in \mathbb{R}
+        \end{equation}
+    }
+    \item {
+        Сумма производной равна сумме производных (а также для разности):
+        \begin{equation}
+            (f \pm g)^{'}(x) = f^{'}(x) \pm g^{'}(x)
+        \end{equation}
+
+        \textbf{Доказательство выглядит так:} (тут для сложения, вычитание аналогично)
+        \begin{multline}
+            (f + g)^{'}(x) = \lim\limits_{t \rightarrow 0}\frac{
+                (f(x + t) + g(x + t)) - (f(x) + g(t))
+            }{t} = \\ =
+            \lim\limits_{t \rightarrow 0}\frac{
+                (f(x + t) - f(x)) + (g(x + t) - g(x))
+            }{t} = \lim\limits_{t \rightarrow 0}\frac{
+                f(x + t) - f(x)
+            }{t} + \\ + \lim\limits_{t \rightarrow 0}\frac{g(x + t) - g(x)}{t}
+            = f^{'}(x) + g^{'}(x) \:\:\:\: (\blacksquare)
+        \end{multline}
+    }
+    \item {
+        Прозводная произведения раскладывается следующим образом:
+        \begin{equation}
+            (f\cdot{g})^{'}(x) = f^{'}(x)\cdot{g(x)} + f(x)g^{'}(x)
+        \end{equation}
+
+        \textbf{Доказательство}
+        \begin{multline}
+            (f\cdot{g})^{'}(x) = \lim\limits_{t \rightarrow 0}\frac{
+                (f(x + t)\cdot{g(x + t)}) - (f(x)\cdot{g(x)})
+            }{t} = \\ = 
+            \lim\limits_{t \rightarrow 0}\frac{
+                f(x + t)\cdot{g(x + t)} - f(x)\cdot{g(x)} + f(x)\cdot{g(x + t)} - f(x)\cdot{g(x + t)}
+            }{t} = \\ =
+            \lim\limits_{t \rightarrow 0}\frac{
+                f(x + t)\cdot{g(x + t)} - f(x)\cdot{g(x + t)}
+            }{t} + \lim\limits_{t \rightarrow 0}\frac{
+                f(x)\cdot{g(x + t)} - f(x)\cdot{g(x)} 
+            }{t} = \\ =
+            \lim\limits_{t \rightarrow 0}g(x + t)\lim\limits_{t \rightarrow 0}\frac{f(x + t) - f(x)}{t} +
+            f(x)\lim\limits_{t \rightarrow 0}\frac{g(x + t) - g(x)}{t} = \\
+            = \lim\limits_{t \rightarrow 0}g(x + t)f^{'}(x) + f(x)g^{'}(x) \underset{g(x)\text{ непрерывна}}{=}
+            f^{'}(x)g(x) + f(x)g^{'}(x) \:\:\:\: (\blacksquare)
+        \end{multline}
+    }
+    \item {
+        Если $g(x) \neq 0$, то можно разложить и производную частного:
+        \begin{equation}
+            \left(\frac{f}{g}\right)^{'}(x) = \frac{f^{'}(x)g(x) - f(x)g^{'}(x)}{g^2(x)}
+        \end{equation}
+
+        \textbf{Доказательство}
+        \begin{multline}
+            \left(\frac{f}{g}\right)^{'}(x) = \lim\limits_{t \rightarrow 0}\frac{\frac{f(x + t)}{g(x + t)} - \frac{f(x)}{g(x)}}{t} =
+            \lim\limits_{t \rightarrow 0}\frac{f(x + t)g(x) - f(x)f(x + t)}{g(x + t)g(x)t} = \\ =
+            \lim\limits_{t \rightarrow 0}\frac{f(x + t)g(x) - f(x)f(x + t) + f(x)g(x) - f(x)g(x)}{g(x + t)g(x)t} =\\ =
+            \lim\limits_{t \rightarrow 0}\frac{1}{g(x + t)g(x)}\left(\lim\limits_{t \rightarrow 0}\frac{f(x + t)g(x) - f(x)g(x)}{t} 
+            + \lim\limits_{t \rightarrow 0}\frac{f(x)g(x) - f(x)g(x + t)}{t}\right) = \\
+            \underset{g(x)\text{ непрерывна}}{=} \frac{1}{g^2(x)}\left(g(x)f^{'}(x) - f(x)g^{'}(x)\right) =
+            \frac{f^{'}(x)g(x) - f(x)g^{'}(x)}{g^2(x)} \:\:\:\: (\blacksquare)
+        \end{multline}
+    }
+\end{enumerate}
+
+\subsection{Производная композиции}
+
+Пусть $h(x) = (g\circ{f})(x) (= g(f(x)))$, тогда если $f$ дифференцируема в точке $a$,
+а $g$ дифференцируема в точке $f(a)$, то
+\begin{equation}
+    h^{'}(a) = g^{'}(f(a))f^{'}(a) = (g^{'}\circ{f})f^{'}
+\end{equation}
+
+\textbf{Докажем это} для второй формы записи
+\begin{equation}
+    g^{'}(f(a))f^{'} = \lim\limits_{x \rightarrow a}\frac{g(f(x)) - g(f(a))}{x - a}
+\end{equation}
+
+Возьмем произвольную последовательность $\{x_n\}$ такую, что $x_n \underset{n\rightarrow \infty}{\longrightarrow} a$ и $x_n \neq a$,
+тогда необходимо доказать следующее:
+\begin{equation}
+    g^{'}(f(a))f^{'} = \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{x_n - a}
+\end{equation}
+
+Далее существует три различных случая:
+\begin{enumerate}
+    \item {
+        $f(x_n) \neq f(a)$ верно для почти всех $n \in \mathbb{N}$
+
+        В таком случае $f(x_n) - f(a) \neq 0$ верно для почти всех $n$ $\rightarrow$ можно делить
+        на $f(x_n) - f(a)$
+        \begin{multline}
+            \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{x_n - a} = 
+            \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{f(x_n) - f(a)} \cdot \lim\limits_{n \rightarrow \infty}\frac{f(x_n) - f(a)}{x_n - a} = \\
+            \underset{y_n = f(x_n)}{=} \lim\limits_{y_n \underset{n \rightarrow \infty}{\rightarrow} f(x)}\frac{
+                g(y_n) - g(f(a))
+            }{y_n - f(a)}\cdot{\lim\limits_{n \rightarrow \infty}\frac{f(x_n) - f(a)}{x_n - a}} =
+            g^{'}(f(a))f^{'}(a)
+        \end{multline}
+    }
+    \item {
+        $f(x_n) = f(a)$ верно для почти всех $n \in \mathbb{N}$
+        
+        Тогда получаем:
+        \begin{equation}
+            \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{x_n - a} 
+            \underset{f(x_n) = f(a)}{=} \lim\limits_{n \rightarrow \infty}\frac{g(f(a)) - g(f(a))}{x_n - a} =
+            \lim\limits_{n \rightarrow \infty}\frac{0}{x_n - a} = 0  
+        \end{equation}
+
+        Одновременно верно следующее:
+        \begin{equation}
+            f^{'}(a) = \lim\limits_{n \rightarrow \infty}\frac{f(x_n) - f(a)}{x_n - a}
+            \underset{f(x_n) = f(a)}{=} \lim\limits_{n\rightarrow\infty}\frac{
+                f(a) - f(a)
+            }{x_n - a} = \lim\limits_{n \rightarrow \infty}\frac{0}{x_n - a} = 0
+        \end{equation}
+
+        Тогда верно то, что:
+        \begin{equation}
+            \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{x_n - a} = 0 =
+            g^{'}(f(a))f^{'}(a)
+        \end{equation}
+    }
+    \item {
+        $f(x_n) = f(a)$ верно для бесконечного количества $n \in \mathbb{N}$ и
+        $f(x_n) \neq f(a)$ верно для бесконечного количества $n \in \mathbb{N}$
+
+        Тогда последовательность $\{x_n\}$ можно разбить на две подпоследовательности,
+        одна из которых удовлетворяет первому пункту, а другая - второму. Тогда в сумме
+        вновь получается, что
+        \begin{equation}
+            g^{'}(f(a))f^{'} = \lim\limits_{n \rightarrow \infty}\frac{g(f(x_n)) - g(f(a))}{x_n - a} \:\:\:\: (\blacksquare)
+        \end{equation}
+    }
+\end{enumerate}
+
+\subsection{Теорема Ферма (не та, о которой ты подумал)}
+
+Пусть функция $f$ определена на интервале $(a, b)$ и в некоторой точке $\varepsilon \in (a, b)$
+достигает экстремума на этом интервале, то есть
+\begin{equation}
+    \begin{aligned}
+        f(\varepsilon) = \underset{x \in (a, b)}{\max} f(x)  & & \lor & &
+        f(\varepsilon) = \underset{x \in (a, b)}{\min} f(x)
+    \end{aligned}
+\end{equation}
+
+Тогда если функция дифференцируема в точке $\varepsilon$, то $f^{'}(\varepsilon) = 0$
+
+\textbf{Доказательство} для максимума
+\begin{equation}
+    f(\varepsilon) = \underset{x \in (a, b)}{\max} f(x)
+    \rightarrow \forall x \in (a, b) f(x) \leq f(\varepsilon)
+\end{equation}
+
+Тогда рассмотрим производную данной функции:
+\begin{equation}
+    f^{'}(\varepsilon) = \lim\limits_{x \rightarrow \varepsilon}\frac{f(x) - f(\varepsilon)}{x - \varepsilon} =
+    \left(\begin{aligned}
+        \text{если предел существует,} \:\:\: \\
+        \text{то он равен пределу справа} \\
+        \text{и пределу справа} \:\:\:\:\:\:\:\:\:
+    \end{aligned}\right)
+    = \begin{cases}
+        \lim\limits_{x \rightarrow \varepsilon - 0}\frac{
+            \overset{\leq 0}{\overbrace{f(x) - f(\varepsilon)}}
+        }{\underset{< 0 (x < \varepsilon)}{\underbrace{x - \varepsilon}}} \geq 0 \\
+        \lim\limits_{x \rightarrow \varepsilon + 0}\frac{
+            \overset{\geq 0}{\overbrace{f(x) - f(\varepsilon)}}
+        }{\underset{> 0 (x > \varepsilon)}{\underbrace{x - \varepsilon}}} \leq 0
+    \end{cases}
+\end{equation}
+
+Получается, что $f^{'}(\varepsilon) \leq 0$ и $f^{'}(\varepsilon) \geq 0$, что равносильно тому, что $f^{'}(\varepsilon) = 0$ $(\blacksquare)$
+
+\subsection{Теоремя Ролля}
+
+Пусть функция $f$ определена на отрезке $[a, b]$, причем она на нем непрерывна,
+интегрируема на интервале $(a, b)$ и $f(a) = f(b)$, тогда $\exists \varepsilon \in (a, b)$: $f^{'}(\varepsilon) = 0$
+
+\textbf{Доказательство.} Поскольку $f$ непрерывна на отрезке $[a, b]$, то по теореме Вейерштрасса об
+экстремумах $f$ имеет максимум и минимум на этом отрезке:
+\begin{eqnarray}
+    \begin{aligned}
+        m = f(x_m) = \underset{x \in [a, b]}{\max}f(x) & & \land & &
+        M = f(x_M) = \underset{x \in [a, b]}{\min}f(x)
+    \end{aligned}
+\end{eqnarray}
+
+Возможны два различных случая:
+\begin{enumerate}
+    \item {
+        Если $m = M$, то получается, что $\underset{x \in [a, b]}{\min}f(x) = \underset{x \in [a, b]}{\max}f(x)$,
+        тогда $f$ - постоянная:
+        \begin{eqnarray}
+            \forall x \in [a, b] \:\:\:\: m = f(x) = M
+        \end{eqnarray}
+
+        Поэтому $f^{'}(x) = 0$ $\forall x in [a, b]$, поэтому обязательно найдется
+        $\varepsilon$, удовлетворяющая условию $(\blacksquare)$
+    }
+    \item {
+        Или $m \neq M$. Важно, что невозможна ситуация, когда и $x_m$, и $x_M$ лежали бы
+        на концах отрезка $[a, b]$, потому что в таком случае задача свелась бы к первому
+        случаю (так как $f(a) = f(b)$)
+
+        Тогда или $x_m$, или $x_M$ или и то, и другое лежит в $(a, b)$ $\Rightarrow$
+        функцию имеет экстремум на интервале $(a, b) $ $\Rightarrow$ по теореме
+        Ферма $\exists \varepsilon$: $f(\varepsilon) = 0$ $(\blacksquare)$
+    }
+\end{enumerate}
+
+\subsection{Теорема Лагранжа}
+
+Пусть функция $f$ определена на отрезке $[a, b]$, непрерывна на нем и дифференцируема
+на интервале $(a, b)$, тогда $\exists \varepsilon (a, b)$: $f^{'}(\varepsilon) = \frac{f(b) - f(a)}{b - a}$
+
+\textbf{Доказательство.} Рассмотрим вспомогательную функцию:
+\begin{equation}
+    F(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}\cdot{(x - a)}
+\end{equation}
+
+Эта функция удовлетворяет всем условиям из теоремы Ролля, значит $\exists \varepsilon \in (a, b)$: $F^{'}(\varepsilon) = 0$
+\begin{equation}
+    0 = F^{'}(\varepsilon) = f^{'}(\varepsilon) - \frac{f(b) - f(a)}{b - a} 
+    \Leftrightarrow f^{'}(\varepsilon) = \frac{f(b) - f(a)}{b - a} \:\:\:\: (\blacksquare)
+\end{equation}
+
+\subsection{Теорема Коши}
+
+Пусть функции $f$ и $g$ определены на отрезке $[a, b]$, непрерывны на этом отрезке,
+дифференцируемы на интервале $(a, b)$ и $g^{'}(x) \neq 0$ при $x \in (a, b)$,
+тогда $\exists \varepsilon \in (a, b)$:
+\begin{equation}
+    \frac{f^{'}(x)}{g^{'}(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}
+\end{equation}
+
+\textbf{Доказательство.} Во-первых $g(a) \neq g(b)$, потому что иначе функция $g$ будет
+удовлетворять всем условиям теоремы Ролля $\Rightarrow$ будет существовать $\varepsilon \in (a, b)$:
+$g^{'}(\varepsilon) = 0$, что противоричит условиям
+
+Рассмотрим вспомогательную функцию
+\begin{eqnarray}
+    F(x) = f(x) - f(a) - \frac{f(b) - f(a)}{g(b) - g(a)}\cdot(g(x) - g(a))
+\end{eqnarray}
+
+Данная функция удовлетворяет всем условиям теоремы Ролля, поэтому $\exists \varepsilon \in (a, b)$:
+$F^{'}(\varepsilon) = 0$
+\begin{eqnarray}
+    0 = F^{'}(\varepsilon) = f^{'}(\varepsilon) - \frac{f(b) - f(a)}{g(b) - g(a)}g^{'}(\varepsilon)
+    \underset{g^{'}(\varepsilon) \neq 0}{\Leftrightarrow} \frac{f^{'}(x)}{g^{'}(x)} = \frac{f(b) - f(a)}{g(b) - g(a)}
+    \:\:\:\: (\blacksquare)
+\end{eqnarray}
+
+\subsection{Правило Лопиталя}
+
+\paragraph{Для предела в точке вида ноль на ноль} Пусть $f$ и $g$ дифференцируемы в некоторой $\overset{\cdot}{v}_{\varepsilon}(a)$,
+$\lim\limits_{x \rightarrow a}f(x) = \lim\limits_{x \rightarrow a}g(x) = 0$,
+$g^{'}(x) \neq 0$ при $x \neq a$ и $\exists \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)}$,
+тогда верно следующее
+\begin{equation}
+    \lim\limits_{x \rightarrow a}\frac{f(x)}{g(x)} = \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)}
+\end{equation}
+
+\textbf{Доказательство} Возьмем произвольную последовательность $\{x_n\}$ такую, что
+$x_n \underset{n \rightarrow \infty}{\longrightarrow} a$ $\land$ $x_n \neq a$, тогда
+необходимо убедиться, что
+\begin{eqnarray}
+    \lim\limits_{x \rightarrow a}\frac{f(x_n)}{g(x_n)} = \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)}
+\end{eqnarray}
+
+Доопределим функции $f$ и $g$ в точке $a$:
+\begin{eqnarray}
+    \begin{aligned}
+        \tilde{f}(x) = \begin{cases}
+            f(x)&, \text{если } x \in \overset{\cdot}{v}_{\varepsilon}(a) \\
+            0&, x = a
+        \end{cases} \\ 
+        \tilde{g}(x) = \begin{cases}
+            g(x)&, \text{если } x \in \overset{\cdot}{v}_{\varepsilon}(a) \\
+            0&, x = a
+        \end{cases}
+    \end{aligned}
+\end{eqnarray}
+
+Тогда по теореме Коши $\exists \varepsilon \in (a, x_n)$:
+\begin{eqnarray}
+    \frac{\tilde{f}(x_n) - \tilde{f}(a)}{\tilde{g}(x_n) - \tilde{g}(a)} = 
+    \frac{f^{'}(\varepsilon)}{g^{'}(\varepsilon)}
+\end{eqnarray}
+
+Так как $\tilde{f}(a) = \tilde{g}(a) = 0$, то верно следующее
+\begin{equation}
+    \frac{\tilde{f}(x_n)}{\tilde{g}(x_n)} = \frac{f^{'}(\varepsilon)}{g^{'}(\varepsilon)}
+\end{equation}
+
+При устремлении $n$ к $\infty$ верно:
+\begin{equation}
+    \lim\limits_{n \rightarrow \infty}\frac{f(x_n)}{g(x_n)} = 
+    \lim\limits_{n \rightarrow \infty}\frac{\tilde{f}(x_n)}{\tilde{g}(x_n)} =
+    \lim\limits_{n \rightarrow \infty}\frac{f^{'}(\varepsilon)}{g^{'}(\varepsilon)} = 
+    \lim\limits_{\varepsilon \rightarrow a}\frac{f^{'}(\varepsilon)}{g^{'}(\varepsilon)} =
+    \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)} \:\:\:\: (\blacksquare)
+\end{equation}
+
+\paragraph{Для предела в точке вида бесконечность на бесконечность} Пусть $f$ и $g$ дифференцируемы в некоторой $\overset{\cdot}{v}_{\varepsilon}(a)$,
+$\lim\limits_{x \rightarrow a}f(x) = \lim\limits_{x \rightarrow a}g(x) = \infty$,
+$g^{'}(x) \neq 0$ при $x \neq a$ и $\exists \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)}$,
+тогда верно следующее
+\begin{equation}
+    \lim\limits_{x \rightarrow a}\frac{f(x)}{g(x)} = \lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)}
+\end{equation}
+
+\paragraph{Доказательство} Возможны два случая
+\begin{enumerate}
+    \item {
+        $\lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)} = A \in \mathbb{R}$
+    }
+
+    Зафиксируем интервал $(a - \delta, a)$, на котором $g^{'}(x) \neq 0$, тогда
+    $g(x)$ строго монотонная на этом интервале, тогда для
+    $x_1 < x_2 < \dots > x_n < \dots < a$ ($x_n \underset{n \rightarrow \infty}{\longrightarrow} a$),
+    тогда $g(x_n) \underset{n \rightarrow \infty}{\longrightarrow} \infty$.
+
+    Положим, что $y_n = g(x_n)$,  а $z_n = f(x_n)$, значит по теореме Штольца:
+    \begin{equation}
+        \lim\limits_{n \rightarrow \infty}\frac{f(x_n)}{g(x_n)} =
+        \lim\limits_{n \rightarrow \infty}\frac{z_n}{y_n} = 
+        \lim\limits_{n \rightarrow \infty}\frac{z_n - z_{n - 1}}{y_n - y_{n - 1}} = A \:\:\:\: (\blacksquare)
+    \end{equation}
+
+    \item $\lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)} = \infty$
+    
+    Тогда $\lim\limits_{x \rightarrow a}\frac{f^{'}(x)}{g^{'}(x)} \neq 0$ в некоторой окрестности точки $a$,
+    из чего получается, что $f^{'}(x) \neq 0$ в некоторой выколотой окрестности точки $a$ и что
+    $\lim\limits_{x \rightarrow a}\frac{g^{'}(x)}{f^{'}(x)} = 0$, что ранее было даказано $(\blacksquare)$
+\end{enumerate}
+
+\paragraph{Для предела в бесконечности} сводим $x \rightarrow \infty$ к $\frac{1}{x} \rightarrow 0$,
+что эквивалентно пределу в точке
+
+\subsection{Достаточное условие монотонности}
+
+Пусть $f$ - дифференцируема на интервале $(a, b)$, тогда
+\begin{enumerate}
+    \item {
+        Если ее производная положительна повсюда на $(a, b)$, то $f$ (строго) возрастает на $(a, b)$
+    
+        \textbf{Доказательство} Если данное условие выполняется, то для любых точек $x,y \in (a, b)$ таких,
+        что $x < y$ можно по теореме Лагранжа подобрать точку $\varepsilon \in (x, y)$:
+        \begin{equation}
+            0 < f^{'}(\varepsilon) = \frac{f(y) - f(x)}{\underset{> 0}{\underbrace{y - x}}} \Rightarrow
+            0 < f(y) - f(x) \Rightarrow f(x) < f(y)
+        \end{equation}    
+    }
+    \item {
+        Если ее производная отрицательна повсюда на $(a, b)$, то $f$ (строго) убывает на $(a, b)$
+        
+        \textbf{Доказательство} Если данное условие выполняется, то для любых точек $x,y \in (a, b)$ таких,
+        что $x < y$ можно по теореме Лагранжа подобрать точку $\varepsilon \in (x, y)$:
+        \begin{equation}
+            0 > f^{'}(\varepsilon) = \frac{f(y) - f(x)}{\underset{> 0}{\underbrace{y - x}}} \Rightarrow
+            0 > f(y) - f(x) \Rightarrow f(x) > f(y)
+        \end{equation}    
+    }
+\end{enumerate}
+
+\subsection{Необходимое условие локального экстремума}
+
+Если функция $f$ имеет в точке $x_0$ локальный экстремум и дифференцируема в точке, то
+\begin{equation}
+    f^{'}(x_0) = 0
+\end{equation}
+
+\textbf{Доказательство} В точке $x_0$ функция $f$ достигает локального максимума или минимума на 
+некотором интервале $(x_0 - \delta, x_0 + \delta)$ $\Rightarrow$ по теоерме Ферма $f^{'}(x_0) = 0$
+
+\subsection{Достаточное условие локального экстремума}
+
+Пусть функция $f$ дифференцируема в некоторой окрестности $v_{\delta}(x_0)$, тогда
+\begin{itemize}
+    \item {
+        Если $f^{x} > 0$ при $x \in (x_0 - \delta, x_0)$ и $f^{'}(x) < 0$ при $x \in (x_0, x_0 + \delta)$,
+        то $x_0$ - точка строгого локального максимума
+    }
+    \item {
+        Если $f^{x} < 0$ при $x \in (x_0 - \delta, x_0)$ и $f^{'}(x) > 0$ при $x \in (x_0, x_0 + \delta)$,
+        то $x_0$ - точка строгого локального минимума
+    }
+\end{itemize}
+
+\textbf{Доказательство} при переходе через $x_0$ функция меняет свой знак на противоположный $\dots$
+
+\end{document}

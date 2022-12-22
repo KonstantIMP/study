@@ -47,6 +47,29 @@
 \usepackage[subpreambles=true]{standalone}
 \usepackage{import}
 
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
 \begin{document}
   % Титульная страница
   \begin{titlepage}
@@ -104,5 +127,11 @@
 
   \section{Пределы функций}
   \import{lectures/}{12_limits}
+
+  \section{Производные}
+  \import{lectures/}{13_derivatives}
+
+  \section{Асимптотические методы}
+  \import{lectures/}{14_asymptotics}
 
 \end{document}
