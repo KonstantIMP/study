@@ -1,0 +1,42 @@
+% Настройка полей
+\geometry{top=2cm}
+\geometry{left=3cm}
+\geometry{bottom=2cm}
+\geometry{right=1.5cm}
+
+% Поддержка необходимых языков
+\setdefaultlanguage{english}
+\setdefaultlanguage{russian}
+
+% Основной шрифт - Times New Roman
+\setmainfont{Times New Roman}
+\newfontfamily\cyrillicfont{Times New Roman}[Script=Cyrillic,Ligatures=TeX]
+
+% Межстрочный интервал
+\onehalfspacing
+% Красная строка
+\setlength{\parindent}{1.25cm}
+
+% Показывать номера только тех элементов,
+% на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Локализация
+\addto\captionsrussian{
+    \renewcommand{\figurename}{Рисунок}
+    \renewcommand{\partname}{Глава}
+    \renewcommand{\contentsname}{\centerline{Содержание}}
+    \renewcommand{\listingscaption}{Листинг}
+}
+
+% Шрифт для листинга
+\setmonofont{Fira Code}[
+    SizeFeatures={Size=14},
+	Contextuals=Alternate
+]
+
+% Сигнум
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+% Перенос знаков в формулах по Львовскому
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{} {\hbox{$\mathsurround=0pt #1$}}{}}

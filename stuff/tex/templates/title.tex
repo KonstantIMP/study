@@ -1,0 +1,31 @@
+% Получение заголовка документа
+\def\title#1{\gdef\@title{#1}\gdef\thetitle{#1}}
+
+% Шаблон титульной страницы
+\newcommand{\templatedtitlepage}{
+    \begin{titlepage}
+        \begin{center}
+            \government
+
+            \university \\
+            \subuniversity
+            \vspace{1.15cm}
+
+            \faculty
+
+            \vspace{4cm}
+
+            \thetitle
+
+            \vspace{3.5cm}
+
+            \signblock
+        \end{center}
+
+        \vfill
+
+        \begin{center}
+            \city \the\year
+        \end{center}
+    \end{titlepage}
+}
