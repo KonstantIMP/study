@@ -1,0 +1,213 @@
+% ДЗ на 19.12.2022
+% Михедов Константин БИБ224
+
+% Статья на А4, 12 кегель
+\documentclass[a4paper,12pt]{article}
+
+% Поиск по скомпилированному PDF
+\usepackage{cmap}
+% Кодировка выходного текста
+\usepackage[T2A]{fontenc}
+% Кодировка исходного текста
+\usepackage[utf8]{inputenc}
+% Поддержка необходимых языков
+\usepackage[english,russian]{babel}
+
+% Поддержка изображений
+\usepackage{graphicx}
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+
+% Умная запятая
+\usepackage{icomma}
+
+% Ссылки на электронные ресурсы
+\usepackage{hyperref}
+% Настройка внешнего вида ссылок
+\hypersetup{
+  % Отключить прямоугольную рамку
+  pdfborder={0 0 0},
+  % Включить цветные ссылки
+  colorlinks=true,
+  % Цвет для ссылок на веб-ресурсы
+  urlcolor=blue,
+  % Цвет внутренних ссылок
+  linkcolor=black
+}
+
+% Дополнительная математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+% Показывать номера только у тех выржений, на которые кто-то ссылается
+\mathtoolsset{showonlyrefs=true}
+
+% Дополнительные символы
+\usepackage{mathbbol}
+
+% Правильное оформление
+% Настройка отступов
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+% Настройка шрифта
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Настройка межстрочных интервалов
+\usepackage{setspace}
+\onehalfspacing
+% и межабзацных
+\usepackage{parskip}
+\setlength{\parindent}{1.25cm} 
+
+% Красная строка
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm} 
+
+% Корректное положение рисунков?
+\usepackage{float}
+
+% Расположение блоков относительно текста
+\usepackage{wrapfig}
+
+\begin{document}
+    \paragraph{Работу выполнил} Михедов Константин Константинович БИБ224
+
+    \section*{Задача }
+ 
+    \paragraph{Условие} Невесомый блок укреплен на вершине двух наклонных плоскостей, составляющих с горизонтом углы
+    $\alpha = 30^{\circ}$ и $\beta = 45^{\circ}$. Гири $A$ и $B$ равного веса $P_1 = P_2 = 1$кгс соединены нитью,
+    перекинутой через блок. Коэффициенты трения гири $A$ и $B$ о наклонной плоскости $f_1 = f_2 = 0.1$. Найдите
+    ускорение, с которым движутся гири, и натяжение нити (трением в блоке пренебречь)
+
+    \begin{figure}[H]
+        \minipage{0.2\textwidth}
+            \begin{tabular}{p{0.8\textwidth} |}
+                \textbf{Дано} \\
+                \hline
+                $\alpha = 30^{\circ}$ \\
+                $\beta = 45^{\circ}$ \\
+                $P_1 = P_2 = 1$кгс \\
+                $f_1 = f_2 = 0.1$ \\
+                \hline
+                $T_1=$ ? $T_2=$ ? \\
+                $a = $ ?
+            \end{tabular}
+            %\vspace{1.5cm}
+        \endminipage
+        \minipage{0.79\textwidth}
+            \textbf{Решение}
+            
+            \begin{figure}[H]
+                \centering
+                \begin{picture}(300, 110)
+                    \put(0,20){\line(1,0){300}}
+
+                    \put(30,20){\line(2,1){120}}
+                    \put(150,80){\line(1,-1){60}}
+
+                    \put(150,80){\circle{25}}
+                    \put(150,80){\circle*{4}}
+
+                    \qbezier(60,20)(60,25)(50,30)
+                    \qbezier(185,20)(190,30)(195,35)
+
+                    \put(65,25){$\alpha$}
+                    \put(175,25){$\beta$}
+
+                    \put(70,40){\line(-2,3){10}}
+                    \put(100,55){\line(-2,3){10}}
+                    \put(60,55){\line(2,1){30}}
+
+                    \put(170,60){\line(1,1){15}}
+                    \put(190,40){\line(1,1){15}}
+                    \put(185,75){\line(1,-1){20}}
+
+                    \put(92.5,62){\line(2,1){47.5}}
+                    \put(180,65){\line(-1,1){20}}
+
+                    \put(80,55){\circle*{3}}
+
+                    \put(187.5,57.5){\circle*{3}}
+
+                    \thicklines
+
+%                    \put(80,55){\vector(1,-2){12}}
+                    \put(75,75){$\vec{N_1}$}
+                    \put(80,55){\vector(-1,2){12}}
+                    \put(100,75){$\vec{T_1}$}
+                    \put(80,55){\vector(0,-1){30}}
+                    \put(85,30){$\vec{P_1}$}
+                    \put(80,55){\vector(2,1){30}}
+                    \put(80,55){\vector(-2,-1){30}}
+                    \put(40,50){$\vec{F_{\text{тр}1}}$}
+
+                    \put(187.5,57.5){\vector(1,-1){20}}
+                    \put(187.5,57.5){\vector(-1,1){20}}
+                    \put(187.5,57.5){\vector(1,1){20}}
+                    %\put(187.5,57.5){\vector(-1,-1){20}}
+                    \put(187.5,57.5){\vector(0,-1){30}}
+
+                    \put(160,86){\circle*{3}}
+                    \put(160,85){\vector(1,-1){10}}
+                    \put(140,86){\circle*{3}}
+                    \put(140,86){\vector(-2,-1){20}}
+
+                    \put(200,80){$\vec{N_2}$}
+                    \put(210,40){$\vec{F_{\text{тр}2}}$}
+                    \put(170,40){$\vec{P_2}$}
+                    \put(175,80){$\vec{T_2}$}
+
+                    \put(160,90){$\vec{T_2^{'}}$}
+                    \put(125,90){$\vec{T_1^{'}}$}
+                \end{picture}
+            \end{figure}
+        \endminipage
+    \end{figure}
+
+    Так как нить невесома и нерастяжима (по условию), то $|\vec{a_1}| = |\vec{a_2}| = a$
+
+    Блок невесомый $\Rightarrow$ его масса равна нулю, а так как $J = \int_mr^2dm$,
+    то $J = 0$. Распишем основной закон динамики вращательного движения:
+    \begin{equation}
+        \vec{M_{T_1}} + \vec{M_{T_2}} = J\varepsilon = 0
+    \end{equation}
+
+    Рассмотрим вращение по часовой стрелке как положительное, а против часовой - как отрицательное,
+    тогда верно:
+    \begin{equation}
+        rT_2 - rT_1 = 0 \Leftrightarrow T_2 = T_1 \Rightarrow T = T_2 = T_1
+    \end{equation}
+
+    Рассмотрим первое тело: введем систему координат, где OX сонаправлена $\vec{T_1}$,
+    а OY сонаправлена $\vec{N_1}$:
+    \begin{equation}
+        \begin{cases}
+            OX: \:\: T - F_{\text{тр}1} - \frac{P_1}{\sin{\alpha}} = m_1a \\
+            OY: \:\: N_1 - \frac{P_1}{\cos\alpha} = 0
+        \end{cases}
+        \overset{F_{\text{тр} = fN}}{\Leftrightarrow} \begin{cases}
+            N_1 = \frac{P_1}{\cos\alpha} \\
+            T = \frac{P_1a}{g} + \frac{P_1f_1}{\cos\alpha} + \frac{P_1}{\sin{\alpha}}
+        \end{cases}
+    \end{equation}
+
+    Тогда $T = P_1(\frac{a}{g} + \frac{f_1}{\cos\alpha} + \frac{1}{\sin{\alpha}})$. Тогда рассмотрим второе тело,
+    запишем для него второй закон Ньютона для OX сонаправленной с $\vec{T_2}$ и OY сонаправленной
+    с $\vec{N_2}$
+    \[\begin{cases}
+        T_2 - F_{\text{тр}2} - \frac{P_2}{\sin\beta} = m_2a \\
+        N_2 - \frac{P_2}{\cos\beta} = 0
+    \end{cases} \Leftrightarrow \begin{cases}
+        N_2 = \frac{P_2}{\cos\beta} \\
+        T = \frac{P_2a}{g} + \frac{f_2P_2}{\cos\beta} + \frac{P_2}{\sin\beta}
+    \end{cases}\]
+
+    Получаем следующую систему:
+    \begin{equation}
+        \begin{cases}
+            T = P_2(\frac{a}{g} + \frac{f_2}{\cos\beta} + \frac{1}{\sin\beta}) \\
+            T = P_1(\frac{a}{g} + \frac{f_1}{\cos\alpha} + \frac{1}{\sin\alpha})
+        \end{cases}
+    \end{equation}
+
+    \begin{flushright}
+        \textbf{Ответ:} $a = 2.45$м/с$^2$, $T_1 = 1.29$Н, $T_2 = 1.47$Н
+    \end{flushright}
+\end{document}
