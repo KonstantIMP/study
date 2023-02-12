@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-    sudo pacman \PYGZhy{}S wireshark\PYGZhy{}qt net\PYGZhy{}tools \PYG{n+nb}{bind} wget
-\end{Verbatim}
