@@ -1,0 +1,62 @@
+[
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/cnt_load/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/cnt_ud/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/freq_div/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/pwm/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/gray_cnt/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/shift_reg/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/extra/1/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/extra/3/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/extra/10/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    },
+    {
+        "directory": "/Users/konstantimp/Code/study/hse/circuitry/chapter_6/extra/13/obj_dir",
+        "command": "c++  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.030/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -std=gnu++17 -Os  -c -o testbench.o ../testbench.cpp",
+        "file": "../testbench.cpp",
+        "output": "testbench.o"
+    }
+]

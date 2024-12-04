@@ -1,0 +1,615 @@
+% Лабораторная работа по Цифровой Схемотехнике и Архитектуре Компьютера № 3
+% Дуников Константин Артёмович 
+
+% Тип документа: статья, на бумаге А4
+\documentclass[a4paper]{article}
+
+% Подключение сторонних tex файлов 
+\usepackage{import}
+
+% Код и картинки
+\usepackage{subcaption}
+
+% Основные данные - ВУЗ, факультет, город...
+\import{./../../../stuff/tex}{config.tex}
+% Небольшой набор инструментов
+\import{./../../../stuff/tex}{tools.tex}
+
+% Подключение необходимых зависимостей
+\import{./../../../stuff/tex/settings}{packages.tex}
+% Настройка подключенных пакетов
+\import{./../../../stuff/tex/settings}{preferences.tex}
+
+
+% Шаблон титульной страницы 
+\import{./../../../stuff/tex/templates}{title.tex}
+% Упрощенный блок "выполнил"
+\import{./../../../stuff/tex/templates}{sign2.tex}
+% Макрос для содержания
+\import{./../../../stuff/tex/templates}{toc.tex}
+
+% Определяем название документа
+\title{
+  ОТЧЕТ \\
+  О ПРАКТИЧЕСКОЙ РАБОТЕ №1 \\
+  по дисциплине <<Системное программирование>> \\
+  Основы Ассамблера \\
+  Вариант №3
+}
+% Указываем преподавателя
+\renewcommand{\teachername}{
+    Балескин В.А.
+}
+
+\definecolor{LightGray}{gray}{0.975}
+\setminted{
+  fontsize=\tiny,
+  baselinestretch=1,
+  linenos=true,
+  frame=lines,
+  framesep=2mm,
+  autogobble=true,
+  bgcolor=LightGray
+}
+
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+% Нумеруем все формулы
+\mathtoolsset{showonlyrefs=false}
+
+\usepackage{caption}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+% Основной текст работы
+\begin{document}
+  \templatedtitlepage
+  
+  \toc
+
+  \section{Ход работы}
+
+  \subsection{Формулировка варианта}
+
+  Дан массив из 10 слов. Найти сумму остатков от деления каждого из них на 3.
+  Результат поместить в отдельный элемент данных.
+  
+  \subsection{Выполнение основного задания}
+
+  \subsubsection{Среда разработки}
+
+  Выполнение работы полностью производилось из терминала,
+  в качестве редактора - $vim$, дебагера - $gdb$, системы
+  сборки - $make$. Для работы с AT\&T синтаксисом используется
+  $gas$, для Intel синтаксиса - $nasm$.
+
+  В качестве основного синтаксиса используется AT\&T, поэтому
+  файл с решением называется $task.gas.s$, открываем его:
+
+  \begin{listing}[H]
+    \begin{minted}{bash}
+        vim task.gas.s
+    \end{minted}
+    \caption{Открываем файл с кодом}
+  \end{listing}
+
+  \subsubsection{Система сборки}
+
+  Используется простой Makefile, имющий два шага (помимо $all$ и $clean$):
+  $gas.o$ для сборки ассемблерного кода в объектный файл, и 
+  $gas$ для линковки объектного файла в исполняемый.
+  В качестве точи входа используется метка \mintinline{asm}|_entrypoint|,
+  поэтому линковщику передаются дополнительные флаги. Сам Make-file
+  выглядит следующим образом:
+
+  \begin{listing}[H]
+    \begin{minted}{make}
+        all: gas
+
+        gas.o: task.gas.s
+            as -g task.gas.s -o task.gas.o
+
+        gas: gas.o
+            ld task.gas.o -e _entrypoint -o gas
+
+        clean:
+            rm -rf gas.o gas
+    \end{minted}
+    \caption{Базовый Makefile}
+  \end{listing}
+
+  \subsubsection{Секции с данными}
+
+  Для начала выделим все данные, которые не будут меняться в ходе
+  работы программы - это номера системных вызовов ($sys\_read$, $sys\_write$
+  и $sys\_exit$) и входные данные (10 слов из условия). Так как эти данные 
+  неизменны, положим их секцию \mintinline{asm}|.rodata|:
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        # Compile-time initialized read-only variables
+        .section .rodata
+        
+        # Some syscalls definitions
+        sys_read: .quad 0 
+        sys_write: .quad 1
+        sys_exit: .quad 60
+        
+        # Array from condition
+        data: .word 0x0000, 0x1357, 0x2468, 0x1234, 0x5678, 0x0987, 0x6543, 0x1111, 0x2222, 0x3333
+    \end{minted}
+    \caption{Неизменяемые в ходе выполнения значения}
+  \end{listing}
+
+  Результат работы необходимо сохранить в специальную переменную.
+  Её также необходимо определить. Так как её значение будет изменяться
+  в ходе работы, то поместить её нужно в секцию, доступную не только на чтение,
+  но и на запись. Таких две \mintinline{asm}|.data| и \mintinline{asm}|.bss|,
+  так как хочется заранее проинициализировать стартовое значение - 
+  выбираем первый вариант:
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        # Compile-time initialized read-write variables
+        .section .data
+        
+        # Max value of mod 3 op is 2, for 10 values max sum is 20 - byte is enogh
+        result: .byte 0
+    \end{minted}
+    \caption{Переменная $result$ для сохранения результата исполнения}
+  \end{listing}
+
+  \subsubsection{Начинается код}
+
+  Далее определяется \mintinline{asm}|.data| секция, а в ней
+  и точка входа (в моём случае \mintinline{asm}|_entrypoint|).
+  Чтобы компоновщих смог найти указанный символ, его необходимо
+  сделать публичным при помощи оператора \mintinline{asm}|.globl|:
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        # Actually code section
+        .section .text
+
+        # Export symbol to linker
+        .globl _entrypoint
+
+        _entrypoint:
+        # ... code here
+    \end{minted}
+    \caption{Точка входа}
+  \end{listing}
+
+  \subsubsection{Подготовка к подсчёту}
+
+  Для того, чтобы пройтись по всем 10 элементам массива входных данных,
+  необходим счётчик. Для цели подсчёта от 0 до 10 будем использовать
+  регистр \mintinline{asm}|rcx| (так как его обозначение образовано
+  от слова counter). Далее можно на каждом цикле подсчёта
+  вычислять адрес следующего элемента из массива, но было решено 
+  использовать регистр \mintinline{asm}|rsi| (source index),
+  как указатель на текущий элемент массива. Итого имеем счётчик,
+  чтобы посчитать 10 значений, и указатель, который каждую итерацию будет
+  перемещаться на 2 байта вперёд к следующему элементу:
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        setup:
+          movq $data, %rsi  
+          movq $0, %rcx
+    \end{minted}
+    \caption{Сброс регистров к нужным значениям}
+  \end{listing}
+
+  \subsubsection{Точка выхода}
+
+  Как только подсчёт необходимого значения будет завершён,
+  необходимо будет куда-то выйти из цикла, занимающегося
+  решением поставленной задачи. Для этого поставим метку
+  \mintinline{asm}|finilize|, при переходе к которой будет
+  выполняться выход с 0 кодом возврата (при помощи системного
+  вызова $sys\_exit$):
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        finilize:
+          movq sys_exit, %rax
+          movq $0, %rdi
+          syscall
+    \end{minted}
+    \caption{Точка успешного выхода из программы}
+  \end{listing}
+
+  \subsubsection{Непосредственный подсчёт}
+
+  Для начала реализуется метка \mintinline{asm}|calc_loop|,
+  в которой будет начинаться цикл подсчёта. Каждый раз на перемещение
+  к ней будет выполняться проверка на завершение цикла - сравнение
+  $10$ и значения из \mintinline{asm}|rcx|. Если значение в регистре
+  больше или равно $10$, то из цикла пора выходить.
+
+  В конце каждой итерации подсчёта мы смещаем указатель на
+  обрабатываемый элемент на 2 байта (так как это размер одного элемента)
+  и инкрементируем счётчик повторений.
+
+  В ходе самого расчёта выполняем деление слова, лежащего по адресу,
+  указанному в \mintinline{asm}|rsi|, на 2. Деление слов
+  происходит при помощи инструкции \mintinline{asm}|divw|,
+  Она делит значение \mintinline{asm}|dx:ax| (да, тут двойное слово)
+  на свой операнд. Остаток от деления она помещает в регистр \mintinline{asm}|dl|.
+
+  Итого, описанный выше код может выглядеть следующим образом:
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        calc_loop:
+          cmpq $10, %rcx
+          jge finilize
+    
+          movw $0, %dx
+          movw (%rsi), %ax
+    
+          movw $3, %bx
+          divw %bx
+    
+          addb %dl, result
+    
+          addq $2, %rsi
+    
+          incq %rcx
+          jmp calc_loop
+    \end{minted}
+    \caption{Подсчёт необхоимого значения}
+  \end{listing}
+
+  \subsubsection{Проверяем на входных данных}
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        data: .word 0x0000, 0x1357, 0x2468, 0x1234, 0x5678, 0x0987, 0x6543, 0x1111, 0x2222, 0x3333
+    \end{minted}
+    \caption{Тестовый массив данных}
+  \end{listing}
+
+  При переводе в десятичный формат и подсчёт всех остатков можно получить результат:
+  \begin{multline}
+    (0\mod 3) +  (4951 \mod 3) + (9320 \mod 3) + (4660 \mod 3) + \\
+    + (22136 \mod 3) + (2439 \mod 3) + (25923 \mod 3) + \\
+    + (4369 \mod 3) + (8738 \mod 3) + (13107 \mod 3) = \\
+    = 0 + 1 + 2 + 1 + 2 + 0 + 0 + 1 + 2 + 0 = 9
+  \end{multline}
+
+  Проверим, такое ли значение лежит в \mintinline{asm}|number|
+  в точке выхода из программы при помощи gdb:
+
+  \begin{listing}[H]
+    \begin{minted}{text}
+        -> % gdb gas
+        GNU gdb (Debian 13.1-3) 13.1
+        Copyright (C) 2023 Free Software Foundation, Inc.
+        License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+        This is free software: you are free to change and redistribute it.
+        There is NO WARRANTY, to the extent permitted by law.
+        Type "show copying" and "show warranty" for details.
+        This GDB was configured as "x86_64-linux-gnu".
+        Type "show configuration" for configuration details.
+        For bug reporting instructions, please see:
+        <https://www.gnu.org/software/gdb/bugs/>.
+        Find the GDB manual and other documentation resources online at:
+            <http://www.gnu.org/software/gdb/documentation/>.
+
+        For help, type "help".
+        Type "apropos word" to search for commands related to "word"...
+        Reading symbols from gas...
+        (gdb) break finilize 
+        Breakpoint 1 at 0x4010b2: file task.gas.s, line 105.
+        (gdb) run
+        Starting program: /home/kimp/Code/lab_1/gas 
+        Your number is 09
+
+        Breakpoint 1, finilize () at task.gas.s:105
+        105	    movq sys_exit, %rax
+        (gdb) print (char) result 
+        $1 = 9 '\t'
+    \end{minted}
+  \end{listing}
+
+  Тут происходит запуск исполняемого файла через $gdb$,
+  на \mintinline{asm}|finilize| ставится точка останова,
+  как только программа её достигает, на экран выводится значение
+  переменной $number$, всё верно.
+
+  \subsection{Дополнительные задание}
+
+  \subsubsection{Вывод результата на экран}
+
+  Стандартными средствами asm, можно вывести что-либо на эран
+  при помощи системного вызова $sys\_write$. Но он позволяет
+  печатать только неформатированные сырые строки - то есть напечатать
+  число просто так не выйде, его сначала надо самостоятельно превратить в строку.
+
+  Чтобы не писать полноценные алгоритмы для работы со строками, была
+  выполнена оценка задачи - максимальный остаток деления на $3$ равен
+  $2$. Максимальная сумма таких остатков для $10$ чисел на $20$. То есть
+  для печати достаточно определить всего две цифры, перевести их в символьный вид
+  и напечатать.
+
+  Определить цифры двузначного числа можно делением на 10,
+  а чтобы получить символьное представление, нужно каждую цифру
+  сместить на значение \mintinline{c}|'0'| (ASCI таблица).
+
+  Затем при помощи $sys\_write$ печатаем всё в $stdout$:
+  
+  \begin{listing}[H]
+    \begin{minted}{asm}
+      print_result:
+        movq sys_write, %rax
+        movq stdout, %rdi
+        movq $message, %rsi
+        movq $16, %rdx
+        syscall
+    
+        movw $0, %ax
+        movb result, %al
+     
+        movw $0, %bx 
+        movb $10, %bl
+        divb %bl
+    
+        movw %ax, %bx
+     
+        movq sys_write, %rax
+        movq stdout, %rdi
+        movq $temp_char, %rsi
+        movq $1, %rdx
+    
+        movb $48, temp_char
+        addb %bl, temp_char
+        syscall
+    
+        movb $48, temp_char
+        addb %bh, temp_char
+        syscall
+        
+        movb $'\n', temp_char
+        syscall
+    \end{minted}
+    \caption{Печать результата на экран}
+  \end{listing}
+
+  \begin{listing}[H]
+    \begin{minted}{text}
+-> % ./gas 
+Your number is 09
+    \end{minted}
+    \caption{Результат работы вывода на экран}
+  \end{listing}
+
+  \subsubsection{Использование Intel синтаксиса}
+
+  Для начала приведём полный код решения на AT\&T синтаксисе:
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+        # Practice work number 1 
+        # by Dunikov Konstantin BIB224
+        # AT&T GAS implementation
+        
+        # Task Number 3
+        # An array of 10 words is given
+        # Find the sum of the remainders from dividing each of them by 3
+        # Place the result in a separate data item.
+        
+        
+        # Compile-time initialized read-only variables
+        .section .rodata
+        
+        # Some syscalls definitions
+        sys_read: .quad 0 
+        sys_write: .quad 1
+        sys_exit: .quad 60
+        
+        # Default streams
+        stdin: .quad 0
+        stdout: .quad 1
+        stderr: .quad 2
+        
+        # ASCI helpers
+        asci_0: .byte 48
+        message: .asciz "Your number is " # 14 characters + '\0'
+        
+        # Array from condition
+        data: .word 0x0000, 0x1357, 0x2468, 0x1234, 0x5678, 0x0987, 0x6543, 0x1111, 0x2222, 0x3333
+        
+        
+        # Compile-time initialized read-write variables
+        .section .data
+        
+        # Max value of mod 3 op is 2, for 10 values max sum is 20 - byte is enogh
+        result: .byte 0
+        temp_char: .byte 0
+        
+        # Runtime initialized variable
+        .section .bss
+        
+        
+        # Actually code
+        .section .text
+        
+        # Export symbol to linker
+        .globl _entrypoint
+        
+        _entrypoint:
+        
+          setup:
+            movq $data, %rsi  
+            movq $0, %rcx
+        
+          calc_loop:
+            cmpq $10, %rcx
+            jge print_result
+        
+            movw $0, %dx
+            movw (%rsi), %ax
+        
+            movw $3, %bx
+            divw %bx
+        
+            addb %dl, result
+        
+            addq $2, %rsi
+        
+            incq %rcx
+            jmp calc_loop
+        
+          print_result:
+            movq sys_write, %rax
+            movq stdout, %rdi
+            movq $message, %rsi
+            movq $16, %rdx
+            syscall
+        
+    \end{minted}
+    \caption{Полное решение на AT\&T, часть 1}
+  \end{listing}
+
+  \begin{listing}[H]
+    \begin{minted}{asm} 
+            movw $0, %ax
+            movb result, %al
+         
+            movw $0, %bx 
+            movb $10, %bl
+            divb %bl
+        
+            movw %ax, %bx
+            movq sys_write, %rax
+            movq stdout, %rdi
+            movq $temp_char, %rsi
+            movq $1, %rdx
+        
+            movb $48, temp_char
+            addb %bl, temp_char
+            syscall
+        
+            movb $48, temp_char
+            addb %bh, temp_char
+            syscall
+            
+            movb $'\n', temp_char
+            syscall
+        
+          finilize:
+            movq sys_exit, %rax
+            movq $0, %rdi
+            syscall        
+    \end{minted}
+    \caption{Полное решение на AT\&T, часть 2}
+  \end{listing}
+
+  Расширим Makefile:
+  \begin{listing}[H]
+    \begin{minted}{make}
+        all: gas, nasm
+
+        gas.o: task.gas.s
+            as -g task.gas.s -o task.gas.o
+
+        gas: gas.o
+            ld task.gas.o -e _entrypoint -o gas
+
+        nasm.o:
+            nasm task.nasm.s -f elf64 -o task.nasm.o
+
+        nasm: nasm.o
+            ld task.nasm.o -e _entrypoint -o nasm
+
+        clean:
+            rm -rf gas.o gas
+    \end{minted}
+    \caption{Полный Makefile}
+  \end{listing}
+
+  \begin{listing}[H]
+    \begin{minted}{asm}
+section .rodata
+
+sys_write dq 1
+sys_exit dq 60
+
+stdout dq 1
+
+asci_0 db 48
+message db "Your number is " 
+data dw 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+
+section .data
+result db 0
+temp_char db 0
+
+section .text
+
+global _entrypoint
+
+_entrypoint:
+ 
+  setup:
+    mov rsi, data
+    mov rcx, 0
+
+  calc_loop:
+    cmp rcx, 10
+    jge print_result
+
+    mov dx, 0
+    mov ax, [rsi]
+
+    mov bx, 3
+    div bx
+
+    add [result], dl
+
+    add rsi, 2
+
+    inc rcx
+    jmp calc_loop 
+
+  print_result:
+    mov rax, [sys_write]
+    mov rdi, [stdout]
+    mov rsi, message
+    mov rdx, 16
+    syscall
+
+    mov ax, 0
+    mov al, [result]
+
+    mov bx, 0
+    mov bl, 10
+    div bl
+
+    mov bx, ax
+
+    mov rax, [sys_write]
+    mov rdi, [stdout]
+    mov rsi, temp_char
+    mov rdx, 1
+
+    mov [temp_char], byte 48
+    add [temp_char], bl
+    syscall
+
+    mov [temp_char], byte 48
+    add [temp_char], bh
+    syscall
+
+    mov [temp_char], byte 10
+    syscall
+
+  finilize:
+    mov rax, [sys_exit]
+    mov rdi, 0
+    syscall  
+    \end{minted}
+    \caption{Решение на Intel синтаксисе}
+  \end{listing}
+
+\end{document}

@@ -1,0 +1,71 @@
+% Лабораторная работа по Цифровой Схемотехнике и Архитектуре Компьютера №4 
+% Дуников Константин Артёмович 
+
+% Тип документа: статья, на бумаге А4
+\documentclass[a4paper]{article}
+
+% Подключение сторонних tex файлов 
+\usepackage{import}
+
+% Код и картинки
+\usepackage{subcaption}
+
+% Основные данные - ВУЗ, факультет, город...
+\import{./../../../stuff/tex}{config.tex}
+% Небольшой набор инструментов
+\import{./../../../stuff/tex}{tools.tex}
+
+% Подключение необходимых зависимостей
+\import{./../../../stuff/tex/settings}{packages.tex}
+% Настройка подключенных пакетов
+\import{./../../../stuff/tex/settings}{preferences.tex}
+
+
+% Шаблон титульной страницы 
+\import{./../../../stuff/tex/templates}{title.tex}
+% Упрощенный блок "выполнил"
+\import{./../../../stuff/tex/templates}{sign2.tex}
+% Макрос для содержания
+\import{./../../../stuff/tex/templates}{toc.tex}
+
+% Определяем название документа
+\title{
+  ОТЧЕТ \\
+  О ПРАКТИЧЕСКОЙ РАБОТЕ №4 \\
+  по дисциплине <<Цифровая Схемотехника и Системная Архитектура>> \\
+  Память: регистровый файл и стек
+}
+% Указываем преподавателя
+\renewcommand{\teachername}{
+    Ромашихин М. Ю.
+}
+
+\definecolor{LightGray}{gray}{0.975}
+\setminted{
+  fontsize=\tiny,
+  baselinestretch=1,
+  linenos=true,
+  frame=lines,
+  framesep=2mm,
+  autogobble=true,
+  bgcolor=LightGray
+}
+
+% Путь до внешних изображений
+\graphicspath{ {./figures/}}
+% Нумеруем все формулы
+\mathtoolsset{showonlyrefs=false}
+
+\usepackage{caption}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+% Основной текст работы
+\begin{document}
+  \templatedtitlepage
+  
+  \toc
+  
+  \section{Основная часть}
+
+
+\end{document}
